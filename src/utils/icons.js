@@ -3,7 +3,8 @@ import {
   faAngleDown,
   faMagnifyingGlass,
   faTableList,
-  faCircleHalfStroke
+  faCircleHalfStroke,
+  faEllipsis
 } from '@fortawesome/free-solid-svg-icons';
 import { faBell, faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 
@@ -13,5 +14,6 @@ const searchIcon = <FontAwesomeIcon icon={faMagnifyingGlass} />;
 const bellIcon = <FontAwesomeIcon icon={faBell} size="lg" />;
 const infoIcon = <FontAwesomeIcon icon={faQuestionCircle} size="lg" />;
 const darkNLightIcon = <FontAwesomeIcon icon={faCircleHalfStroke} size="lg" />;
+const threeDotsIcon = <FontAwesomeIcon icon={faEllipsis} />;
 
-export { tableIcon, downCaretIcon, searchIcon, bellIcon, infoIcon, darkNLightIcon };
+export { tableIcon, downCaretIcon, searchIcon, bellIcon, infoIcon, darkNLightIcon, threeDotsIcon };

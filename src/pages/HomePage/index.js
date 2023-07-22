@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
-import { v4 as uuidv4 } from 'uuid';
 
 import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
@@ -22,32 +21,27 @@ const HomePage = () => {
     onFetchBoardsData();
   }, []);
 
-  const handleAddBoard = boardTitle => {
-    const newBoard = {
-      boardId: `bo-${uuidv4()}`,
-      boardTitle: boardTitle,
-      list: [
-        {
-          columnId: uuidv4(),
-          name: 'Todo',
-          items: []
-        },
-        {
-          columnId: uuidv4(),
-          name: 'In Progress',
-          items: []
-        },
-        {
-          columnId: uuidv4(),
-          name: 'Completed',
-          items: []
-        }
-      ]
-    };
+  const handleAddBoard = newBoard => {
     const newBoardsList = [...boardsList, newBoard];
     setBoardsList(newBoardsList);
     boardsListStorage.save(newBoardsList);
+
+    setOpenCreateForm(false);
   };
+
+  const boardsListElements = (boardsList || []).map(board => (
+    <Button
+      key={board.boardId}
+      className={cx('board')}
+      to={`/b/${board.boardId}`}
+      style={
+        (board.boardImageBg && { backgroundImage: `url(${board.boardImageBg})` }) ||
+        (board.boardColorBg && { backgroundColor: board.boardColorBg })
+      }
+    >
+      {board.boardTitle}
+    </Button>
+  ));
 
   return (
     <div className={cx('wrapper')}>
@@ -56,12 +50,7 @@ const HomePage = () => {
         <section className={cx('section')}>
           <h3>YOUR WORKSPACES</h3>
           <div className={cx('boards')}>
-            {boardsList.length > 0 &&
-              boardsList.map(board => (
-                <Button key={board.boardId} className={cx('board')} to={`/b/${board.boardId}`}>
-                  {board.boardTitle}
-                </Button>
-              ))}
+            {boardsListElements}
             <Button className={cx('createNewBoardBtn')} onClick={() => setOpenCreateForm(true)}>
               Create new board
             </Button>

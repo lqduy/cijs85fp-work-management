@@ -11,7 +11,8 @@
 .boardWhiteFrame {
   border-radius: 4px;
 
-  background-color: aqua;
+  background-size: cover;
+  background-position: center;
 
   text-align: center;
 
@@ -22,9 +23,59 @@
     vertical-align: middle;
   }
 }
+.background {
+  > *:not(h5) {
+    display: flex;
+    gap: 6px;
+  }
+  .images {
+    margin-bottom: 6px;
+  }
+  .images > * {
+    display: block;
+
+    width: calc(25% - 6px * 3 / 4);
+    height: 40px;
+    border-radius: 3px;
+
+    background-size: cover;
+    background-position: center;
+
+    cursor: pointer;
+  }
+  .colors-mono > * {
+    display: block;
+
+    width: calc(16.67% - 6px * 5 / 6);
+    height: 32px;
+    border-radius: 3px;
+
+    cursor: pointer;
+  }
+  .colors-mono .moreBackgroundBtn {
+    background-color: #091e420f;
+  }
+}
 .boardTitle {
   display: flex;
   flex-direction: column;
+
+  input {
+    height: 32px;
+    padding: 12px 8px;
+    border-radius: 3px;
+    outline: none;
+
+    border-color: #091e4224;
+
+    &:focus {
+      border-color: #388bff;
+    }
+  }
+
+  .requied:focus {
+    border-color: #e34935;
+  }
 }
 .formBtn {
   background-color: #091e420f;

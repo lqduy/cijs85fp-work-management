@@ -35,8 +35,16 @@
     justify-content: start;
     align-items: start;
 
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid transparent;
     border-radius: 3px;
+
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-size: 1.6rem;
+    font-weight: 700;
   }
 
   .createNewBoardBtn {
