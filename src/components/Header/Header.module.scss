@@ -9,11 +9,21 @@
     display: flex;
   }
 }
+.menu {
+  gap: 12px;
+
+  .createBtn {
+    background-color: #0c66e4;
+    color: white;
+  }
+}
 .setting {
   gap: 4px;
 
   .inputBar__wrap {
     position: relative;
+
+    height: 100%;
   }
 
   .settingBtn {
@@ -26,6 +36,7 @@
 .inputBar__wrap .inputBar {
   display: flex;
 
+  height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 
@@ -40,6 +51,7 @@
     flex-grow: 1;
 
     border: none;
+    border-radius: 4px;
     outline: none;
 
     background-color: inherit;
@@ -57,6 +69,7 @@
 
   width: 778px;
   border-color: #0055cc;
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
 
   background-color: #f7f8f9;
 }

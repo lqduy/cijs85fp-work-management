@@ -1,0 +1,31 @@
+.wrapper {
+  width: 304px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
+
+  > *:not(:last-child) {
+    margin-bottom: 8px;
+  }
+}
+.boardWhiteFrame {
+  border-radius: 4px;
+
+  background-color: aqua;
+
+  text-align: center;
+
+  img {
+    padding: 16px 0;
+    margin-bottom: 0;
+
+    vertical-align: middle;
+  }
+}
+.boardTitle {
+  display: flex;
+  flex-direction: column;
+}
+.formBtn {
+  background-color: #091e420f;
+}

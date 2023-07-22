@@ -25,7 +25,7 @@ const Header = () => {
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
-        <Button>Create</Button>
+        <Button className={cx('createBtn')}>Create</Button>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>

@@ -16,6 +16,7 @@ const Button = ({
   large,
   rounded,
   circled,
+  fullWidth,
   onClick,
   ...rest
 }) => {
@@ -38,7 +39,8 @@ const Button = ({
     [className]: className,
     large: large,
     rounded: rounded,
-    circled: circled
+    circled: circled,
+    fullWidth: fullWidth
   });
 
   return (
@@ -53,7 +55,8 @@ const Button = ({
 Button.defaultProps = {
   large: false,
   rounded: false,
-  circled: false
+  circled: false,
+  fullWidth: false
 };
 
 export default Button;

@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+
+  max-width: 1236px;
+
+  margin: 0 auto;
+
+  .sideBar {
+    width: 25%;
+    min-height: 700px;
+
+    background-color: antiquewhite;
+  }
+
+  .sideBody {
+    width: 75%;
+
+    padding: 16px;
+  }
+}
+.boards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  margin-top: 16px;
+
+  > * {
+    width: calc(25% - 12px * 3 / 4);
+    height: 96px;
+  }
+
+  .board {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+  }
+
+  .createNewBoardBtn {
+    background-color: #091e420f;
+  }
+}
