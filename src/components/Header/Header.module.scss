@@ -1,0 +1,62 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  height: 48px;
+  padding: 8px;
+
+  > * {
+    display: flex;
+  }
+}
+.setting {
+  gap: 4px;
+
+  .inputBar__wrap {
+    position: relative;
+  }
+
+  .settingBtn {
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+  }
+}
+
+.inputBar__wrap .inputBar {
+  display: flex;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  button {
+    background-color: none;
+
+    &:hover {
+      background-color: unset;
+    }
+  }
+  input {
+    flex-grow: 1;
+
+    border: none;
+    outline: none;
+
+    background-color: inherit;
+  }
+
+  &:hover {
+    background-color: #f7f8f9;
+  }
+}
+
+.inputBar__wrap .focusInput {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  width: 778px;
+  border-color: #0055cc;
+
+  background-color: #f7f8f9;
+}
