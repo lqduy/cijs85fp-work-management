@@ -58,9 +58,9 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
         ]
       };
       if (bgImageValue) {
-        newBoard['boardImageBg'] = bgImageValue
+        newBoard['boardImageBg'] = bgImageValue;
       } else if (bgColorValue) {
-        newBoard['boardColorBg'] = bgColorValue
+        newBoard['boardColorBg'] = bgColorValue;
       }
 
       handleAddBoard(newBoard);
