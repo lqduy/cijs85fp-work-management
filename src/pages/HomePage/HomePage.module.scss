@@ -52,3 +52,30 @@
     background-color: var(--backgroundColor-darker);
   }
 }
+
+.boardWrap {
+  position: relative;
+
+  .board {
+    height: 100%;
+  }
+
+  .starIcon {
+    display: block;
+
+    position: absolute;
+    bottom: 2px;
+    right: 6px;
+
+    color: white;
+
+    &:hover {
+      transform: scale(1.2);
+      transition: 0.3s;
+    }
+  }
+
+  .yellowStar {
+    color: rgb(238, 201, 37);
+  }
+}

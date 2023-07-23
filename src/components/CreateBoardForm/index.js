@@ -39,6 +39,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
       const newBoard = {
         boardId: `bo-${uuidv4()}`,
         boardTitle: titleValue,
+        isStar: false,
         columnsList: [
           {
             columnId: `co-${uuidv4()}`,

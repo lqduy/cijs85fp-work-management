@@ -5,6 +5,7 @@ import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
 import { boardsListStorage } from '../../utils/local-storage';
+import { starRegularIcon, starSolidIcon } from '../../utils/icons';
 
 let cx = classNames.bind(styles);
 
@@ -29,18 +30,35 @@ const HomePage = () => {
     setOpenCreateForm(false);
   };
 
+  const handleSetStarByBoardId = boardId => {
+    const newBoardList = boardsList.map(board =>
+      board.boardId === boardId ? { ...board, isStar: !board.isStar } : board
+    );
+    setBoardsList(newBoardList);
+    boardsListStorage.save(newBoardList);
+  };
+
   const boardsListElements = (boardsList || []).map(board => (
-    <Button
-      key={board.boardId}
-      className={cx('board')}
-      to={`/b/${board.boardId}`}
-      style={
-        (board.boardImageBg && { backgroundImage: `url(${board.boardImageBg})` }) ||
-        (board.boardColorBg && { backgroundColor: board.boardColorBg })
+    <div key={board.boardId} className={cx('boardWrap')}>
+      <Button
+        className={cx('board')}
+        to={`/b/${board.boardId}`}
+        style={
+          (board.boardImageBg && { backgroundImage: `url(${board.boardImageBg})` }) ||
+          (board.boardColorBg && { backgroundColor: board.boardColorBg })
+        }
+      >
+        {board.boardTitle}
+      </Button>
+      {
+        <span
+          className={cx('starIcon', { yellowStar: board.isStar })}
+          onClick={() => handleSetStarByBoardId(board.boardId)}
+        >
+          {board.isStar ? starSolidIcon : starRegularIcon}
+        </span>
       }
-    >
-      {board.boardTitle}
-    </Button>
+    </div>
   ));
 
   return (
