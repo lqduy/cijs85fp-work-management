@@ -4,9 +4,10 @@ import { Routes, Route } from 'react-router-dom';
 import { puplicRouters } from './routers';
 import Header from './components/Header';
 import ThemeContext from './contexts/ThemeContext';
+import { themeModeStorage } from './utils/local-storage';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode);

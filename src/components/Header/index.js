@@ -12,12 +12,21 @@ import {
 import Button from '../Button';
 import styles from './Header.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
+import { themeModeStorage } from '../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
 const Header = () => {
   const [focusInput, setFocusInput] = useState(false);
   const { darkMode, setDarkMode } = useContext(ThemeContext);
+
+  const handleSetThemeMode = () => {
+    setDarkMode(prevMode => {
+      const newMode = !prevMode;
+      themeModeStorage.save(newMode);
+      return newMode;
+    });
+  };
 
   return (
     <header className={cx('header')}>
@@ -47,11 +56,7 @@ const Header = () => {
         <Button className={cx('settingBtn')} circled>
           {infoIcon}
         </Button>
-        <Button
-          className={cx('settingBtn')}
-          circled
-          onClick={() => setDarkMode(prevValue => !prevValue)}
-        >
+        <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
           {darkNLightIcon}
         </Button>
       </div>

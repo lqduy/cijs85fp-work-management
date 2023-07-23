@@ -123,41 +123,43 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
   };
 
   return (
-    <form className={cx('wrapper')} ref={wrapperRef} onSubmit={onSubmitForm}>
-      <h4>Create board</h4>
-      <div className={cx('boardWhiteFrame')} style={demoBackground}>
-        <img src="/assets/white-frame/board.svg" alt="board-white-frame" />
-      </div>
-      <div className={cx('background')}>
-        <h5>Background</h5>
-        <div className={cx('images')}>{bgImageElements}</div>
-        <div className={cx('colors-mono')}>
-          {bgMonoColorElements}
-          <Button className={cx('moreBackgroundBtn')}>{threeDotsIcon}</Button>
+    <div className={cx('backLayer')}>
+      <form className={cx('wrapper')} ref={wrapperRef} onSubmit={onSubmitForm}>
+        <h4>Create board</h4>
+        <div className={cx('boardWhiteFrame')} style={demoBackground}>
+          <img src="/assets/white-frame/board.svg" alt="board-white-frame" />
         </div>
-      </div>
-      <div className={cx('boardTitle')}>
-        <label htmlFor="inputBoardTitle">
-          <h5>Board title</h5>
-        </label>
-        <input
-          id="inputBoardTitle"
-          ref={inputRef}
-          type="text"
-          className={cx({ requied: showRequied })}
-          value={titleValue}
-          onChange={e => setTitleValue(e.target.value)}
-          onBlur={handleCheckInput}
-          onInput={() => setShowRequied(false)}
-        />
-      </div>
-      <Button className={cx('formBtn')} type="submit" fullWidth>
-        Create
-      </Button>
-      <Button className={cx('formBtn')} fullWidth>
-        Start with temple
-      </Button>
-    </form>
+        <div className={cx('background')}>
+          <h5>Background</h5>
+          <div className={cx('images')}>{bgImageElements}</div>
+          <div className={cx('colors-mono')}>
+            {bgMonoColorElements}
+            <Button className={cx('moreBackgroundBtn')}>{threeDotsIcon}</Button>
+          </div>
+        </div>
+        <div className={cx('boardTitle')}>
+          <label htmlFor="inputBoardTitle">
+            <h5>Board title</h5>
+          </label>
+          <input
+            id="inputBoardTitle"
+            ref={inputRef}
+            type="text"
+            className={cx({ requied: showRequied })}
+            value={titleValue}
+            onChange={e => setTitleValue(e.target.value)}
+            onBlur={handleCheckInput}
+            onInput={() => setShowRequied(false)}
+          />
+        </div>
+        <Button className={cx('formBtn')} type="submit" fullWidth>
+          Create
+        </Button>
+        <Button className={cx('formBtn')} fullWidth>
+          Start with temple
+        </Button>
+      </form>
+    </div>
   );
 };
 

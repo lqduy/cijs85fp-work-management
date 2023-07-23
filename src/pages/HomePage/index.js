@@ -56,13 +56,13 @@ const HomePage = () => {
             </Button>
           </div>
         </section>
-        {openCreateForm && (
-          <CreateBoardForm
-            handleCloseForm={() => setOpenCreateForm(false)}
-            handleAddBoard={handleAddBoard}
-          />
-        )}
       </div>
+      {openCreateForm && (
+        <CreateBoardForm
+          handleCloseForm={() => setOpenCreateForm(false)}
+          handleAddBoard={handleAddBoard}
+        />
+      )}
     </div>
   );
 };

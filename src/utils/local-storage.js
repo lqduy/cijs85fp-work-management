@@ -8,3 +8,14 @@ export const boardsListStorage = {
     localStorage.setItem('boardsList', data);
   }
 };
+
+export const themeModeStorage = {
+  load: () => {
+    const data = localStorage.getItem('darkThemeMode');
+    return data ? JSON.parse(data) : false;
+  },
+  save: isDarkMode => {
+    const data = JSON.stringify(isDarkMode);
+    localStorage.setItem('darkThemeMode', data);
+  }
+};
