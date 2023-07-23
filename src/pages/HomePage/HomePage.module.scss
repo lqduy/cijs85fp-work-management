@@ -18,6 +18,16 @@
     padding: 16px;
   }
 }
+.section {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    display: flex;
+    gap: 12px;
+  }
+}
 .boards {
   display: flex;
   flex-wrap: wrap;
@@ -68,6 +78,8 @@
     right: 6px;
 
     color: white;
+
+    cursor: pointer;
 
     &:hover {
       transform: scale(1.2);

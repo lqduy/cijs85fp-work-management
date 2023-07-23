@@ -15,7 +15,8 @@ a {
 ul {
   list-style: none;
 }
-button, input {
+button,
+input {
   color: inherit;
 }
 html {
@@ -26,7 +27,7 @@ body {
 
   position: relative;
 
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;

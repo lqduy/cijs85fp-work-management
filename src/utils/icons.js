@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
+  faClock,
   faQuestionCircle,
   faStar as faStarRegular
 } from '@fortawesome/free-regular-svg-icons';
@@ -24,6 +25,7 @@ const threeDotsIcon = <FontAwesomeIcon icon={faEllipsis} />;
 const checkIcon = <FontAwesomeIcon icon={faCheck} />;
 const starRegularIcon = <FontAwesomeIcon icon={faStarRegular} />;
 const starSolidIcon = <FontAwesomeIcon icon={faStarSolid} />;
+const clockIcon = <FontAwesomeIcon icon={faClock} />;
 
 export {
   tableIcon,
@@ -35,5 +37,6 @@ export {
   threeDotsIcon,
   checkIcon,
   starRegularIcon,
-  starSolidIcon
+  starSolidIcon,
+  clockIcon
 };
