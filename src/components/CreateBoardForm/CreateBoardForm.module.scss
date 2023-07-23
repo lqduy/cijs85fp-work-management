@@ -1,8 +1,13 @@
+@import '../../styles/mixins';
+
 .wrapper {
   width: 304px;
   padding: 12px;
   border-radius: 8px;
-  box-shadow: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
+  border: 1px solid var(--lineColor);
+  box-shadow: 0px 8px 12px var(--lineColor), 0px 0px 1px var(--lineColor);
+
+  background-color: var(--backgroundColor-darker);
 
   > *:not(:last-child) {
     margin-bottom: 8px;
@@ -27,6 +32,9 @@
   > *:not(h5) {
     display: flex;
     gap: 6px;
+  }
+  h5 {
+    margin-bottom: 4px;
   }
   .images {
     margin-bottom: 6px;
@@ -53,12 +61,16 @@
     cursor: pointer;
   }
   .colors-mono .moreBackgroundBtn {
-    background-color: #091e420f;
+    background-color: var(--backgroundColor-lighter);
   }
 }
 .boardTitle {
   display: flex;
   flex-direction: column;
+
+  h5 {
+    margin-bottom: 4px;
+  }
 
   input {
     height: 32px;
@@ -66,17 +78,20 @@
     border-radius: 3px;
     outline: none;
 
+    border-width: 2px;
     border-color: #091e4224;
 
     &:focus {
-      border-color: #388bff;
+      box-shadow: 0 0 0 3px var(--createFormInput-borderBlueColor);
+      border: none;
     }
   }
 
   .requied:focus {
-    border-color: #e34935;
+    box-shadow: 0 0 0 3px var(--createFormInput-borderRedColor);
+    border: none;
   }
 }
 .formBtn {
-  background-color: #091e420f;
+  background-color: var(--backgroundColor-lighter);
 }
