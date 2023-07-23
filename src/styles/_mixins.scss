@@ -1,0 +1,21 @@
+// Mixin cho light mode
+@mixin light-theme {
+  --textColor: #172b4d;
+  --lineColor: hsla(218, 54%, 19.6%, 0.16);
+  --backgroundColor-darker: #091e420f;
+  --createBoardBtn-bgColor: #0c66e4;
+
+  color: var(--textColor);
+}
+
+// Mixin cho dark mode
+@mixin dark-theme {
+  --textColor: #b6c2cf;
+  --lineColor: hsla(211, 18%, 68%, 0.16);
+  --backgroundColor: #2b3035;
+  --backgroundColor-darker: #343a3f;
+  --createBoardBtn-bgColor: #579dff;
+
+  color: var(--textColor);
+  background-color: var(--backgroundColor);
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import {
@@ -11,11 +11,13 @@ import {
 } from '../../utils/icons';
 import Button from '../Button';
 import styles from './Header.module.scss';
+import ThemeContext from '../../contexts/ThemeContext';
 
 let cx = classNames.bind(styles);
 
 const Header = () => {
   const [focusInput, setFocusInput] = useState(false);
+  const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   return (
     <header className={cx('header')}>
@@ -45,7 +47,11 @@ const Header = () => {
         <Button className={cx('settingBtn')} circled>
           {infoIcon}
         </Button>
-        <Button className={cx('settingBtn')} circled>
+        <Button
+          className={cx('settingBtn')}
+          circled
+          onClick={() => setDarkMode(prevValue => !prevValue)}
+        >
           {darkNLightIcon}
         </Button>
       </div>

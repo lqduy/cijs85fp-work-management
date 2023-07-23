@@ -1,9 +1,12 @@
+@import '../../styles/variables';
+
 .header {
   display: flex;
   justify-content: space-between;
 
   height: 48px;
   padding: 8px;
+  border-bottom: 1px solid var(--lineColor);
 
   > * {
     display: flex;
@@ -13,7 +16,7 @@
   gap: 12px;
 
   .createBtn {
-    background-color: #0c66e4;
+    background-color: var(--createBoardBtn-bgColor);
     color: white;
   }
 }
@@ -37,7 +40,7 @@
   display: flex;
 
   height: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--lineColor);
   border-radius: 4px;
 
   button {
@@ -56,10 +59,6 @@
 
     background-color: inherit;
   }
-
-  &:hover {
-    background-color: #f7f8f9;
-  }
 }
 
 .inputBar__wrap .focusInput {
@@ -71,5 +70,5 @@
   border-color: #0055cc;
   box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
 
-  background-color: #f7f8f9;
+  background-color: inherit;
 }
