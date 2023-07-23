@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './CreateBoardForm.module.scss';
 import Button from '../Button';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
-import { threeDotsIcon } from '../../utils/icons';
+import { checkIcon, threeDotsIcon } from '../../utils/icons';
 
 let cx = classNames.bind(styles);
 
@@ -91,30 +91,32 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
 
   const bgImageElements = useMemo(
     () =>
-      backgroundImagesList
-        .slice(0, 4)
-        .map(image => (
-          <span
-            key={image.id}
-            style={{ backgroundImage: `url(${image.imgSrc})` }}
-            onClick={() => onImgBgSelected(image.imgSrc)}
-          ></span>
-        )),
-    []
+      backgroundImagesList.slice(0, 4).map(image => (
+        <span
+          key={image.id}
+          className={cx('bgSelectBox')}
+          style={{ backgroundImage: `url(${image.imgSrc})` }}
+          onClick={() => onImgBgSelected(image.imgSrc)}
+        >
+          {image.imgSrc === bgImageValue && checkIcon}
+        </span>
+      )),
+    [bgImageValue]
   );
 
   const bgMonoColorElements = useMemo(
     () =>
-      backgroundColorsList.monoColor
-        .slice(0, 5)
-        .map((color, index) => (
-          <span
-            key={index}
-            style={{ backgroundColor: color }}
-            onClick={() => onColorBgSelected(color)}
-          ></span>
-        )),
-    []
+      backgroundColorsList.monoColor.slice(0, 5).map((color, index) => (
+        <span
+          key={index}
+          className={cx('bgSelectBox')}
+          style={{ backgroundColor: color }}
+          onClick={() => onColorBgSelected(color)}
+        >
+          {color === bgColorValue && checkIcon}
+        </span>
+      )),
+    [bgColorValue]
   );
 
   const demoBackground = {

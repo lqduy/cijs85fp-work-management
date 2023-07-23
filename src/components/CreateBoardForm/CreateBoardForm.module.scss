@@ -12,6 +12,10 @@
   background-color: var(--createFormBackLayer-bgColor);
 }
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
   position: absolute;
   top: 10%;
   left: 50%;
@@ -79,6 +83,20 @@
   }
   .colors-mono .moreBackgroundBtn {
     background-color: var(--backgroundColor-lighter);
+  }
+}
+.bgSelectBox {
+  position: relative;
+
+  svg {
+    display: block;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: white;
   }
 }
 .boardTitle {
