@@ -1,5 +1,6 @@
 @import '../../styles/mixins';
 
+// Main form
 .backLayer {
   position: fixed;
   top: 0;
@@ -14,7 +15,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 12px;
 
   position: absolute;
   top: 10%;
@@ -30,8 +31,16 @@
 
   background-color: var(--backgroundColor-darker);
 
-  > *:not(:last-child) {
-    margin-bottom: 8px;
+  h4 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .closeFormBtn {
+    position: absolute;
+    right: 4px;
+    top: 4px;
   }
 }
 .boardWhiteFrame {
@@ -56,6 +65,9 @@
   }
   h5 {
     margin-bottom: 4px;
+
+    font-weight: bold;
+    font-size: 1.4rem;
   }
   .images {
     margin-bottom: 6px;
@@ -107,6 +119,9 @@
 
   h5 {
     margin-bottom: 4px;
+
+    font-weight: bold;
+    font-size: 1.4rem;
   }
 
   input {
@@ -128,9 +143,103 @@
     box-shadow: 0 0 0 3px var(--createFormInput-borderRedColor);
     border: none;
   }
+
+  p {
+    margin-top: 4px;
+
+    font-size: 1.4rem;
+    font-style: italic;
+  }
 }
 .formBtn {
   height: 40px;
 
   background-color: var(--backgroundColor-lighter);
+}
+
+// Sub form
+
+.backgroundForm {
+  top: 50%;
+  transform: translate(47.5%, -50%);
+
+  .backBtn {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+  .bgSelectBox {
+    border-radius: 3px;
+  }
+}
+.backgroundForm .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  margin-bottom: 8px;
+
+  h5 {
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+
+  .seeMoreBtn {
+    font-size: 1.4rem;
+    background-color: var(--backgroundColor-lighter);
+  }
+}
+.backgroundForm .images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .bgSelectBox {
+    width: calc(33.33% - 8px * 2 / 3);
+    height: 56px;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+.backgroundForm .showMoreImageBg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  > * {
+    width: calc(50% - 12px / 2);
+    height: 73px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+.backgroundForm .showMoreColorBg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  &:first-of-type {
+    padding-bottom: 16px;
+    margin-bottom: 4px;
+    border-bottom: 2px solid var(--lineColor);
+  }
+
+  > * {
+    width: calc(33.33% - 8px * 2 / 3);
+    height: 56px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
 }

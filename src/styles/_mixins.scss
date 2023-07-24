@@ -2,13 +2,14 @@
 @mixin light-theme {
   --textColor: #172b4d;
   --lineColor: hsla(218, 54%, 19.6%, 0.16);
+  --backgroundColor: white;
   --backgroundColor-darker: #f6f5f5;
   --backgroundColor-lighter: rgb(232, 234, 234);
   --createBoardBtn-bgColor: #0c66e4;
   --headerSearchInput-outlineColor: #0055cc;
   --createFormInput-borderBlueColor: #388bff;
   --createFormInput-borderRedColor: #e34935;
-  --createFormBackLayer-bgColor: rgb(0, 0, 0, 0.7);
+  --createFormBackLayer-bgColor: rgb(255, 255, 255, 0.75);
 
   color: var(--textColor);
 }

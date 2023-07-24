@@ -6,7 +6,9 @@ import {
   faCircleHalfStroke,
   faEllipsis,
   faCheck,
-  faStar as faStarSolid
+  faStar as faStarSolid,
+  faXmark,
+  faAngleLeft
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -26,6 +28,8 @@ const checkIcon = <FontAwesomeIcon icon={faCheck} />;
 const starRegularIcon = <FontAwesomeIcon icon={faStarRegular} />;
 const starSolidIcon = <FontAwesomeIcon icon={faStarSolid} />;
 const clockIcon = <FontAwesomeIcon icon={faClock} />;
+const xIcon = <FontAwesomeIcon icon={faXmark} />;
+const backCaretIcon = <FontAwesomeIcon icon={faAngleLeft} />;
 
 export {
   tableIcon,
@@ -38,5 +42,7 @@ export {
   checkIcon,
   starRegularIcon,
   starSolidIcon,
-  clockIcon
+  clockIcon,
+  xIcon,
+  backCaretIcon
 };

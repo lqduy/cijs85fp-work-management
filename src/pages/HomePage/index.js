@@ -100,6 +100,7 @@ const HomePage = () => {
         <CreateBoardForm
           handleCloseForm={() => setOpenCreateForm(false)}
           handleAddBoard={handleAddBoard}
+          onCloseCreateForm={() => setOpenCreateForm(false)}
         />
       )}
     </div>

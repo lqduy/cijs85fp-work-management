@@ -4,16 +4,18 @@ import { v4 as uuidv4 } from 'uuid';
 
 import styles from './CreateBoardForm.module.scss';
 import Button from '../Button';
+import BackgroundForm from './_BackgroundForm';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
-import { checkIcon, threeDotsIcon } from '../../utils/icons';
+import { checkIcon, threeDotsIcon, xIcon } from '../../utils/icons';
 
 let cx = classNames.bind(styles);
 
-const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
+const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm }) => {
   const [titleValue, setTitleValue] = useState('');
   const [showRequied, setShowRequied] = useState(false);
   const [bgImageValue, setBgImageValue] = useState(backgroundImagesList[0].imgSrc);
   const [bgColorValue, setBgColorValue] = useState(null);
+  const [openSubForm, setOpenSubForm] = useState(false);
 
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
@@ -91,33 +93,39 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
     setBgImageValue(null);
   };
 
+  const getImageBgElements = arrData =>
+    arrData.map(image => (
+      <span
+        key={image.id}
+        className={cx('bgSelectBox')}
+        style={{ backgroundImage: `url(${image.imgSrc})` }}
+        onClick={() => onImgBgSelected(image.imgSrc)}
+      >
+        {image.imgSrc === bgImageValue && checkIcon}
+      </span>
+    ));
+
+  const getColorBgElements = arrData =>
+    arrData.map((color, index) => (
+      <span
+        key={index}
+        className={cx('bgSelectBox')}
+        style={{ backgroundColor: color }}
+        onClick={() => onColorBgSelected(color)}
+      >
+        {color === bgColorValue && checkIcon}
+      </span>
+    ));
+
   const bgImageElements = useMemo(
-    () =>
-      backgroundImagesList.slice(0, 4).map(image => (
-        <span
-          key={image.id}
-          className={cx('bgSelectBox')}
-          style={{ backgroundImage: `url(${image.imgSrc})` }}
-          onClick={() => onImgBgSelected(image.imgSrc)}
-        >
-          {image.imgSrc === bgImageValue && checkIcon}
-        </span>
-      )),
+    () => getImageBgElements(backgroundImagesList.slice(0, 4)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bgImageValue]
   );
 
   const bgMonoColorElements = useMemo(
-    () =>
-      backgroundColorsList.monoColor.slice(0, 5).map((color, index) => (
-        <span
-          key={index}
-          className={cx('bgSelectBox')}
-          style={{ backgroundColor: color }}
-          onClick={() => onColorBgSelected(color)}
-        >
-          {color === bgColorValue && checkIcon}
-        </span>
-      )),
+    () => getColorBgElements(backgroundColorsList.monoColor.slice(0, 5)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bgColorValue]
   );
 
@@ -129,6 +137,9 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
   return (
     <div className={cx('backLayer')}>
       <form className={cx('wrapper')} ref={wrapperRef} onSubmit={onSubmitForm}>
+        <Button className={cx('closeFormBtn')} onClick={onCloseCreateForm}>
+          {xIcon}
+        </Button>
         <h4>Create board</h4>
         <div className={cx('boardWhiteFrame')} style={demoBackground}>
           <img src="/assets/white-frame/board.svg" alt="board-white-frame" />
@@ -138,7 +149,9 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
           <div className={cx('images')}>{bgImageElements}</div>
           <div className={cx('colors-mono')}>
             {bgMonoColorElements}
-            <Button className={cx('moreBackgroundBtn')}>{threeDotsIcon}</Button>
+            <Button className={cx('moreBackgroundBtn')} onClick={() => setOpenSubForm(true)}>
+              {threeDotsIcon}
+            </Button>
           </div>
         </div>
         <div className={cx('boardTitle')}>
@@ -155,6 +168,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
             onBlur={handleCheckInput}
             onInput={() => setShowRequied(false)}
           />
+          <p>Board title is required</p>
         </div>
         <Button className={cx('formBtn')} type="submit" fullWidth>
           Create
@@ -162,6 +176,14 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard }) => {
         <Button className={cx('formBtn')} fullWidth>
           Start with temple
         </Button>
+        {openSubForm && (
+          <BackgroundForm
+            wrapperClassName={cx('wrapper')}
+            onCloseSubForm={() => setOpenSubForm(false)}
+            getImageBgElements={getImageBgElements}
+            getColorBgElements={getColorBgElements}
+          />
+        )}
       </form>
     </div>
   );

@@ -35,7 +35,7 @@ body {
 body.dark-mode {
   @include dark-theme;
 }
-.container {
+.site-container {
   width: 100%;
 }
 .main-container {

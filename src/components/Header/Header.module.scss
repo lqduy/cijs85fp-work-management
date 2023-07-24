@@ -52,6 +52,8 @@
   border: 1px solid var(--lineColor);
   border-radius: 4px;
 
+  background-color: var(--backgroundColor);
+
   button {
     background-color: none;
 
@@ -79,5 +81,5 @@
   border-color: var(--headerSearchInput-outlineColor);
   box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
 
-  background-color: inherit;
+  background-color: var(--backgroundColor);
 }

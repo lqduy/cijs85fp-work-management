@@ -9,8 +9,47 @@ export const backgroundColorsList = {
     'rgb(75, 191, 107)',
     'rgb(0, 174, 204)',
     'rgb(131, 140, 145)'
+  ],
+  gradientColor: [
+    {
+      id: 'bg-gradcolor-01',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-01.svg'
+    },
+    {
+      id: 'bg-gradcolor-02',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-02.svg'
+    },
+    {
+      id: 'bg-gradcolor-03',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-03.svg'
+    },
+    {
+      id: 'bg-gradcolor-04',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-04.svg'
+    },
+    {
+      id: 'bg-gradcolor-05',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-05.svg'
+    },
+    {
+      id: 'bg-gradcolor-06',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-06.svg'
+    },
+    {
+      id: 'bg-gradcolor-07',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-07.svg'
+    },
+    {
+      id: 'bg-gradcolor-08',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-08.svg'
+    },
+    {
+      id: 'bg-gradcolor-09',
+      imgSrc: '/assets/backgound-gradient-color/bg-gradcolor-09.svg'
+    }
   ]
 };
+
 export const backgroundImagesList = [
   {
     id: 'bg-img-0001',
@@ -50,6 +89,31 @@ export const backgroundImagesList = [
   {
     id: 'bg-img-0008',
     imgSrc: '/assets/background-img/bg-img-08.jpg',
+    category: ''
+  },
+  {
+    id: 'bg-img-0009',
+    imgSrc: '/assets/background-img/bg-img-09.jpg',
+    category: ''
+  },
+  {
+    id: 'bg-img-0010',
+    imgSrc: '/assets/background-img/bg-img-10.jpg',
+    category: ''
+  },
+  {
+    id: 'bg-img-0011',
+    imgSrc: '/assets/background-img/bg-img-11.jpg',
+    category: ''
+  },
+  {
+    id: 'bg-img-0012',
+    imgSrc: '/assets/background-img/bg-img-12.jpg',
+    category: ''
+  },
+  {
+    id: 'bg-img-0013',
+    imgSrc: '/assets/background-img/bg-img-13.jpg',
     category: ''
   }
 ];

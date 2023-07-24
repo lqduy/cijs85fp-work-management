@@ -15,7 +15,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-      <div className="container">
+      <div className="site-container">
         <Header />
         <div className="main-container">
           <Routes>
