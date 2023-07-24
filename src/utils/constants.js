@@ -115,5 +115,10 @@ export const backgroundImagesList = [
     id: 'bg-img-0013',
     imgSrc: '/assets/background-img/bg-img-13.jpg',
     category: ''
+  },
+  {
+    id: 'bg-img-0014',
+    imgSrc: '/assets/background-img/bg-img-14.jpg',
+    category: ''
   }
 ];

@@ -2,7 +2,6 @@
   display: flex;
 
   max-width: 1236px;
-
   margin: 0 auto;
 
   .sideBar {
@@ -26,6 +25,8 @@
   h3 {
     display: flex;
     gap: 12px;
+
+    font-weight: bold;
   }
 }
 .boards {
