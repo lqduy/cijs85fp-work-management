@@ -1,0 +1,53 @@
+.wrapper {
+  margin: 20px auto;
+  width: 100%;
+  padding: 3rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.logo {
+  overflow: hidden;
+  margin: 0px auto;
+}
+
+.container {
+  height: 70%;
+  margin: 0px auto;
+  padding: 2.5rem;
+  background-color: #fff;
+  box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+}
+.btn {
+  background-color: #36b37e;
+  color: #fff;
+  font-weight: 500;
+  border: 0;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 2rem;
+  transition: background-color 0.2s ease 0s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+.infoText {
+  color: #0052cc;
+  text-decoration: none;
+}
+.myform {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.75rem;
+}
+.info {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+
+}
