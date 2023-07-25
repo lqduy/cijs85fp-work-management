@@ -75,6 +75,13 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
     }
   };
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSubmitForm(e);
+    }
+  };
+
   const handleCheckInput = () => {
     const isError = titleValue.replace(/\s+/g, '') === '';
     if (isError) {
@@ -167,6 +174,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
             onChange={e => setTitleValue(e.target.value)}
             onBlur={handleCheckInput}
             onInput={() => setShowRequied(false)}
+            onKeyDown={handleKeyDown}
           />
           <p>Board title is required</p>
         </div>

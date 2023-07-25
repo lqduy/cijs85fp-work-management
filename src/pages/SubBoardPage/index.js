@@ -3,20 +3,20 @@ import classNames from 'classnames/bind';
 
 import styles from './SubBoardPage.module.scss';
 import { useParams } from 'react-router-dom';
-import { boardsListStorage } from '../../utils/local-storage';
+import { boardsListStorage, updateNewBoardToStorage } from '../../utils/local-storage';
 import Button from '../../components/Button';
-import { editIcon, plusIcon } from '../../utils/icons';
+import { plusIcon } from '../../utils/icons';
 import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import Card from './Card';
+import SubBoardHeader from './SubBoardHeader';
 
 let cx = classNames.bind(styles);
 
 const SubBoardPage = () => {
   const { boardId } = useParams();
   const [boardData, setBoardData] = useState([]);
-  const [openAddCardForm, setOpenAddCardForm] = useState(null);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
 
   const { darkMode } = useContext(ThemeContext);
@@ -47,11 +47,7 @@ const SubBoardPage = () => {
     newBoardData.columnsList[updatingIndex].cardsList.push(newCard);
     setBoardData(newBoardData);
 
-    const boardsListData = boardsListStorage.load();
-    const newBoardsList = boardsListData.map(board =>
-      board.boardId === boardId ? newBoardData : board
-    );
-    boardsListStorage.save(newBoardsList);
+    updateNewBoardToStorage(boardId, newBoardData);
   };
 
   const handleAddNewColumn = newColumn => {
@@ -59,11 +55,28 @@ const SubBoardPage = () => {
     newBoardData.columnsList.push(newColumn);
     setBoardData(newBoardData);
 
-    const boardsListData = boardsListStorage.load();
-    const newBoardsList = boardsListData.map(board =>
-      board.boardId === boardId ? newBoardData : board
+    updateNewBoardToStorage(boardId, newBoardData);
+  };
+
+  const handleRemoveColumn = columnId => {
+    const newColumnsList = columnsList.filter(column => column.columnId !== columnId);
+    const newBoardData = { ...boardData, columnsList: newColumnsList };
+    setBoardData(newBoardData);
+
+    updateNewBoardToStorage(boardId, newBoardData);
+  };
+
+  const handleRemoveCard = (cardId, columnId) => {
+    const updatingColumn = columnsList.find(column => column.columnId === columnId);
+    const newCardsList = updatingColumn.cardsList.filter(card => card.cardId !== cardId);
+    const newColumn = { ...updatingColumn, cardsList: newCardsList };
+    const newColumnsList = columnsList.map(column =>
+      column.columnId === columnId ? newColumn : column
     );
-    boardsListStorage.save(newBoardsList);
+    const newBoardData = { ...boardData, columnsList: newColumnsList };
+    setBoardData(newBoardData);
+
+    updateNewBoardToStorage(boardId, newBoardData);
   };
 
   const pageBackground =
@@ -72,21 +85,26 @@ const SubBoardPage = () => {
 
   return (
     <div className={cx('wrapper')} style={pageBackground}>
-      {darkMode && <div className={cx('dark-mode-layer')}></div>}
+      <SubBoardHeader />
       <div className={cx('columns-list')}>
+        {darkMode && <div className={cx('dark-mode-layer')}></div>}
         {/* Render Column */}
         {(boardData.columnsList || []).map(column => (
           <Column
+            key={column.columnId}
             {...column}
             handleAddNewCard={handleAddNewCard}
-            openAddCardForm={openAddCardForm}
-            setOpenAddCardForm={() => setOpenAddCardForm(column.columnId)}
-            setCloseAddCardForm={() => setOpenAddCardForm(null)}
+            handleRemoveColumn={handleRemoveColumn}
           >
             <div className={cx('column__cards-list')}>
               {/* Render Card */}
               {column.cardsList.map(card => (
-                <Card {...card} />
+                <Card
+                  key={card.cardId}
+                  {...card}
+                  columnId={column.columnId}
+                  handleRemoveCard={handleRemoveCard}
+                />
               ))}
             </div>
           </Column>

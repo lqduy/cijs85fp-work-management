@@ -19,10 +19,27 @@ const AddForm = props => {
   } = props || {};
 
   const [title, setTitle] = useState('');
-  const inputRef = useRef(null);
+  const formRef = useRef(null);
+
+  const onClickOutside = e => {
+    const handleCloseForm = () => {
+      if (isAddColumnForm) {
+        setCloseAddColumnForm();
+      } else {
+        setCloseAddCardForm();
+      }
+    };
+    if (formRef.current && !formRef.current.contains(e.target)) {
+      handleCloseForm();
+    }
+  };
 
   useEffect(() => {
-    inputRef.current.focus();
+    document.addEventListener('mousedown', onClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmitToAdd = e => {
@@ -43,7 +60,6 @@ const AddForm = props => {
         handleAddNewCard(columnId, newCard);
       }
       setTitle('');
-      handleCloseForm(e);
     }
   };
 
@@ -63,14 +79,14 @@ const AddForm = props => {
   const InputTagElement = isAddColumnForm ? 'input' : 'textarea';
 
   return (
-    <form className={cx('add-item-form')} onSubmit={onSubmitToAdd}>
+    <form className={cx('add-item-form')} onSubmit={onSubmitToAdd} ref={formRef}>
       <InputTagElement
-        placeholder={isAddColumnForm ? 'Enter list title...' : 'Enter a title for this card...'}
+        placeholder={isAddColumnForm ? 'Enter column title...' : 'Enter a title for this card...'}
         className={cx('textarea', { 'add-column-input': isAddColumnForm })}
         value={title}
         onChange={e => setTitle(e.target.value)}
         onKeyDown={onEnterToSubmit}
-        ref={inputRef}
+        autoFocus
       ></InputTagElement>
       <div className={cx('form-btns')}>
         <Button type="submit" leftIcon={plusIcon} className={cx('add-item-form-submit-btn')}>

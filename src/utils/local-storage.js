@@ -19,3 +19,11 @@ export const themeModeStorage = {
     localStorage.setItem('darkThemeMode', data);
   }
 };
+
+export const updateNewBoardToStorage = (boardId, newBoardData) => {
+  const boardsListData = boardsListStorage.load();
+  const newBoardsList = boardsListData.map(board =>
+    board.boardId === boardId ? newBoardData : board
+  );
+  boardsListStorage.save(newBoardsList);
+};
