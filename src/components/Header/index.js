@@ -18,7 +18,7 @@ let cx = classNames.bind(styles);
 
 const Header = () => {
   const [focusInput, setFocusInput] = useState(false);
-  const { darkMode, setDarkMode } = useContext(ThemeContext);
+  const { setDarkMode } = useContext(ThemeContext);
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {

@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './SubBoardPage.module.scss';
 import { useParams } from 'react-router-dom';
 import { boardsListStorage } from '../../utils/local-storage';
 import Button from '../../components/Button';
-import { editIcon, plusIcon, threeDotsIcon } from '../../utils/icons';
-import AddForm from './AddForm/_AddForm';
+import { editIcon, plusIcon } from '../../utils/icons';
+import AddForm from './AddForm';
+import ThemeContext from '../../contexts/ThemeContext';
+import Column from './Column';
+import Card from './Card';
 
 let cx = classNames.bind(styles);
 
@@ -15,6 +18,8 @@ const SubBoardPage = () => {
   const [boardData, setBoardData] = useState([]);
   const [openAddCardForm, setOpenAddCardForm] = useState(null);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
+
+  const { darkMode } = useContext(ThemeContext);
 
   const fetchBoardData = () => {
     const boardsListData = boardsListStorage.load();
@@ -67,39 +72,24 @@ const SubBoardPage = () => {
 
   return (
     <div className={cx('wrapper')} style={pageBackground}>
+      {darkMode && <div className={cx('dark-mode-layer')}></div>}
       <div className={cx('columns-list')}>
         {/* Render Column */}
         {(boardData.columnsList || []).map(column => (
-          <div key={column.columnId} className={cx('column')}>
-            <div className={cx('column__title')}>
-              <h4>{column.columnTitle}</h4>
-              <Button>{threeDotsIcon}</Button>
-            </div>
+          <Column
+            {...column}
+            handleAddNewCard={handleAddNewCard}
+            openAddCardForm={openAddCardForm}
+            setOpenAddCardForm={() => setOpenAddCardForm(column.columnId)}
+            setCloseAddCardForm={() => setOpenAddCardForm(null)}
+          >
             <div className={cx('column__cards-list')}>
               {/* Render Card */}
               {column.cardsList.map(card => (
-                <div key={card?.cardId} className={cx('card-wrap')}>
-                  <h3>{card?.cardTitle}</h3>
-                  <Button className={cx('edit-card-btn')}>{editIcon}</Button>
-                </div>
+                <Card {...card} />
               ))}
             </div>
-            {openAddCardForm === column.columnId ? (
-              <AddForm
-                {...column}
-                setCloseAddCardForm={() => setOpenAddCardForm(null)}
-                handleAddNewCard={handleAddNewCard}
-              />
-            ) : (
-              <Button
-                leftIcon={plusIcon}
-                className={cx('add-card-btn')}
-                onClick={() => setOpenAddCardForm(column.columnId)}
-              >
-                Add a card
-              </Button>
-            )}
-          </div>
+          </Column>
         ))}
         {/* Add Column Form/Button */}
         {openAddColumnForm ? (

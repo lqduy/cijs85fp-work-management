@@ -4,10 +4,25 @@
 .wrapper {
   @include background-img;
 
+  position: relative;
+
   height: calc(100vh - $header-height);
   padding: 16px;
 
   overflow-x: scroll;
+
+  .dark-mode-layer {
+    pointer-events: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
 }
 .columns-list {
   display: flex;
@@ -31,101 +46,6 @@
     }
   }
 }
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: fit-content;
-  min-height: 119px;
-  padding: 16px;
-  background-color: var(--backgroundColor);
-
-  &__title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    position: relative;
-
-    margin-bottom: 8px;
-  }
-
-  &__title h4 {
-    font-weight: bold;
-  }
-
-  &__title button {
-    width: 30px;
-    height: 30px;
-
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-
-    font-size: 1.4rem;
-  }
-
-  &__cards-list {
-    margin-bottom: 8px;
-  }
-
-  .add-card-btn {
-    justify-content: start;
-
-    height: 30px;
-    padding: 4px;
-
-    &:hover {
-      background-color: var(--backgroundColor-lighter);
-    }
-  }
-}
-
-.card-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  height: 40px;
-  padding: 8px;
-
-  border-radius: 3px;
-  background-color: var(--backgroundColor-darker);
-
-  &:not(:last-of-type) {
-    margin-bottom: 8px;
-  }
-
-  h3 {
-    margin-bottom: 0;
-  }
-
-  &:hover .edit-card-btn {
-    display: block;
-
-    padding: 0;
-  }
-
-  .edit-card-btn {
-    display: none;
-
-    width: auto;
-    height: 100%;
-    padding: 0;
-
-    background-color: transparent;
-
-    font-size: 1.4rem;
-
-    &:hover {
-      transform: scale(1.2);
-      transition: 0.3s;
-    }
-  }
-}
-
 .add-column-form {
   height: fit-content;
   padding: 8px;
