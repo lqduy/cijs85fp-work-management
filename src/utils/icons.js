@@ -8,11 +8,13 @@ import {
   faCheck,
   faStar as faStarSolid,
   faXmark,
-  faAngleLeft
+  faAngleLeft,
+  faPlus
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
   faClock,
+  faPenToSquare,
   faQuestionCircle,
   faStar as faStarRegular
 } from '@fortawesome/free-regular-svg-icons';
@@ -30,6 +32,8 @@ const starSolidIcon = <FontAwesomeIcon icon={faStarSolid} />;
 const clockIcon = <FontAwesomeIcon icon={faClock} />;
 const xIcon = <FontAwesomeIcon icon={faXmark} />;
 const backCaretIcon = <FontAwesomeIcon icon={faAngleLeft} />;
+const plusIcon = <FontAwesomeIcon icon={faPlus} />;
+const editIcon = <FontAwesomeIcon icon={faPenToSquare}/>
 
 export {
   tableIcon,
@@ -44,5 +48,7 @@ export {
   starSolidIcon,
   clockIcon,
   xIcon,
-  backCaretIcon
+  backCaretIcon,
+  plusIcon,
+  editIcon
 };

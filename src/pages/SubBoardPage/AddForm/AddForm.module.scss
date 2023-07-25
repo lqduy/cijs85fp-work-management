@@ -1,0 +1,53 @@
+@import '../../../styles/mixins';
+
+.add-item-form .textarea {
+  resize: none;
+  width: 100%;
+  height: 70px;
+  padding: 8px;
+  margin-bottom: 4px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: rgba(50, 50, 93, 0.1) 0px 2px 4px 0px;
+
+  background-color: var(--backgroundColor-lighter);
+  color: var(--textColor);
+
+  font-size: 1em;
+  font-family: inherit;
+}
+
+.add-item-form .add-column-input {
+  height: 32px;
+  padding: 4px;
+  margin-bottom: 8px;
+
+  border: 3px solid var(--createFormInput-borderBlueColor);
+}
+
+.form-btns {
+  display: flex;
+  gap: 4px;
+  .add-item-form-submit-btn {
+    height: 30px;
+
+    background-color: var(--createBoardBtn-bgColor);
+    color: var(--backgroundColor);
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+  .add-item-form-cancel-btn {
+    height: 30px;
+    width: 30px;
+
+    background: transparent;
+    color: var(--textColor);
+
+    &:hover {
+      background-color: var(--backgroundColor-lighter);
+    }
+  }
+}

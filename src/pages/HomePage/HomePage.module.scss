@@ -3,6 +3,7 @@
 
   max-width: 1236px;
   margin: 0 auto;
+  padding-top: 40px;
 
   .sideBar {
     width: 25%;
@@ -72,7 +73,7 @@
   }
 
   .starIcon {
-    display: block;
+    display: none;
 
     position: absolute;
     bottom: 2px;
@@ -88,7 +89,13 @@
     }
   }
 
+  &:hover .starIcon {
+    display: block;
+  }
+
   .yellowStar {
+    display: block;
+
     color: rgb(238, 201, 37);
   }
 }
