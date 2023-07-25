@@ -17,8 +17,16 @@ const SubBoardPage = () => {
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
 
   const fetchBoardData = () => {
-    const data = boardsListStorage.load().find(board => board.boardId === boardId);
-    setBoardData(data);
+    const boardsListData = boardsListStorage.load();
+    const boardData = boardsListData.find(board => board.boardId === boardId);
+    setBoardData(boardData);
+
+    // update lastVisting
+    const time = new Date().getTime();
+    const newBoardsListData = boardsListData.map(board =>
+      board.boardId === boardId ? { ...board, lastVisiting: time } : board
+    );
+    boardsListStorage.save(newBoardsListData);
   };
 
   useEffect(() => {

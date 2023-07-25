@@ -39,6 +39,10 @@ const HomePage = () => {
   };
 
   let starredBoardsElements = [];
+  let lastestVistingBoardsElements = ([...boardsList] || [])
+    .sort((board, nextBoard) => +nextBoard.lastVisiting - +board.lastVisiting)
+    .filter(board => board.lastVisiting > 0)
+    .slice(0, 4);
   const boardsListElements = (boardsList || []).map(board => {
     const boardElements = (
       <div key={board.boardId} className={cx('boardWrap')}>
@@ -65,6 +69,15 @@ const HomePage = () => {
     if (board.isStarred) {
       starredBoardsElements = [...starredBoardsElements, boardElements];
     }
+    const isTop4RecentlyVisited = lastestVistingBoardsElements.some(
+      vistedBoard => vistedBoard.boardId === board.boardId
+    );
+    if (isTop4RecentlyVisited) {
+      lastestVistingBoardsElements = lastestVistingBoardsElements.map(vistedBoard =>
+        vistedBoard.boardId === board.boardId ? boardElements : vistedBoard
+      );
+    }
+
     return boardElements;
   });
 
@@ -84,7 +97,7 @@ const HomePage = () => {
             <span>{clockIcon}</span>
             <span>Recently viewed</span>
           </h3>
-          <div className={cx('boards')}></div>
+          <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
         </section>
         <section className={cx('section')}>
           <h3>YOUR WORKSPACES</h3>

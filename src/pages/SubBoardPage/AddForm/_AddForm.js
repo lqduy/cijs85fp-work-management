@@ -84,4 +84,8 @@ const AddForm = props => {
   );
 };
 
+AddForm.defaultProps = {
+  isAddColumnForm: false
+};
+
 export default AddForm;
