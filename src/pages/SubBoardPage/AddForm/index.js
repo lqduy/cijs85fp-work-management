@@ -11,6 +11,7 @@ let cx = classNames.bind(styles);
 const AddForm = props => {
   const {
     columnId,
+    boardId,
     handleAddNewCard,
     setCloseAddCardForm,
     isAddColumnForm,
@@ -20,6 +21,7 @@ const AddForm = props => {
 
   const [title, setTitle] = useState('');
   const formRef = useRef(null);
+  const inputRef = useRef(null);
 
   const onClickOutside = e => {
     const handleCloseForm = () => {
@@ -47,19 +49,21 @@ const AddForm = props => {
     if (title !== '') {
       if (isAddColumnForm) {
         const newColumn = {
+          parentId: boardId,
           columnId: `co-${uuidv4()}`,
           columnTitle: title,
-          cardsList: []
         };
         handleAddNewColumn(newColumn);
       } else {
         const newCard = {
+          parentId: columnId,
           cardId: `ca-${uuidv4()}`,
           cardTitle: title
         };
-        handleAddNewCard(columnId, newCard);
+        handleAddNewCard(newCard);
       }
       setTitle('');
+      inputRef.current.focus();
     }
   };
 
@@ -81,13 +85,14 @@ const AddForm = props => {
   return (
     <form className={cx('add-item-form')} onSubmit={onSubmitToAdd} ref={formRef}>
       <InputTagElement
+        ref={inputRef}
         placeholder={isAddColumnForm ? 'Enter column title...' : 'Enter a title for this card...'}
         className={cx('textarea', { 'add-column-input': isAddColumnForm })}
         value={title}
         onChange={e => setTitle(e.target.value)}
         onKeyDown={onEnterToSubmit}
         autoFocus
-      ></InputTagElement>
+      />
       <div className={cx('form-btns')}>
         <Button type="submit" leftIcon={plusIcon} className={cx('add-item-form-submit-btn')}>
           {isAddColumnForm ? 'Add column' : 'Add card'}

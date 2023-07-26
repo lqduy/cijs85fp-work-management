@@ -9,6 +9,28 @@ export const boardsListStorage = {
   }
 };
 
+export const columnsListStorage = {
+  load: () => {
+    const data = localStorage.getItem('columnsList');
+    return data ? JSON.parse(data) : [];
+  },
+  save: boardsListArr => {
+    const data = JSON.stringify(boardsListArr);
+    localStorage.setItem('columnsList', data);
+  }
+};
+
+export const cardsListStorage = {
+  load: () => {
+    const data = localStorage.getItem('cardsList');
+    return data ? JSON.parse(data) : [];
+  },
+  save: boardsListArr => {
+    const data = JSON.stringify(boardsListArr);
+    localStorage.setItem('cardsList', data);
+  }
+};
+
 export const themeModeStorage = {
   load: () => {
     const data = localStorage.getItem('darkThemeMode');

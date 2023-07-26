@@ -3,7 +3,12 @@ import classNames from 'classnames/bind';
 
 import styles from './SubBoardPage.module.scss';
 import { useParams } from 'react-router-dom';
-import { boardsListStorage, updateNewBoardToStorage } from '../../utils/local-storage';
+import {
+  boardsListStorage,
+  cardsListStorage,
+  columnsListStorage,
+  updateNewBoardToStorage
+} from '../../utils/local-storage';
 import Button from '../../components/Button';
 import { plusIcon } from '../../utils/icons';
 import AddForm from './AddForm';
@@ -16,17 +21,29 @@ let cx = classNames.bind(styles);
 
 const SubBoardPage = () => {
   const { boardId } = useParams();
-  const [boardData, setBoardData] = useState([]);
+  const [boardData, setBoardData] = useState({});
+  const [columnsData, setColumnsData] = useState([]);
+  const [cardsData, setCardsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
 
   const { darkMode } = useContext(ThemeContext);
 
-  const fetchBoardData = () => {
+  const handleFetchData = () => {
     const boardsListData = boardsListStorage.load();
     const boardData = boardsListData.find(board => board.boardId === boardId);
     setBoardData(boardData);
 
-    // update lastVisting
+    const columnsListData = columnsListStorage.load();
+    const columnsData = columnsListData.filter(column => column.parentId === boardId);
+    setColumnsData(columnsData);
+
+    const cardsListData = cardsListStorage.load();
+    const cardsData = cardsListData.filter(card =>
+      columnsData.some(column => column.columnId === card.parentId)
+    );
+    setCardsData(cardsData);
+
+    // Update lastVisting
     const time = new Date().getTime();
     const newBoardsListData = boardsListData.map(board =>
       board.boardId === boardId ? { ...board, lastVisiting: time } : board
@@ -35,48 +52,24 @@ const SubBoardPage = () => {
   };
 
   useEffect(() => {
-    fetchBoardData();
+    handleFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { boardImageBg, boardColorBg, columnsList } = boardData;
-
-  const handleAddNewCard = (columnId, newCard) => {
-    const newBoardData = { ...boardData };
-    const updatingIndex = columnsList.findIndex(column => column.columnId === columnId);
-    newBoardData.columnsList[updatingIndex].cardsList.push(newCard);
-    setBoardData(newBoardData);
-
-    updateNewBoardToStorage(boardId, newBoardData);
-  };
+  const { boardImageBg, boardColorBg } = boardData;
 
   const handleAddNewColumn = newColumn => {
-    const newBoardData = { ...boardData };
-    newBoardData.columnsList.push(newColumn);
-    setBoardData(newBoardData);
+    const newColumnsList = [...columnsData, newColumn];
+    setColumnsData(newColumnsList);
 
-    updateNewBoardToStorage(boardId, newBoardData);
+    columnsListStorage.save(newColumnsList);
   };
 
   const handleRemoveColumn = columnId => {
-    const newColumnsList = columnsList.filter(column => column.columnId !== columnId);
-    const newBoardData = { ...boardData, columnsList: newColumnsList };
-    setBoardData(newBoardData);
+    const newColumnsList = columnsData.filter(column => column.columnId !== columnId);
+    setColumnsData(newColumnsList);
 
-    updateNewBoardToStorage(boardId, newBoardData);
-  };
-
-  const handleRemoveCard = (cardId, columnId) => {
-    const updatingColumn = columnsList.find(column => column.columnId === columnId);
-    const newCardsList = updatingColumn.cardsList.filter(card => card.cardId !== cardId);
-    const newColumn = { ...updatingColumn, cardsList: newCardsList };
-    const newColumnsList = columnsList.map(column =>
-      column.columnId === columnId ? newColumn : column
-    );
-    const newBoardData = { ...boardData, columnsList: newColumnsList };
-    setBoardData(newBoardData);
-
-    updateNewBoardToStorage(boardId, newBoardData);
+    columnsListStorage.save(newColumnsList);
   };
 
   const pageBackground =
@@ -89,31 +82,19 @@ const SubBoardPage = () => {
       <div className={cx('columns-list')}>
         {darkMode && <div className={cx('dark-mode-layer')}></div>}
         {/* Render Column */}
-        {(boardData.columnsList || []).map(column => (
+        {(columnsData || []).map(column => (
           <Column
             key={column.columnId}
             {...column}
-            handleAddNewCard={handleAddNewCard}
             handleRemoveColumn={handleRemoveColumn}
-          >
-            <div className={cx('column__cards-list')}>
-              {/* Render Card */}
-              {column.cardsList.map(card => (
-                <Card
-                  key={card.cardId}
-                  {...card}
-                  columnId={column.columnId}
-                  handleRemoveCard={handleRemoveCard}
-                />
-              ))}
-            </div>
-          </Column>
+          />
         ))}
         {/* Add Column Form/Button */}
         {openAddColumnForm ? (
           <div className={cx('add-column-form')}>
             <AddForm
               isAddColumnForm
+              boardId={boardId}
               setCloseAddColumnForm={() => setOpenAddColumnForm(false)}
               handleAddNewColumn={handleAddNewColumn}
             />

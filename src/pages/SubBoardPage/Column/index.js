@@ -5,10 +5,13 @@ import Button from '../../../components/Button';
 import { plusIcon, threeDotsIcon, trashIcon, xIcon } from '../../../utils/icons';
 import AddForm from '../AddForm';
 import { useRef, useState, useEffect } from 'react';
+import { cardsListStorage } from '../../../utils/local-storage';
+import Card from '../Card';
 
 let cx = classNames.bind(styles);
 
-const Column = ({ children, columnId, columnTitle, handleAddNewCard, handleRemoveColumn }) => {
+const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
+  const [cardsData, setCardsData] = useState([]);
   const [openAddCardForm, setOpenAddCardForm] = useState(false);
   const [openSettingBox, setOpenSettingBox] = useState(false);
 
@@ -20,13 +23,37 @@ const Column = ({ children, columnId, columnTitle, handleAddNewCard, handleRemov
     }
   };
 
+  const handleFetchData = () => {
+    const cardsData = cardsListStorage.load().filter(card => card.parentId === columnId);
+    setCardsData(cardsData);
+  };
+
   useEffect(() => {
     document.addEventListener('mousedown', onClickOutsideSettingBox);
+    handleFetchData();
     return () => {
       document.removeEventListener('mousedown', onClickOutsideSettingBox);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleAddNewCard = newCard => {
+    const newCardsData = [...cardsData, newCard];
+    setCardsData(newCardsData);
+
+    const cardsListData = cardsListStorage.load();
+    const newCardsListData = [...cardsListData, newCard];
+    cardsListStorage.save(newCardsListData);
+  };
+
+  const handleRemoveCard = cardId => {
+    const newCardsData = cardsData.filter(card => card.cardId !== cardId);
+    setCardsData(newCardsData);
+
+    const cardsListData = cardsListStorage.load();
+    const newCardsListData = cardsListData.filter(card => card.cardId !== cardId);
+    cardsListStorage.save(newCardsListData);
+  };
 
   return (
     <div className={cx('column')}>
@@ -56,7 +83,13 @@ const Column = ({ children, columnId, columnTitle, handleAddNewCard, handleRemov
       </div>
       <div className={cx('column__cards-list')}>
         {/* Render Card */}
-        {children}
+        {(cardsData || []).map(card => (
+          <Card
+            key={card.cardId}
+            cardData={card}
+            handleRemoveCard={() => handleRemoveCard(card.cardId)}
+          />
+        ))}
       </div>
       {openAddCardForm ? (
         <AddForm
