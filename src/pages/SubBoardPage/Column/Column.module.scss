@@ -6,6 +6,8 @@
   flex-direction: column;
   justify-content: space-between;
 
+  position: relative;
+
   height: fit-content;
   min-height: 119px;
   padding: 16px;
@@ -35,6 +37,10 @@
     transform: translateY(-50%);
 
     font-size: 1.4rem;
+
+    &:hover {
+      background-color: var(--backgroundColor-lighter);
+    }
   }
 
   &__cards-list {
@@ -44,11 +50,20 @@
   .add-card-btn {
     justify-content: start;
 
-    height: 30px;
+    height: 40px;
     padding: 4px;
+
+    border-radius: 6px;
 
     &:hover {
       background-color: var(--backgroundColor-lighter);
     }
   }
+}
+
+.column .setting-box {
+  @include menuBox;
+
+  top: 45px;
+  right: -95%;
 }

@@ -7,9 +7,19 @@
   position: relative;
 
   height: calc(100vh - $header-height);
-  padding: 16px;
+}
+.columns-list {
+  display: flex;
+  gap: 12px;
 
+  height: calc(100vh - $header-height - $subBoardHeader-height);
+  padding: 16px;
   overflow-x: scroll;
+
+  > * {
+    min-width: 272px;
+    border-radius: 12px;
+  }
 
   .dark-mode-layer {
     pointer-events: none;
@@ -20,17 +30,9 @@
 
     width: 100%;
     height: 100%;
+    border-radius: 0;
 
     background-color: rgba($color: #000000, $alpha: 0.3);
-  }
-}
-.columns-list {
-  display: flex;
-  gap: 12px;
-
-  > * {
-    min-width: 272px;
-    border-radius: 12px;
   }
 
   .add-column-btn {
@@ -38,11 +40,11 @@
 
     height: 48px;
 
-    color: #b6c2cf;
-    background-color: rgba($color: white, $alpha: 0.2);
+    color: white;
+    background-color: rgba($color: #ffffff, $alpha: 0.3);
 
     &:hover {
-      background-color: rgba($color: white, $alpha: 0.4);
+      background-color: rgba($color: #ffffff, $alpha: 0.7);
     }
   }
 }

@@ -7,6 +7,7 @@ import Button from '../Button';
 import BackgroundForm from './_BackgroundForm';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
 import { checkIcon, threeDotsIcon, xIcon } from '../../utils/icons';
+import { columnsListStorage } from '../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
@@ -38,40 +39,51 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
   const onSubmitForm = e => {
     e.preventDefault();
     if (titleValue.length > 0) {
+      const newBoardId = `bo-${uuidv4()}`;
       const newBoard = {
-        boardId: `bo-${uuidv4()}`,
+        boardId: newBoardId,
         boardTitle: titleValue,
         isStarred: false,
-        lastVisiting: 0,
-        columnsList: [
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'Todo',
-            cardsList: []
-          },
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'In Progress',
-            cardsList: []
-          },
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'Completed',
-            cardsList: []
-          }
-        ]
+        lastVisiting: 0
       };
       if (bgImageValue) {
         newBoard['boardImageBg'] = bgImageValue;
       } else if (bgColorValue) {
         newBoard['boardColorBg'] = bgColorValue;
       }
-
       handleAddBoard(newBoard);
       setTitleValue('');
+
+      const newColumns = [
+        {
+          parentId: newBoardId,
+          columnId: `co-${uuidv4()}`,
+          columnTitle: 'Todo'
+        },
+        {
+          parentId: newBoardId,
+          columnId: `co-${uuidv4()}`,
+          columnTitle: 'In Progress'
+        },
+        {
+          parentId: newBoardId,
+          columnId: `co-${uuidv4()}`,
+          columnTitle: 'Completed'
+        }
+      ];
+      const columnsListData = columnsListStorage.load();
+      const newColumnList = [...columnsListData, ...newColumns];
+      columnsListStorage.save(newColumnList);
     } else {
       setShowRequied(true);
       inputRef.current.focus();
+    }
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSubmitForm(e);
     }
   };
 
@@ -167,6 +179,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
             onChange={e => setTitleValue(e.target.value)}
             onBlur={handleCheckInput}
             onInput={() => setShowRequied(false)}
+            onKeyDown={handleKeyDown}
           />
           <p>Board title is required</p>
         </div>

@@ -1,6 +1,7 @@
 // Mixin cho light mode
 @mixin light-theme {
   --textColor: #172b4d;
+  --textColorOpposition: #172b4d;
   --lineColor: hsla(218, 54%, 19.6%, 0.16);
   --backgroundColor: white;
   --backgroundColor-darker: #f6f5f5;
@@ -9,7 +10,7 @@
   --headerSearchInput-outlineColor: #0055cc;
   --createFormInput-borderBlueColor: #388bff;
   --createFormInput-borderRedColor: #e34935;
-  --createFormBackLayer-bgColor: rgb(255, 255, 255, 0.75);
+  --createFormBackLayer-bgColor: rgba(222, 222, 222, 0.75);
 
   color: var(--textColor);
 }
@@ -17,6 +18,7 @@
 // Mixin cho dark mode
 @mixin dark-theme {
   --textColor: #b6c2cf;
+  --textColorOpposition: #eee;
   --lineColor: hsla(211, 18%, 68%, 0.16);
   --backgroundColor: #22262a;
   --backgroundColor-darker: #343a3f;
@@ -35,4 +37,47 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+@mixin menuBox {
+  position: absolute;
+  z-index: 1;
+
+  width: 304px;
+  padding: 16px;
+  border: 1px solid var(--lineColor);
+  border-radius: 12px;
+
+  background-color: var(--backgroundColor);
+
+  .box-title {
+    h4 {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    button.close-settingbox-btn {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+    }
+  }
+
+  .setting-part {
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--lineColor);
+      margin-bottom: 8px;
+    }
+
+    > * {
+      justify-content: start;
+
+      width: 100%;
+    }
+  }
+
+  .remove-column-btn {
+    color: var(--bs-danger);
+  }
 }

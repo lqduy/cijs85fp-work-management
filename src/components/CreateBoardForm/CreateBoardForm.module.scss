@@ -131,7 +131,8 @@
     outline: none;
 
     border-width: 2px;
-    border-color: #091e4224;
+    border-color: var(--lineColor);
+    background-color: var(--backgroundColor-darker);
 
     &:focus {
       box-shadow: 0 0 0 3px var(--createFormInput-borderBlueColor);

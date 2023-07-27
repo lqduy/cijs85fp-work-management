@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './CreateBoardForm.module.scss';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
-import { backCaretIcon, checkIcon, xIcon } from '../../utils/icons';
+import { backCaretIcon, xIcon } from '../../utils/icons';
 import Button from '../Button';
 
 let cx = classNames.bind(styles);

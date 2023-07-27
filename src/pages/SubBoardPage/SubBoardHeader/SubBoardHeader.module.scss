@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: $subBoardHeader-height;
+  padding: 8px 16px;
+
+  background-color: var(--createFormBackLayer-bgColor);
+  color: var(--textColorOpposition);
+
+  > * {
+    display: flex;
+    gap: 4px;
+  }
+}
+
+.left-part {
+  .board-title {
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    background-color: aqua;
+  }
+}

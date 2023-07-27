@@ -9,6 +9,28 @@ export const boardsListStorage = {
   }
 };
 
+export const columnsListStorage = {
+  load: () => {
+    const data = localStorage.getItem('columnsList');
+    return data ? JSON.parse(data) : [];
+  },
+  save: boardsListArr => {
+    const data = JSON.stringify(boardsListArr);
+    localStorage.setItem('columnsList', data);
+  }
+};
+
+export const cardsListStorage = {
+  load: () => {
+    const data = localStorage.getItem('cardsList');
+    return data ? JSON.parse(data) : [];
+  },
+  save: boardsListArr => {
+    const data = JSON.stringify(boardsListArr);
+    localStorage.setItem('cardsList', data);
+  }
+};
+
 export const themeModeStorage = {
   load: () => {
     const data = localStorage.getItem('darkThemeMode');
@@ -18,4 +40,12 @@ export const themeModeStorage = {
     const data = JSON.stringify(isDarkMode);
     localStorage.setItem('darkThemeMode', data);
   }
+};
+
+export const updateNewBoardToStorage = (boardId, newBoardData) => {
+  const boardsListData = boardsListStorage.load();
+  const newBoardsList = boardsListData.map(board =>
+    board.boardId === boardId ? newBoardData : board
+  );
+  boardsListStorage.save(newBoardsList);
 };

@@ -9,7 +9,10 @@ import {
   faStar as faStarSolid,
   faXmark,
   faAngleLeft,
-  faPlus
+  faPlus,
+  faFilter,
+  faExpand,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -33,7 +36,10 @@ const clockIcon = <FontAwesomeIcon icon={faClock} />;
 const xIcon = <FontAwesomeIcon icon={faXmark} />;
 const backCaretIcon = <FontAwesomeIcon icon={faAngleLeft} />;
 const plusIcon = <FontAwesomeIcon icon={faPlus} />;
-const editIcon = <FontAwesomeIcon icon={faPenToSquare}/>
+const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
+const filterIcon = <FontAwesomeIcon icon={faFilter} />;
+const viewModeIcon = <FontAwesomeIcon icon={faExpand} />;
+const trashIcon = <FontAwesomeIcon icon={faTrash} />;
 
 export {
   tableIcon,
@@ -50,5 +56,8 @@ export {
   xIcon,
   backCaretIcon,
   plusIcon,
-  editIcon
+  editIcon,
+  filterIcon,
+  viewModeIcon,
+  trashIcon
 };

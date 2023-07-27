@@ -11,6 +11,7 @@ let cx = classNames.bind(styles);
 const AddForm = props => {
   const {
     columnId,
+    boardId,
     handleAddNewCard,
     setCloseAddCardForm,
     isAddColumnForm,
@@ -19,10 +20,28 @@ const AddForm = props => {
   } = props || {};
 
   const [title, setTitle] = useState('');
+  const formRef = useRef(null);
   const inputRef = useRef(null);
 
+  const onClickOutside = e => {
+    const handleCloseForm = () => {
+      if (isAddColumnForm) {
+        setCloseAddColumnForm();
+      } else {
+        setCloseAddCardForm();
+      }
+    };
+    if (formRef.current && !formRef.current.contains(e.target)) {
+      handleCloseForm();
+    }
+  };
+
   useEffect(() => {
-    inputRef.current.focus();
+    document.addEventListener('mousedown', onClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', onClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmitToAdd = e => {
@@ -30,20 +49,21 @@ const AddForm = props => {
     if (title !== '') {
       if (isAddColumnForm) {
         const newColumn = {
+          parentId: boardId,
           columnId: `co-${uuidv4()}`,
           columnTitle: title,
-          cardsList: []
         };
         handleAddNewColumn(newColumn);
       } else {
         const newCard = {
+          parentId: columnId,
           cardId: `ca-${uuidv4()}`,
           cardTitle: title
         };
-        handleAddNewCard(columnId, newCard);
+        handleAddNewCard(newCard);
       }
       setTitle('');
-      handleCloseForm(e);
+      inputRef.current.focus();
     }
   };
 
@@ -63,15 +83,16 @@ const AddForm = props => {
   const InputTagElement = isAddColumnForm ? 'input' : 'textarea';
 
   return (
-    <form className={cx('add-item-form')} onSubmit={onSubmitToAdd}>
+    <form className={cx('add-item-form')} onSubmit={onSubmitToAdd} ref={formRef}>
       <InputTagElement
-        placeholder={isAddColumnForm ? 'Enter list title...' : 'Enter a title for this card...'}
+        ref={inputRef}
+        placeholder={isAddColumnForm ? 'Enter column title...' : 'Enter a title for this card...'}
         className={cx('textarea', { 'add-column-input': isAddColumnForm })}
         value={title}
         onChange={e => setTitle(e.target.value)}
         onKeyDown={onEnterToSubmit}
-        ref={inputRef}
-      ></InputTagElement>
+        autoFocus
+      />
       <div className={cx('form-btns')}>
         <Button type="submit" leftIcon={plusIcon} className={cx('add-item-form-submit-btn')}>
           {isAddColumnForm ? 'Add column' : 'Add card'}
