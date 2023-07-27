@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import firebase from '@firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-
 import { puplicRouters } from './routers';
 import Header from './components/Header';
 import ThemeContext from './contexts/ThemeContext';

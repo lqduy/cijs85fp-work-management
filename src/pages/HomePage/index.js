@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
+import { v4 as uuidv4 } from 'uuid';
 
 import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
-import { boardsListStorage } from '../../utils/local-storage';
+import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
 
 let cx = classNames.bind(styles);
@@ -26,6 +27,27 @@ const HomePage = () => {
     const newBoardsList = [...boardsList, newBoard];
     setBoardsList(newBoardsList);
     boardsListStorage.save(newBoardsList);
+
+    const newColumns = [
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'Todo'
+      },
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'In Progress'
+      },
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'Completed'
+      }
+    ];
+    const columnsListData = columnsListStorage.load();
+    const newColumnList = [...columnsListData, ...newColumns];
+    columnsListStorage.save(newColumnList);
 
     setOpenCreateForm(false);
   };

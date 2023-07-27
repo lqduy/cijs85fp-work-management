@@ -3,18 +3,12 @@ import classNames from 'classnames/bind';
 
 import styles from './SubBoardPage.module.scss';
 import { useParams } from 'react-router-dom';
-import {
-  boardsListStorage,
-  cardsListStorage,
-  columnsListStorage,
-  updateNewBoardToStorage
-} from '../../utils/local-storage';
+import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import Button from '../../components/Button';
 import { plusIcon } from '../../utils/icons';
 import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
-import Card from './Card';
 import SubBoardHeader from './SubBoardHeader';
 
 let cx = classNames.bind(styles);
@@ -23,7 +17,6 @@ const SubBoardPage = () => {
   const { boardId } = useParams();
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
-  const [cardsData, setCardsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
 
   const { darkMode } = useContext(ThemeContext);
@@ -36,12 +29,6 @@ const SubBoardPage = () => {
     const columnsListData = columnsListStorage.load();
     const columnsData = columnsListData.filter(column => column.parentId === boardId);
     setColumnsData(columnsData);
-
-    const cardsListData = cardsListStorage.load();
-    const cardsData = cardsListData.filter(card =>
-      columnsData.some(column => column.columnId === card.parentId)
-    );
-    setCardsData(cardsData);
 
     // Update lastVisting
     const time = new Date().getTime();
@@ -56,7 +43,7 @@ const SubBoardPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { boardImageBg, boardColorBg } = boardData;
+  const { boardTitle, boardImageBg, boardColorBg } = boardData;
 
   const handleAddNewColumn = newColumn => {
     const newColumnsList = [...columnsData, newColumn];
@@ -78,16 +65,12 @@ const SubBoardPage = () => {
 
   return (
     <div className={cx('wrapper')} style={pageBackground}>
-      <SubBoardHeader />
+      {boardTitle && <SubBoardHeader boardData={boardData} />}
       <div className={cx('columns-list')}>
         {darkMode && <div className={cx('dark-mode-layer')}></div>}
         {/* Render Column */}
         {(columnsData || []).map(column => (
-          <Column
-            key={column.columnId}
-            {...column}
-            handleRemoveColumn={handleRemoveColumn}
-          />
+          <Column key={column.columnId} {...column} handleRemoveColumn={handleRemoveColumn} />
         ))}
         {/* Add Column Form/Button */}
         {openAddColumnForm ? (
