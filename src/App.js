@@ -6,11 +6,7 @@ import ThemeContext from './contexts/ThemeContext';
 import { themeModeStorage } from './utils/local-storage';
 import { AuthProvider } from "./contexts/AuthContext"
 
-// db.collection("user-database").get().then((querySnapshot) => {
-//   querySnapshot.forEach((user) => {
-//   console.log(user.id,"-", user.data().name,"-", user.data().password);
-//   });
-// });
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
