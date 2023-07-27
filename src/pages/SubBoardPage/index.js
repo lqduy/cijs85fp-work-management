@@ -68,10 +68,9 @@ const SubBoardPage = () => {
     (boardColorBg && { backgroundColor: boardColorBg });
 
   return (
-    <div className={cx('wrapper')} style={pageBackground}>
+    <div className={cx('wrapper', {'dark-layer': darkMode})} style={pageBackground}>
       {boardTitle && <SubBoardHeader boardData={boardData} />}
       <div className={cx('columns-list')}>
-        {darkMode && <div className={cx('dark-mode-layer')}></div>}
         {/* Render Column */}
         {(columnsData || []).map(column => (
           <Column key={column.columnId} {...column} handleRemoveColumn={handleRemoveColumn} />

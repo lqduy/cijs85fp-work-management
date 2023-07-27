@@ -13,16 +13,18 @@ const Card = ({ cardData, handleRemoveCard }) => {
 
   const [cardTitleValue, setCardTitleValue] = useState(cardTitle);
   const [openSettingBox, setOpenSettingBox] = useState(false);
-  const [editingTitleValue, setEditingTitleValue] = useState(false);
   const settingBoxRef = useRef(null);
   const titleInputRef = useRef(null);
+  const saveBtnRef = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     const isClickOutside =
       settingBoxRef.current &&
       titleInputRef.current &&
+      saveBtnRef.current &&
       !settingBoxRef.current.contains(e.target) &&
-      !titleInputRef.current.contains(e.target);
+      !titleInputRef.current.contains(e.target) &&
+      !saveBtnRef.current.contains(e.target);
     if (isClickOutside) {
       setOpenSettingBox(false);
     }
@@ -36,14 +38,23 @@ const Card = ({ cardData, handleRemoveCard }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleOpenSetting = () => {
-    setOpenSettingBox(true);
-    setEditingTitleValue(true);
-    titleInputRef.current.focus();
+  const autoSelectFormValue = () => {
+    let timer;
+    if (openSettingBox && titleInputRef.current) {
+      timer = setTimeout(() => {
+        titleInputRef.current.select();
+      }, 0);
+    }
+    return () => clearTimeout(timer);
   };
 
-  const handleUpdateCardTitle = e => {
-    const newCardTitle = e.target.value;
+  useEffect(() => {
+    autoSelectFormValue();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openSettingBox]);
+
+  const handleUpdateCardTitle = () => {
+    const newCardTitle = titleInputRef.current.value;
     setCardTitleValue(newCardTitle);
 
     const newCardData = { ...cardData, cardTitle: newCardTitle };
@@ -52,10 +63,19 @@ const Card = ({ cardData, handleRemoveCard }) => {
       card.cardId === cardId ? newCardData : card
     );
     cardsListStorage.save(newCardsListData);
+
+    setOpenSettingBox(false);
+  };
+
+  const onEnterToSave = e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      handleUpdateCardTitle(e);
+    }
   };
 
   return (
-    <div key={cardId} className={cx('card-wrap')}>
+    <div key={cardId} className={cx('card-wrap', { 'card-editing': openSettingBox })}>
+      {openSettingBox && <div className={cx('black-overlay')}></div>}
       {openSettingBox && (
         <div className={cx('setting-box')} ref={settingBoxRef}>
           <div className={cx('box-title')}>
@@ -76,19 +96,29 @@ const Card = ({ cardData, handleRemoveCard }) => {
           </div>
         </div>
       )}
-      <input
-        ref={titleInputRef}
-        name="cardTitle"
-        className={cx('card-title')}
-        value={cardTitleValue}
-        onChange={handleUpdateCardTitle}
-        readOnly={!editingTitleValue}
-        onBlur={() => setEditingTitleValue(false)}
-        autoFocus
-      />
-      <Button className={cx('edit-card-btn')} onClick={handleOpenSetting}>
-        {editIcon}
-      </Button>
+      {openSettingBox && (
+        <button ref={saveBtnRef} className={cx('save-btn')} onClick={handleUpdateCardTitle}>
+          Save
+        </button>
+      )}
+      {openSettingBox && (
+        <textarea
+          ref={titleInputRef}
+          className={cx('card-title')}
+          value={cardTitleValue}
+          onChange={e => setCardTitleValue(e.target.value)}
+          onKeyDown={onEnterToSave}
+          rows={4}
+        ></textarea>
+      )}
+      {!openSettingBox && (
+        <div className={cx('card-title')}>
+          <p>{cardTitleValue}</p>
+          <Button className={cx('edit-card-btn')} onClick={() => setOpenSettingBox(true)}>
+            {editIcon}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

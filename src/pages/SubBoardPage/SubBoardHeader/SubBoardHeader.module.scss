@@ -9,7 +9,7 @@
   height: $subBoardHeader-height;
   padding: 8px 16px;
 
-  background-color: var(--createFormBackLayer-bgColor);
+  background-color: var(--subBoardHeader-bgColor);
   color: var(--textColorOpposition);
 
   > * {
@@ -32,6 +32,8 @@
     outline: none;
     border-radius: 4px;
     background-color: inherit;
+
+    font-weight: bold;
   }
   .board-title__editing {
     outline: 4px solid var(--createFormInput-borderBlueColor);
@@ -42,7 +44,7 @@
     background-color: var(--backgroundColor);
   }
 
-  .star-icon{
+  .star-icon {
     background-color: transparent;
 
     color: rgb(238, 201, 37);

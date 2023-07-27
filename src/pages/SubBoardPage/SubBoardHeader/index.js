@@ -61,7 +61,7 @@ const SubBoardHeader = ({ boardData }) => {
           onFocus={() => setEditingBoardTitle(true)}
           onBlur={() => setEditingBoardTitle(false)}
           onKeyDown={onEnterToSaveEditing}
-          size={boardTitleValue.length}
+          size={boardTitleValue.length - 4}
         />
         <Button className={cx('star-icon')} onClick={handleSetStar}>
           {isStarredIcon ? starSolidIcon : starRegularIcon}

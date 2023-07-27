@@ -23,8 +23,16 @@
     margin-bottom: 8px;
   }
 
-  &__title h4 {
+  &__title input {
+    width: 85%;
+
+    padding: 0 4px;
+    border: none;
+    border-radius: 3px;
+
+    background-color: transparent;
     font-weight: bold;
+    cursor: pointer;
   }
 
   &__title button {
@@ -41,6 +49,11 @@
     &:hover {
       background-color: var(--backgroundColor-lighter);
     }
+  }
+
+  &__title--edit {
+    outline: 2px solid var(--createFormInput-borderBlueColor);
+    background-color: var(--backgroundColor-lighter);
   }
 
   &__cards-list {

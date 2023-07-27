@@ -18,21 +18,8 @@
 
   > * {
     min-width: 272px;
+    max-width: 272px;
     border-radius: 12px;
-  }
-
-  .dark-mode-layer {
-    pointer-events: none;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-
-    background-color: rgba($color: #000000, $alpha: 0.3);
   }
 
   .add-column-btn {
@@ -54,4 +41,20 @@
 
   border-radius: 12px;
   background-color: var(--backgroundColor);
+}
+
+.dark-layer {
+  position: relative;
+}
+
+.dark-layer::before {
+  content: '';
+  position: absolute;
+  top: $subBoardHeader-height;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% - $subBoardHeader-height);
+  background-color: rgba(0, 0, 0, 0.4); /* Màu nền với độ mờ phủ (opacity) 0.5 */
+  pointer-events: none;
 }
