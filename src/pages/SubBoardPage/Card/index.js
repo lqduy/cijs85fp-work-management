@@ -16,6 +16,7 @@ const Card = ({ cardData, handleRemoveCard }) => {
   const settingBoxRef = useRef(null);
   const titleInputRef = useRef(null);
   const saveBtnRef = useRef(null);
+  const prevCardTitle = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     const isClickOutside =
@@ -27,6 +28,7 @@ const Card = ({ cardData, handleRemoveCard }) => {
       !saveBtnRef.current.contains(e.target);
     if (isClickOutside) {
       setOpenSettingBox(false);
+      setCardTitleValue(prevCardTitle.current);
     }
   };
 
@@ -52,6 +54,11 @@ const Card = ({ cardData, handleRemoveCard }) => {
     autoSelectFormValue();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openSettingBox]);
+
+  const onCLickEditCard = () => {
+    setOpenSettingBox(true);
+    prevCardTitle.current = cardTitleValue;
+  };
 
   const handleUpdateCardTitle = () => {
     const newCardTitle = titleInputRef.current.value;
@@ -114,7 +121,7 @@ const Card = ({ cardData, handleRemoveCard }) => {
       {!openSettingBox && (
         <div className={cx('card-title')}>
           <p>{cardTitleValue}</p>
-          <Button className={cx('edit-card-btn')} onClick={() => setOpenSettingBox(true)}>
+          <Button className={cx('edit-card-btn')} onClick={onCLickEditCard}>
             {editIcon}
           </Button>
         </div>

@@ -19,6 +19,10 @@
     margin-bottom: 8px;
   }
 
+  div.card-title {
+    cursor: pointer;
+  }
+
   .card-title {
     width: 100%;
     margin-bottom: 0;
@@ -39,6 +43,10 @@
       margin-bottom: 0;
       vertical-align: middle;
     }
+  }
+
+  &:hover{
+    background-color: var(--backgroundColor-darker);
   }
 
   &:hover .edit-card-btn {
