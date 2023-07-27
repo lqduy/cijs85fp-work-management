@@ -49,14 +49,18 @@ const SubBoardPage = () => {
     const newColumnsList = [...columnsData, newColumn];
     setColumnsData(newColumnsList);
 
-    columnsListStorage.save(newColumnsList);
+    const columnsListData = columnsListStorage.load();
+    const newColumnsListData = [...columnsListData, newColumn];
+    columnsListStorage.save(newColumnsListData);
   };
 
   const handleRemoveColumn = columnId => {
     const newColumnsList = columnsData.filter(column => column.columnId !== columnId);
     setColumnsData(newColumnsList);
 
-    columnsListStorage.save(newColumnsList);
+    const columnsListData = columnsListStorage.load();
+    const newColumnsListData = columnsListData.filter(column => column.columnId !== columnId);
+    columnsListStorage.save(newColumnsListData);
   };
 
   const pageBackground =
