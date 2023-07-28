@@ -6,7 +6,7 @@ const Signup = () => {
   return (
     <div className={signupStyles.wrapper}>
       <div className={signupStyles.logo}>
-        <img width="200" height="42" src="/assets/trello-logo-blue.svg" />
+        <img width="200" height="42" src="/assets/trello-logo-blue.svg" alt=""/>
       </div>
       <div className={signupStyles.container}>
         <form className={signupStyles.myform}>

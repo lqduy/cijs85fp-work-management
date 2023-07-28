@@ -6,6 +6,8 @@ import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
 import { boardsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
+import Sidebar from '../../components/Sidebar/Sidebar';
+
 
 let cx = classNames.bind(styles);
 
@@ -83,7 +85,6 @@ const HomePage = () => {
 
   return (
     <div className={cx('wrapper')}>
-      <div className={cx('sideBar')}></div>
       <div className={cx('sideBody')}>
         <section className={cx('section')}>
           <h3>

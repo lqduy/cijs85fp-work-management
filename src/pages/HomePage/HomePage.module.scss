@@ -5,19 +5,13 @@
   margin: 0 auto;
   padding-top: 40px;
 
-  .sideBar {
-    width: 25%;
-    min-height: 700px;
-
-    background-color: antiquewhite;
-  }
-
   .sideBody {
     width: 75%;
 
     padding: 16px;
   }
 }
+
 .section {
   &:not(:last-child) {
     margin-bottom: 32px;
@@ -30,6 +24,7 @@
     font-weight: bold;
   }
 }
+
 .boards {
   display: flex;
   flex-wrap: wrap;
@@ -37,7 +32,7 @@
 
   margin-top: 16px;
 
-  > * {
+  >* {
     width: calc(25% - 12px * 3 / 4);
     height: 96px;
   }

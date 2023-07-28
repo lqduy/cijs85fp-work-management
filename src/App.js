@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import firebase from "@firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
-import firebase from '@firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-
-import { puplicRouters } from './routers';
-import Header from './components/Header';
-import ThemeContext from './contexts/ThemeContext';
-import { themeModeStorage } from './utils/local-storage';
+import { puplicRouters } from "./routers";
+import Header from "./components/Header";
+import ThemeContext from "./contexts/ThemeContext";
+import { themeModeStorage } from "./utils/local-storage";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 // firebase.initializeApp({
 //   apiKey: 'AIzaSyAI-g4aT3bfiNIcxFiAp-8D81FCuYhMJc8',
@@ -19,22 +19,39 @@ import { themeModeStorage } from './utils/local-storage';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
-
   useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
+    document.body.classList.toggle("dark-mode", darkMode);
   }, [darkMode]);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+    <ThemeContext.Provider
+      value={{ darkMode, setDarkMode, sidebarOpen, setSidebarOpen }}
+    >
       <div className="site-container">
         <Header />
-        <div className="main-container">
-          <Routes>
-            {puplicRouters.map((route, index) => {
-              const Page = route.component;
-              return <Route key={index} path={route.path} element={<Page />} />;
-            })}
-          </Routes>
+        <div className={sidebarOpen ? "wrapper open" : "wrapper"}>
+          <nav
+            className={
+              sidebarOpen
+                ? "sidebar-container sidebar-open"
+                : "sidebar-container"
+            }
+          >
+            <Sidebar />
+          </nav>
+          <main
+            className={sidebarOpen ? "main-container open" : "main-container"}
+          >
+            <Routes>
+              {puplicRouters.map((route, index) => {
+                const Page = route.component;
+                return (
+                  <Route key={index} path={route.path} element={<Page />} />
+                );
+              })}
+            </Routes>
+          </main>
         </div>
       </div>
     </ThemeContext.Provider>

@@ -9,7 +9,7 @@ const Login = () => {
 
     <div className={(loginStyles.wrapper)}>
       <div className={(loginStyles.logo)}>
-        <img width="200" height="42" src="/assets/trello-logo-blue.svg" />
+        <img width="200" height="42" src="/assets/trello-logo-blue.svg" alt=""/>
       </div>
       <div className={(loginStyles.container)}>
       <form className={(loginStyles.myform)}>

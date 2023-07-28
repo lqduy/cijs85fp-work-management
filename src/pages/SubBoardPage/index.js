@@ -11,6 +11,7 @@ import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import Card from './Card';
 import SubBoardHeader from './SubBoardHeader';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 let cx = classNames.bind(styles);
 
