@@ -5,13 +5,9 @@ import { puplicRouters } from './routers';
 import Header from './components/Header';
 import ThemeContext from './contexts/ThemeContext';
 import { themeModeStorage } from './utils/local-storage';
+import { AuthProvider } from "./contexts/AuthContext"
 
-// firebase.initializeApp({
-//   apiKey: 'AIzaSyAI-g4aT3bfiNIcxFiAp-8D81FCuYhMJc8',
-//   authDomain: 'cijs85fp-work-management.firebaseapp.com',
-//   projectId: 'cijs85fp-work-management'
-// });
-// const db = firebase.firestore();
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
@@ -21,6 +17,7 @@ function App() {
   }, [darkMode]);
 
   return (
+    <AuthProvider>
     <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
       <div className="site-container">
         <Header />
@@ -34,6 +31,7 @@ function App() {
         </div>
       </div>
     </ThemeContext.Provider>
+    </AuthProvider>
   );
 }
 
