@@ -5,7 +5,7 @@ import Button from '../../../components/Button';
 import { plusIcon, threeDotsIcon, trashIcon, xIcon } from '../../../utils/icons';
 import AddForm from '../AddForm';
 import { useRef, useState, useEffect } from 'react';
-import { cardsListStorage } from '../../../utils/local-storage';
+import { cardsListStorage, columnsListStorage } from '../../../utils/local-storage';
 import Card from '../Card';
 
 let cx = classNames.bind(styles);
@@ -14,6 +14,8 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
   const [cardsData, setCardsData] = useState([]);
   const [openAddCardForm, setOpenAddCardForm] = useState(false);
   const [openSettingBox, setOpenSettingBox] = useState(false);
+  const [columnTitleValue, setColumnTitleValue] = useState(columnTitle);
+  const [editingColumnTitle, setEditingColumnTitle] = useState(false);
 
   const settingBoxRef = useRef(null);
 
@@ -55,13 +57,32 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
     cardsListStorage.save(newCardsListData);
   };
 
+  const handleUpdateColumnTitle = e => {
+    if (columnTitleValue !== '') {
+      const columnsListData = columnsListStorage.load();
+      const newColumnListData = columnsListData.map(column =>
+        column.columnId === columnId ? { ...column, columnTitle: columnTitleValue } : column
+      );
+      columnsListStorage.save(newColumnListData);
+    }
+    setEditingColumnTitle(false);
+  };
+
+  const onEnterToSave = e => {
+    if (e.key === 'Enter') {
+      handleUpdateColumnTitle(e);
+    }
+  };
+
   return (
     <div className={cx('column')}>
       {openSettingBox && (
         <div className={cx('setting-box')} ref={settingBoxRef}>
           <div className={cx('box-title')}>
             <h4>List action</h4>
-            <Button className={cx('close-settingbox-btn')}>{xIcon}</Button>
+            <Button className={cx('close-settingbox-btn')} onClick={() => setOpenSettingBox(false)}>
+              {xIcon}
+            </Button>
           </div>
           <div className={cx('setting-part')}>
             <Button>Add card</Button>
@@ -78,7 +99,15 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
         </div>
       )}
       <div className={cx('column__title')}>
-        <h4>{columnTitle}</h4>
+        <input
+          className={cx({ 'column__title--edit': editingColumnTitle })}
+          value={columnTitleValue}
+          onFocus={() => setEditingColumnTitle(true)}
+          onChange={e => setColumnTitleValue(e.target.value)}
+          onBlur={handleUpdateColumnTitle}
+          onKeyDown={onEnterToSave}
+          readOnly={!editingColumnTitle}
+        />
         <Button onClick={() => setOpenSettingBox(true)}>{threeDotsIcon}</Button>
       </div>
       <div className={cx('column__cards-list')}>

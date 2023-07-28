@@ -39,9 +39,8 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
   const onSubmitForm = e => {
     e.preventDefault();
     if (titleValue.length > 0) {
-      const newBoardId = `bo-${uuidv4()}`;
       const newBoard = {
-        boardId: newBoardId,
+        boardId: `bo-${uuidv4()}`,
         boardTitle: titleValue,
         isStarred: false,
         lastVisiting: 0
@@ -53,27 +52,6 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
       }
       handleAddBoard(newBoard);
       setTitleValue('');
-
-      const newColumns = [
-        {
-          parentId: newBoardId,
-          columnId: `co-${uuidv4()}`,
-          columnTitle: 'Todo'
-        },
-        {
-          parentId: newBoardId,
-          columnId: `co-${uuidv4()}`,
-          columnTitle: 'In Progress'
-        },
-        {
-          parentId: newBoardId,
-          columnId: `co-${uuidv4()}`,
-          columnTitle: 'Completed'
-        }
-      ];
-      const columnsListData = columnsListStorage.load();
-      const newColumnList = [...columnsListData, ...newColumns];
-      columnsListStorage.save(newColumnList);
     } else {
       setShowRequied(true);
       inputRef.current.focus();

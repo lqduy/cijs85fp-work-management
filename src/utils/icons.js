@@ -12,7 +12,13 @@ import {
   faPlus,
   faFilter,
   faExpand,
-  faTrash
+  faTrash,
+  faArrowUpRightFromSquare,
+  faImage,
+  faUser,
+  faTag,
+  faArrowRight,
+  faCopy
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -40,6 +46,12 @@ const editIcon = <FontAwesomeIcon icon={faPenToSquare} />;
 const filterIcon = <FontAwesomeIcon icon={faFilter} />;
 const viewModeIcon = <FontAwesomeIcon icon={faExpand} />;
 const trashIcon = <FontAwesomeIcon icon={faTrash} />;
+const openIcon = <FontAwesomeIcon icon={faArrowUpRightFromSquare} />;
+const photoIcon = <FontAwesomeIcon icon={faImage} />;
+const userIcon = <FontAwesomeIcon icon={faUser} />;
+const tagIcon = <FontAwesomeIcon icon={faTag} />;
+const arrowRightIcon = <FontAwesomeIcon icon={faArrowRight} />;
+const copyIcon = <FontAwesomeIcon icon={faCopy} />;
 
 export {
   tableIcon,
@@ -59,5 +71,11 @@ export {
   editIcon,
   filterIcon,
   viewModeIcon,
-  trashIcon
+  trashIcon,
+  openIcon,
+  photoIcon,
+  userIcon,
+  tagIcon,
+  arrowRightIcon,
+  copyIcon
 };
