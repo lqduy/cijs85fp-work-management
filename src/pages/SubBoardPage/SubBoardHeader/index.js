@@ -10,7 +10,7 @@ import {
   viewModeIcon
 } from '../../../utils/icons';
 import Button from '../../../components/Button';
-import { boardsListStorage, updateNewBoardToStorage } from '../../../utils/local-storage';
+import { updateNewBoardToStorage } from '../../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
@@ -22,19 +22,16 @@ const SubBoardHeader = ({ boardData }) => {
   const [editingBoardTitle, setEditingBoardTitle] = useState(false);
 
   const handleEditBoardTitle = e => {
-    let newTitle = e.target.value;
-    setBoardTitleValue(newTitle);
-
-    if (newTitle.length === 0) {
-      newTitle = 'Unknown';
+    if (boardTitleValue !== '') {
+      const newBoardData = { ...boardData, boardTitle: boardTitleValue };
+      updateNewBoardToStorage(boardData.boardId, newBoardData);
     }
-    const newBoardData = { ...boardData, boardTitle: newTitle };
-    updateNewBoardToStorage(boardData.boardId, newBoardData);
+    setEditingBoardTitle(false);
   };
 
   const onEnterToSaveEditing = e => {
     if (e.key === 'Enter') {
-      setEditingBoardTitle(false);
+      handleEditBoardTitle();
     }
   };
 
@@ -56,12 +53,12 @@ const SubBoardHeader = ({ boardData }) => {
             'board-tile__error': boardTitleValue.length === 0
           })}
           value={boardTitleValue}
-          onChange={handleEditBoardTitle}
+          onChange={e => setBoardTitleValue(e.target.value)}
           readOnly={!editingBoardTitle}
           onFocus={() => setEditingBoardTitle(true)}
-          onBlur={() => setEditingBoardTitle(false)}
+          onBlur={handleEditBoardTitle}
           onKeyDown={onEnterToSaveEditing}
-          size={boardTitleValue.length - 4}
+          size={boardTitleValue.length - 4 || 0}
         />
         <Button className={cx('star-icon')} onClick={handleSetStar}>
           {isStarredIcon ? starSolidIcon : starRegularIcon}

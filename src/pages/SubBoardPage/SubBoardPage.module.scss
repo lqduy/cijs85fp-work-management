@@ -27,11 +27,11 @@
 
     height: 48px;
 
-    color: white;
-    background-color: rgba($color: #ffffff, $alpha: 0.3);
+    color: var(--textColor);
+    background-color: var(--subBoardHeader-bgColor);
 
     &:hover {
-      background-color: rgba($color: #ffffff, $alpha: 0.7);
+      background-color: var(--backgroundColor-lighter);
     }
   }
 }

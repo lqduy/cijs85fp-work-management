@@ -10,7 +10,7 @@
 
   height: fit-content;
   min-height: 119px;
-  padding: 16px;
+  padding: 8px;
   background-color: var(--backgroundColor);
 
   &__title {
@@ -51,9 +51,10 @@
     }
   }
 
-  &__title--edit {
+  &__title .column__title--edit {
     outline: 2px solid var(--createFormInput-borderBlueColor);
     background-color: var(--backgroundColor-lighter);
+    cursor: text;
   }
 
   &__cards-list {

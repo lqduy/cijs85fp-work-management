@@ -34,10 +34,13 @@
     background-color: inherit;
 
     font-weight: bold;
+    font-size: 2rem;
+    cursor: pointer;
   }
   .board-title__editing {
     outline: 4px solid var(--createFormInput-borderBlueColor);
     background-color: var(--backgroundColor);
+    cursor: text;
   }
   .board-tile__error {
     outline: 4px solid var(--createFormInput-borderRedColor);

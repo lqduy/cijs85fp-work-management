@@ -58,17 +58,20 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
   };
 
   const handleUpdateColumnTitle = e => {
-    let newTitle = e.target.value;
-    setColumnTitleValue(newTitle);
-
-    if (newTitle === '') {
-      newTitle = 'Unknown';
+    if (columnTitleValue !== '') {
+      const columnsListData = columnsListStorage.load();
+      const newColumnListData = columnsListData.map(column =>
+        column.columnId === columnId ? { ...column, columnTitle: columnTitleValue } : column
+      );
+      columnsListStorage.save(newColumnListData);
     }
-    const columnsListData = columnsListStorage.load();
-    const newColumnListData = columnsListData.map(column =>
-      column.columnId === columnId ? { ...column, columnTitle: newTitle } : column
-    );
-    columnsListStorage.save(newColumnListData);
+    setEditingColumnTitle(false);
+  };
+
+  const onEnterToSave = e => {
+    if (e.key === 'Enter') {
+      handleUpdateColumnTitle(e);
+    }
   };
 
   return (
@@ -77,7 +80,9 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
         <div className={cx('setting-box')} ref={settingBoxRef}>
           <div className={cx('box-title')}>
             <h4>List action</h4>
-            <Button className={cx('close-settingbox-btn')}>{xIcon}</Button>
+            <Button className={cx('close-settingbox-btn')} onClick={() => setOpenSettingBox(false)}>
+              {xIcon}
+            </Button>
           </div>
           <div className={cx('setting-part')}>
             <Button>Add card</Button>
@@ -98,8 +103,9 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
           className={cx({ 'column__title--edit': editingColumnTitle })}
           value={columnTitleValue}
           onFocus={() => setEditingColumnTitle(true)}
-          onBlur={() => setEditingColumnTitle(false)}
-          onChange={handleUpdateColumnTitle}
+          onChange={e => setColumnTitleValue(e.target.value)}
+          onBlur={handleUpdateColumnTitle}
+          onKeyDown={onEnterToSave}
           readOnly={!editingColumnTitle}
         />
         <Button onClick={() => setOpenSettingBox(true)}>{threeDotsIcon}</Button>

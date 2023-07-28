@@ -8,7 +8,6 @@
 
   position: relative;
 
-  // min-height: 40px;
   height: fit-content;
   padding: 4px;
 
@@ -45,7 +44,7 @@
     }
   }
 
-  &:hover{
+  &:hover {
     background-color: var(--backgroundColor-darker);
   }
 
@@ -62,11 +61,12 @@
     right: 0;
     top: 0;
 
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 0;
+    border-radius: 6px;
 
-    background-color: var(--backgroundColor-darker);
+    background-color: var(--cardEditBtn-bgColor);
 
     font-size: 1.4rem;
 
@@ -79,11 +79,33 @@
 }
 
 .card-wrap .setting-box {
-  @include menuBox;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 
+  position: absolute;
   top: 0;
   right: 0;
   transform: translateX(calc(100% + 8px));
+  z-index: 1;
+
+  .setting-item {
+    justify-content: start;
+
+    width: fit-content;
+    border-radius: 3px;
+    background-color: rgba($color: #454545, $alpha: 0.8);
+    color: #b6c2cf;
+
+    &:hover {
+      background-color: #454545;
+      transform: translateX(5%);
+      transition: 0.1s;
+    }
+  }
+  .remove-column-btn {
+    color: var(--bs-danger);
+  }
 }
 
 .card-editing {
