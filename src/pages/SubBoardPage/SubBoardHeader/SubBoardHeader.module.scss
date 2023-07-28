@@ -21,6 +21,7 @@
 
 .left-part {
   .board-title {
+    width: fit-content;
     height: 32px;
     padding: 8px;
 
@@ -58,3 +59,8 @@
     }
   }
 }
+// .right-part{
+//   > * > button:hover{
+//     background-color: var(--backgroundColor-lighter);
+//   }
+// }

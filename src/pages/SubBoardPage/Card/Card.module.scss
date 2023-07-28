@@ -102,6 +102,9 @@
       transform: translateX(5%);
       transition: 0.1s;
     }
+    &:hover:not(.remove-column-btn) {
+      color: white;
+    }
   }
   .remove-column-btn {
     color: var(--bs-danger);

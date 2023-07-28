@@ -5,9 +5,7 @@ import { puplicRouters } from './routers';
 import Header from './components/Header';
 import ThemeContext from './contexts/ThemeContext';
 import { themeModeStorage } from './utils/local-storage';
-import { AuthProvider } from "./contexts/AuthContext"
-
-
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
@@ -18,19 +16,19 @@ function App() {
 
   return (
     <AuthProvider>
-    <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
-      <div className="site-container">
-        <Header />
-        <div className="main-container">
-          <Routes>
-            {puplicRouters.map((route, index) => {
-              const Page = route.component;
-              return <Route key={index} path={route.path} element={<Page />} />;
-            })}
-          </Routes>
+      <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
+        <div className="site-container">
+          <Header />
+          <div className="main-container">
+            <Routes>
+              {puplicRouters.map((route, index) => {
+                const Page = route.component;
+                return <Route key={index} path={route.path} element={<Page />} />;
+              })}
+            </Routes>
+          </div>
         </div>
-      </div>
-    </ThemeContext.Provider>
+      </ThemeContext.Provider>
     </AuthProvider>
   );
 }

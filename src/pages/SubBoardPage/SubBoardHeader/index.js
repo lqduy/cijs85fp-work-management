@@ -58,18 +58,26 @@ const SubBoardHeader = ({ boardData }) => {
           onFocus={() => setEditingBoardTitle(true)}
           onBlur={handleEditBoardTitle}
           onKeyDown={onEnterToSaveEditing}
-          size={boardTitleValue.length - 4 || 0}
+          size={boardTitleValue.length}
         />
         <Button className={cx('star-icon')} onClick={handleSetStar}>
           {isStarredIcon ? starSolidIcon : starRegularIcon}
         </Button>
       </div>
       <div className={cx('right-part')}>
-        <Button leftIcon={filterIcon} className={cx('filter-icon')}>
-          Filter
-        </Button>
-        <Button leftIcon={viewModeIcon}>View mode</Button>
-        <Button>{threeDotsIcon}</Button>
+        <div className={cx('setting-item__wrap')}>
+          <Button leftIcon={filterIcon} className={cx('setting-item', 'filter-btn')}>
+            Filter
+          </Button>
+        </div>
+        <div className={cx('setting-item__wrap')}>
+          <Button leftIcon={viewModeIcon} className={cx('setting-item')}>
+            View mode
+          </Button>
+        </div>
+        <div className={cx('setting-item__wrap')}>
+          <Button>{threeDotsIcon}</Button>
+        </div>
       </div>
     </div>
   );
