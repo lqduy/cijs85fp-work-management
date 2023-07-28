@@ -7,7 +7,6 @@ import Button from '../Button';
 import BackgroundForm from './_BackgroundForm';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
 import { checkIcon, threeDotsIcon, xIcon } from '../../utils/icons';
-import { columnsListStorage } from '../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
