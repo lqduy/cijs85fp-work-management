@@ -7,6 +7,7 @@ import Button from '../Button';
 import BackgroundForm from './_BackgroundForm';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
 import { checkIcon, threeDotsIcon, xIcon } from '../../utils/icons';
+import { columnsListStorage } from '../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
@@ -42,31 +43,13 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
         boardId: `bo-${uuidv4()}`,
         boardTitle: titleValue,
         isStarred: false,
-        lastVisiting: 0,
-        columnsList: [
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'Todo',
-            cardsList: []
-          },
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'In Progress',
-            cardsList: []
-          },
-          {
-            columnId: `co-${uuidv4()}`,
-            columnTitle: 'Completed',
-            cardsList: []
-          }
-        ]
+        lastVisiting: 0
       };
       if (bgImageValue) {
         newBoard['boardImageBg'] = bgImageValue;
       } else if (bgColorValue) {
         newBoard['boardColorBg'] = bgColorValue;
       }
-
       handleAddBoard(newBoard);
       setTitleValue('');
     } else {

@@ -10,7 +10,9 @@
   --headerSearchInput-outlineColor: #0055cc;
   --createFormInput-borderBlueColor: #388bff;
   --createFormInput-borderRedColor: #e34935;
-  --createFormBackLayer-bgColor: rgba(222, 222, 222, 0.75);
+  --createFormBackLayer-bgColor: rgba(191, 191, 191, 0.75);
+  --subBoardHeader-bgColor: rgba(197, 197, 197, 0.7);
+  --cardEditBtn-bgColor: #c9cccf;
 
   color: var(--textColor);
 }
@@ -28,6 +30,8 @@
   --createFormInput-borderBlueColor: #85b8ff;
   --createFormInput-borderRedColor: #ef5c48;
   --createFormBackLayer-bgColor: rgb(0, 0, 0, 0.4);
+  --subBoardHeader-bgColor: rgba(27, 27, 27, 0.8);
+  --cardEditBtn-bgColor: #1d1e1f;
 
   color: var(--textColor);
   background-color: var(--backgroundColor);
