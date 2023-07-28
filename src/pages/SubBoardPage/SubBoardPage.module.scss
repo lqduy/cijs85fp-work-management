@@ -16,9 +16,14 @@
   padding: 16px;
   overflow-x: scroll;
 
-  > * {
-    min-width: 272px;
-    max-width: 272px;
+  &__core {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__core > * {
+    min-width: $column-width;
+    max-width: $column-width;
     border-radius: 12px;
   }
 
@@ -26,6 +31,9 @@
     justify-content: start;
 
     height: 48px;
+    min-width: $column-width;
+    max-width: $column-width;
+    border-radius: 12px;
 
     color: var(--textColor);
     background-color: var(--subBoardHeader-bgColor);
@@ -37,6 +45,7 @@
 }
 .add-column-form {
   height: fit-content;
+  width: $column-width;
   padding: 8px;
 
   border-radius: 12px;

@@ -1,5 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import classNames from 'classnames/bind';
+import { DndContext } from '@dnd-kit/core';
+import { SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 
 import styles from './SubBoardPage.module.scss';
 import { useParams } from 'react-router-dom';
@@ -10,7 +12,6 @@ import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import SubBoardHeader from './SubBoardHeader';
-import Sidebar from '../../components/Sidebar/Sidebar';
 
 let cx = classNames.bind(styles);
 
@@ -64,39 +65,64 @@ const SubBoardPage = () => {
     columnsListStorage.save(newColumnsListData);
   };
 
+  const handleDragEnd = e => {
+    const { active, over } = e;
+    console.log(e);
+    if (!over) return;
+    if (active.id !== over.id) {
+      const oldIndex = columnsData.findIndex(column => column.columnId === active.id);
+      const newIndex = columnsData.findIndex(column => column.columnId === over.id);
+      const dndOrderedColumns = arrayMove(columnsData, oldIndex, newIndex);
+      setColumnsData(dndOrderedColumns);
+
+      const columnsListData = columnsListStorage.load();
+      let newColumnsListData = columnsListData.filter(column => column.parentId !== boardId);
+      newColumnsListData = [...newColumnsListData, ...dndOrderedColumns];
+      columnsListStorage.save(newColumnsListData);
+    }
+  };
+
   const pageBackground =
     (boardImageBg && { backgroundImage: `url(${boardImageBg})` }) ||
     (boardColorBg && { backgroundColor: boardColorBg });
 
+  const columnIdsList = columnsData?.map(column => column.columnId);
+
   return (
-    <div className={cx('wrapper', {'dark-layer': darkMode})} style={pageBackground}>
-      {boardTitle && <SubBoardHeader boardData={boardData} />}
-      <div className={cx('columns-list')}>
-        {/* Render Column */}
-        {(columnsData || []).map(column => (
-          <Column key={column.columnId} {...column} handleRemoveColumn={handleRemoveColumn} />
-        ))}
-        {/* Add Column Form/Button */}
-        {openAddColumnForm ? (
-          <div className={cx('add-column-form')}>
-            <AddForm
-              isAddColumnForm
-              boardId={boardId}
-              setCloseAddColumnForm={() => setOpenAddColumnForm(false)}
-              handleAddNewColumn={handleAddNewColumn}
-            />
-          </div>
-        ) : (
-          <Button
-            leftIcon={plusIcon}
-            className={cx('add-column-btn')}
-            onClick={() => setOpenAddColumnForm(true)}
-          >
-            Add another column
-          </Button>
-        )}
+    <DndContext onDragEnd={handleDragEnd}>
+      <div className={cx('wrapper', { 'dark-layer': darkMode })} style={pageBackground}>
+        {boardTitle && <SubBoardHeader boardData={boardData} />}
+        <div className={cx('columns-list')}>
+          <SortableContext items={columnIdsList} strategy={horizontalListSortingStrategy}>
+            <div className={cx('columns-list__core')}>
+              {/* Render Column */}
+              {columnsData?.map(column => (
+                <Column key={column.columnId} {...column} handleRemoveColumn={handleRemoveColumn} />
+              ))}
+            </div>
+          </SortableContext>
+          {/* Add Column Form/Button */}
+          {openAddColumnForm ? (
+            <div className={cx('add-column-form')}>
+              <AddForm
+                isAddColumnForm
+                boardId={boardId}
+                setCloseAddColumnForm={() => setOpenAddColumnForm(false)}
+                handleAddNewColumn={handleAddNewColumn}
+              />
+            </div>
+          ) : (
+            <Button
+              leftIcon={plusIcon}
+              className={cx('add-column-btn')}
+              onClick={() => setOpenAddColumnForm(true)}
+            >
+              Add another column
+            </Button>
+          )}
+        </div>
       </div>
-    </div>
+    </DndContext>
   );
 };
 
