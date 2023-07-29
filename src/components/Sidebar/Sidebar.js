@@ -23,6 +23,7 @@ let cx = classNames.bind(styles);
 
 const Sidebar = () => {
   const { setSidebarOpen, sidebarOpen } = useContext(ThemeContext);
+  const [workspaces, setWorkspaces] = useState(true);
 
   return (
     <div className={cx("sidebar")}>
@@ -54,11 +55,13 @@ const Sidebar = () => {
             <span>+</span>
           </div>
           <div className={cx("dropdown")}>
-            <div className={cx("dropdown-select")}>
-              <span className={cx("dropdown-click")}>Your Workspace</span>
-              <FontAwesomeIcon icon={faCaretDown} />
+            <div className={cx("dropdown-select")} onClick={() => setWorkspaces(!workspaces)}>
+              <span className={cx("dropdown-click")}>
+                Your Workspace
+                <FontAwesomeIcon icon={faCaretDown} />
+              </span>
             </div>
-            <ul className={cx("dropdown-list")}>
+            <ul className={workspaces ? cx("dropdown-list open") : cx("dropdown-list")}>
               <li className={cx("dropdown-item")}>
                 <span className={cx("dropdown-text")}>
                   <FontAwesomeIcon icon={faSuitcase} />
