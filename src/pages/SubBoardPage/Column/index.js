@@ -9,7 +9,6 @@ import Card from '../Card';
 import { plusIcon, threeDotsIcon, trashIcon, xIcon } from '../../../utils/icons';
 import { cardsListStorage, columnsListStorage } from '../../../utils/local-storage';
 import styles from './Column.module.scss';
-import { clippingParents } from '@popperjs/core';
 
 let cx = classNames.bind(styles);
 
@@ -120,7 +119,7 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
       {...attributes}
       {...listeners}
     >
-      {openSettingBox && { settingBoxElements }}
+      {openSettingBox && settingBoxElements}
       <div className={cx('column__title')}>
         <input
           className={cx({ 'column__title--edit': editingColumnTitle })}
@@ -131,9 +130,7 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
           onKeyDown={onEnterToSave}
           readOnly={!editingColumnTitle}
         />
-        <Button onClick={e => console.log(e)} onDragStart={e => e.preventDefault()}>
-          {threeDotsIcon}
-        </Button>
+        <Button onClick={() => setOpenSettingBox(true)}>{threeDotsIcon}</Button>
       </div>
       <div className={cx('column__cards-list')}>
         {/* Render Card */}

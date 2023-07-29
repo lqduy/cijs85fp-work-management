@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import classNames from 'classnames/bind';
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, KeyboardSensor, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 
 import styles from './SubBoardPage.module.scss';
@@ -15,11 +15,20 @@ import SubBoardHeader from './SubBoardHeader';
 
 let cx = classNames.bind(styles);
 
+
 const SubBoardPage = () => {
   const { boardId } = useParams();
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
+
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 10, // Enable sort function when dragging 10px
+    },
+  })
+  const keyboardSensor = useSensor(KeyboardSensor)
+  const sensors = useSensors(mouseSensor, keyboardSensor)
 
   const { darkMode } = useContext(ThemeContext);
 
@@ -89,7 +98,7 @@ const SubBoardPage = () => {
   const columnIdsList = columnsData?.map(column => column.columnId);
 
   return (
-    <DndContext onDragEnd={handleDragEnd}>
+    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
       <div className={cx('wrapper', { 'dark-layer': darkMode })} style={pageBackground}>
         {boardTitle && <SubBoardHeader boardData={boardData} />}
         <div className={cx('columns-list')}>
