@@ -5,7 +5,7 @@ import Signup from '../pages/Authenticator/Signup/Signup'
 import Home from '../pages/Home/Home';
 import Templates from "../pages/Templates/Templates"
 
-export const puplicRouters = [
+export const publicRouters = [
   { path: '/', component: HomePage },
   { path: '/b/:boardId', component: SubBoardPage },
   { path: '/login', component: Login},
