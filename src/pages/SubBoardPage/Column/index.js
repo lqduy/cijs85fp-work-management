@@ -67,30 +67,25 @@ const Column = ({
 
   const handleDndCard = () => {
     console.log(overCardIndex);
-    if (activeDragItemData && activeDragItemData.cardId !== overCardId) {
+    if (
+      activeDragItemData &&
+      (activeDragItemData?.cardId !== overCardId && activeDragItemData?.columnId !== overCardId)
+    ) {
       setCardsData(prev => {
         if (isReceiver) {
           const shouldAdd = cardsData.every(card => card.cardId !== activeDragItemData.cardId);
           if (shouldAdd) {
-            console.log(columnTitle, 'thêm');
             const newCardsData = [...cardsData];
             newCardsData.splice(overCardIndex, 0, activeDragItemData);
-            console.log(
-              'sdgsdgfdg',
-              newCardsData.findIndex(c => c.cardId === activeDragItemData.cardId)
-            );
-            prevCardsData.current = [...prev];
             return newCardsData;
           }
         }
         if (!isReceiver) {
           const shouldRemove = cardsData.some(card => card.cardId === activeDragItemData.cardId);
           if (shouldRemove) {
-            console.log(columnTitle, 'xóa');
             const newCardsData = cardsData.filter(
               card => card.cardId !== activeDragItemData.cardId
             );
-            prevCardsData.current = [...prev];
             return newCardsData;
           }
         }
@@ -128,7 +123,7 @@ const Column = ({
   useEffect(() => {
     handleDndCard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [overCardId, overCardIndex]);
+  }, [activeDragItemData, overCardId, overCardIndex]);
 
   const handleAddNewCard = newCard => {
     const newCardsData = [...cardsData, newCard];

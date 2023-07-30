@@ -123,18 +123,18 @@ const SubBoardPage = () => {
     // if (!activeColumn || !overColumn) return;
 
     // if (activeColumn.columnId !== overColumn.columnId) {
+    // setActiveDragItemData(activeDraggingCardData);
     setDraggingOverColumnId(overColumnId);
-    setActiveDragItemData(activeDraggingCardData);
     const overCardIndex = overDraggingCardData?.cardIndex;
     console.log(overCardIndex);
     console.log(overCardId);
-    // const cardsLength = overDraggingCardData?.cardsLength;
-    // const isBelowOverItem =
-    //   active.rect.current.translated &&
-    //   active.rect.current.translated.top > over.rect.top + over.rect.height;
-    // const modifier = isBelowOverItem ? 1 : 0;
-    // const newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : cardsLength +1;
-    setOverCardIndex(overCardIndex);
+    const cardsLength = overDraggingCardData?.cardsLength;
+    const isBelowOverItem =
+      active.rect.current.translated &&
+      active.rect.current.translated.top > over.rect.top + over.rect.height;
+    const modifier = isBelowOverItem ? 1 : 0;
+    const newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : cardsLength + 1;
+    setOverCardIndex(newCardIndex);
     setOverCardId(overCardId);
 
     // }
@@ -172,7 +172,7 @@ const SubBoardPage = () => {
     sideEffects: defaultDropAnimationSideEffects({
       styles: {
         active: {
-          opacity: '0.5'
+          opacity: '0.5',
         }
       }
     })
