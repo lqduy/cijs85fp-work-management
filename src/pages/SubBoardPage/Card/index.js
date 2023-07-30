@@ -1,5 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames/bind';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 import Button from '../../../components/Button';
 import {
@@ -11,15 +13,14 @@ import {
   photoIcon,
   tagIcon,
   trashIcon,
-  userIcon,
-  xIcon
+  userIcon
 } from '../../../utils/icons';
 import styles from './Card.module.scss';
 import { cardsListStorage } from '../../../utils/local-storage';
 
 let cx = classNames.bind(styles);
 
-const Card = ({ cardData, handleRemoveCard }) => {
+const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
   const { cardId, cardTitle } = cardData;
 
   const [cardTitleValue, setCardTitleValue] = useState(cardTitle);
@@ -28,6 +29,17 @@ const Card = ({ cardData, handleRemoveCard }) => {
   const titleInputRef = useRef(null);
   const saveBtnRef = useRef(null);
   const prevCardTitle = useRef(null);
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: cardId,
+    data: { ...cardData, cardIndex: cardIndex, cardsLength: cardsLength }
+  });
+  const dndKitCardStyles = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid var(--headerSearchInput-outlineColor)' : undefined
+  };
 
   const onClickOutsideSettingBox = e => {
     const isClickOutside =
@@ -91,41 +103,54 @@ const Card = ({ cardData, handleRemoveCard }) => {
     }
   };
 
+  const settingBox = useMemo(
+    () => (
+      <div className={cx('setting-box')} ref={settingBoxRef}>
+        <Button leftIcon={openIcon} className={cx('setting-item')}>
+          Open card
+        </Button>
+        <Button leftIcon={tagIcon} className={cx('setting-item')}>
+          Edit labels
+        </Button>
+        <Button leftIcon={userIcon} className={cx('setting-item')}>
+          Change members
+        </Button>
+        <Button leftIcon={photoIcon} className={cx('setting-item')}>
+          Change cover
+        </Button>
+        <Button leftIcon={arrowRightIcon} className={cx('setting-item')}>
+          Move
+        </Button>
+        <Button leftIcon={copyIcon} className={cx('setting-item')}>
+          Copy
+        </Button>
+        <Button leftIcon={clockIcon} className={cx('setting-item')}>
+          Edit dates
+        </Button>
+        <Button
+          leftIcon={trashIcon}
+          className={cx('setting-item', 'remove-column-btn')}
+          onClick={() => handleRemoveCard(cardId)}
+        >
+          Remove this card
+        </Button>
+      </div>
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
-    <div key={cardId} className={cx('card-wrap', { 'card-editing': openSettingBox })}>
+    <div
+      key={cardId}
+      className={cx('card-wrap', { 'card-editing': openSettingBox })}
+      ref={setNodeRef}
+      style={dndKitCardStyles}
+      {...attributes}
+      {...listeners}
+    >
       {openSettingBox && <div className={cx('black-overlay')}></div>}
-      {openSettingBox && (
-        <div className={cx('setting-box')} ref={settingBoxRef}>
-          <Button leftIcon={openIcon} className={cx('setting-item')}>
-            Open card
-          </Button>
-          <Button leftIcon={tagIcon} className={cx('setting-item')}>
-            Edit labels
-          </Button>
-          <Button leftIcon={userIcon} className={cx('setting-item')}>
-            Change members
-          </Button>
-          <Button leftIcon={photoIcon} className={cx('setting-item')}>
-            Change cover
-          </Button>
-          <Button leftIcon={arrowRightIcon} className={cx('setting-item')}>
-            Move
-          </Button>
-          <Button leftIcon={copyIcon} className={cx('setting-item')}>
-            Copy
-          </Button>
-          <Button leftIcon={clockIcon} className={cx('setting-item')}>
-            Edit dates
-          </Button>
-          <Button
-            leftIcon={trashIcon}
-            className={cx('setting-item', 'remove-column-btn')}
-            onClick={() => handleRemoveCard(cardId)}
-          >
-            Remove this card
-          </Button>
-        </div>
-      )}
+      {openSettingBox && settingBox}
       {openSettingBox && (
         <button ref={saveBtnRef} className={cx('save-btn')} onClick={handleUpdateCardTitle}>
           Save

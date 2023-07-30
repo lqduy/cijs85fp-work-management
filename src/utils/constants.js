@@ -122,3 +122,8 @@ export const backgroundImagesList = [
     category: ''
   }
 ];
+
+export const ACTIVE_DRAG_ITEM_TYPE = {
+  COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
+  CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
+};

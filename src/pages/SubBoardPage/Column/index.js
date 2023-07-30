@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames/bind';
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import Button from '../../../components/Button';
@@ -12,22 +12,27 @@ import styles from './Column.module.scss';
 
 let cx = classNames.bind(styles);
 
-const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
+const Column = ({
+  columnData,
+  handleRemoveColumn,
+  isGiver,
+  isReceiver,
+  overCardId,
+  overCardIndex,
+  activeDragItemData
+}) => {
+  const { columnId, columnTitle } = columnData;
+
   const [cardsData, setCardsData] = useState([]);
   const [openAddCardForm, setOpenAddCardForm] = useState(false);
   const [openSettingBox, setOpenSettingBox] = useState(false);
   const [columnTitleValue, setColumnTitleValue] = useState(columnTitle);
   const [editingColumnTitle, setEditingColumnTitle] = useState(false);
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: columnId
-  });
-  const dndKitColumnStyles = {
-    transform: CSS.Translate.toString(transform),
-    transition
-  };
-
   const settingBoxRef = useRef(null);
+  const prevCardsData = useRef(null);
+  const prevCardId = useRef(null);
+  const prevCardIndex = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     if (settingBoxRef.current && !settingBoxRef.current.contains(e.target)) {
@@ -48,6 +53,82 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: columnId,
+    data: { ...columnData }
+  });
+  const dndKitColumnStyles = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    height: '100%',
+    opacity: isDragging ? 0.5 : undefined
+  };
+
+  const handleDndCard = () => {
+    console.log(overCardIndex);
+    if (activeDragItemData && activeDragItemData.cardId !== overCardId) {
+      setCardsData(prev => {
+        if (isReceiver) {
+          const shouldAdd = cardsData.every(card => card.cardId !== activeDragItemData.cardId);
+          if (shouldAdd) {
+            console.log(columnTitle, 'thêm');
+            const newCardsData = [...cardsData];
+            newCardsData.splice(overCardIndex, 0, activeDragItemData);
+            console.log(
+              'sdgsdgfdg',
+              newCardsData.findIndex(c => c.cardId === activeDragItemData.cardId)
+            );
+            prevCardsData.current = [...prev];
+            return newCardsData;
+          }
+        }
+        if (!isReceiver) {
+          const shouldRemove = cardsData.some(card => card.cardId === activeDragItemData.cardId);
+          if (shouldRemove) {
+            console.log(columnTitle, 'xóa');
+            const newCardsData = cardsData.filter(
+              card => card.cardId !== activeDragItemData.cardId
+            );
+            prevCardsData.current = [...prev];
+            return newCardsData;
+          }
+        }
+        prevCardId.current = overCardId;
+        prevCardIndex.current = overCardIndex;
+        return [...prev];
+      });
+    }
+  };
+
+  // if (activeDragItemData) {
+  //   if (isGiver && isReceiver) return;
+  //   if (isGiver && !isReceiver) {
+  //     const shouldRemove = cardsData.some(card => card.cardId === activeDragItemData.cardId);
+  //     if (shouldRemove) {
+  //       prevCardsData.current = [...cardsData];
+  //       const newCardsData = cardsData.filter(card => card.cardId !== activeDragItemData.cardId);
+  //       setCardsData(newCardsData);
+  //     }
+  //   }
+  //   if (!isGiver && isReceiver) {
+  //     const shouldAdd = cardsData.every(card => card.cardId !== activeDragItemData.cardId);
+  //     if (shouldAdd) {
+  //       prevCardsData.current = [...cardsData];
+  //       const newCardsData = [...cardsData, activeDragItemData];
+  //       setCardsData(newCardsData);
+  //     }
+  //   }
+  // if (!isGiver && !isReceiver && prevCardsData.current) {
+  //   const newCardsData = prevCardsData.current;
+  //   setCardsData(newCardsData);
+  // }
+  // prevCardsData.current = null;
+
+  useEffect(() => {
+    handleDndCard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [overCardId, overCardIndex]);
 
   const handleAddNewCard = newCard => {
     const newCardsData = [...cardsData, newCard];
@@ -111,52 +192,54 @@ const Column = ({ columnId, columnTitle, handleRemoveColumn }) => {
     []
   );
 
+  const cardIdsList = cardsData?.map(card => card.cardId);
+
   return (
-    <div
-      className={cx('column')}
-      ref={setNodeRef}
-      style={dndKitColumnStyles}
-      {...attributes}
-      {...listeners}
-    >
-      {openSettingBox && settingBoxElements}
-      <div className={cx('column__title')}>
-        <input
-          className={cx({ 'column__title--edit': editingColumnTitle })}
-          value={columnTitleValue}
-          onFocus={() => setEditingColumnTitle(true)}
-          onChange={e => setColumnTitleValue(e.target.value)}
-          onBlur={handleUpdateColumnTitle}
-          onKeyDown={onEnterToSave}
-          readOnly={!editingColumnTitle}
-        />
-        <Button onClick={() => setOpenSettingBox(true)}>{threeDotsIcon}</Button>
-      </div>
-      <div className={cx('column__cards-list')}>
-        {/* Render Card */}
-        {cardsData?.map(card => (
-          <Card
-            key={card.cardId}
-            cardData={card}
-            handleRemoveCard={() => handleRemoveCard(card.cardId)}
+    <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
+      <div className={cx('column')} {...listeners}>
+        {openSettingBox && settingBoxElements}
+        <div className={cx('column__title')}>
+          <input
+            className={cx({ 'column__title--edit': editingColumnTitle })}
+            value={columnTitleValue}
+            onFocus={() => setEditingColumnTitle(true)}
+            onChange={e => setColumnTitleValue(e.target.value)}
+            onBlur={handleUpdateColumnTitle}
+            onKeyDown={onEnterToSave}
+            readOnly={!editingColumnTitle}
           />
-        ))}
+          <Button onClick={() => setOpenSettingBox(true)}>{threeDotsIcon}</Button>
+        </div>
+        <SortableContext items={cardIdsList} strategy={verticalListSortingStrategy}>
+          <div className={cx('column__cards-list')}>
+            {/* Render Card */}
+            {cardsData?.map((card, cardIndex) => (
+              <Card
+                key={card.cardId}
+                cardData={card}
+                cardIndex={cardIndex}
+                cardsLength={cardsData.length}
+                handleRemoveCard={() => handleRemoveCard(card.cardId)}
+              />
+            ))}
+          </div>
+        </SortableContext>
+        {openAddCardForm ? (
+          <AddForm
+            columnId={columnId}
+            setCloseAddCardForm={() => setOpenAddCardForm(false)}
+            handleAddNewCard={handleAddNewCard}
+          />
+        ) : (
+          <Button
+            leftIcon={plusIcon}
+            className={cx('add-card-btn')}
+            onClick={() => setOpenAddCardForm(true)}
+          >
+            Add a card
+          </Button>
+        )}
       </div>
-      {openAddCardForm ? (
-        <AddForm
-          columnId={columnId}
-          setCloseAddCardForm={() => setOpenAddCardForm(false)}
-          handleAddNewCard={handleAddNewCard}
-        />
-      ) : (
-        <Button
-          leftIcon={plusIcon}
-          className={cx('add-card-btn')}
-          onClick={() => setOpenAddCardForm(true)}
-        >
-          Add a card
-        </Button>
-      )}
     </div>
   );
 };

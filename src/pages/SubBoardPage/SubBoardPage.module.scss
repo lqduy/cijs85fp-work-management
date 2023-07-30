@@ -24,7 +24,6 @@
   &__core > * {
     min-width: $column-width;
     max-width: $column-width;
-    border-radius: 12px;
   }
 
   .add-column-btn {
@@ -45,7 +44,8 @@
 }
 .add-column-form {
   height: fit-content;
-  width: $column-width;
+  min-width: $column-width;
+  max-width: $column-width;
   padding: 8px;
 
   border-radius: 12px;

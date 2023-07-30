@@ -1,6 +1,13 @@
 import { useEffect, useState, useContext } from 'react';
 import classNames from 'classnames/bind';
-import { DndContext, KeyboardSensor, MouseSensor, useSensor, useSensors } from '@dnd-kit/core';
+import {
+  DndContext,
+  MouseSensor,
+  useSensor,
+  useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects
+} from '@dnd-kit/core';
 import { SortableContext, horizontalListSortingStrategy, arrayMove } from '@dnd-kit/sortable';
 
 import styles from './SubBoardPage.module.scss';
@@ -12,23 +19,29 @@ import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import SubBoardHeader from './SubBoardHeader';
+import { ACTIVE_DRAG_ITEM_TYPE } from '../../utils/constants';
+import Card from './Card';
 
 let cx = classNames.bind(styles);
-
 
 const SubBoardPage = () => {
   const { boardId } = useParams();
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
+  const [activeDragItemId, setActiveDragItemId] = useState(null);
+  const [activeDragItemType, setActiveDragItemType] = useState(null);
+  const [activeDragItemData, setActiveDragItemData] = useState(null);
+  const [draggingOverColumnId, setDraggingOverColumnId] = useState(null);
+  const [overCardId, setOverCardId] = useState(null);
+  const [overCardIndex, setOverCardIndex] = useState(null);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
-      distance: 10, // Enable sort function when dragging 10px
-    },
-  })
-  const keyboardSensor = useSensor(KeyboardSensor)
-  const sensors = useSensors(mouseSensor, keyboardSensor)
+      distance: 10 // Enable sort function when dragging 10px
+    }
+  });
+  const sensors = useSensors(mouseSensor);
 
   const { darkMode } = useContext(ThemeContext);
 
@@ -74,10 +87,65 @@ const SubBoardPage = () => {
     columnsListStorage.save(newColumnsListData);
   };
 
+  const handleDragStart = e => {
+    setActiveDragItemId(e?.active?.id);
+    setActiveDragItemType(
+      e?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.COLUMN : ACTIVE_DRAG_ITEM_TYPE.CARD
+    );
+    setActiveDragItemData(e?.active?.data?.current);
+  };
+
+  const handleDragOver = e => {
+    if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) return;
+    const { active, over } = e;
+    if (!active || !over) return;
+
+    const {
+      id: activeDraggingCardId,
+      data: { current: activeDraggingCardData }
+    } = active;
+    const {
+      id: overCardId,
+      data: { current: overDraggingCardData }
+    } = over;
+    console.log(over);
+
+    const overColumnId = overDraggingCardData?.cardTitle
+      ? overDraggingCardData.parentId
+      : overDraggingCardData.columnId;
+
+    // const activeColumn = columnsData.find(
+    //   column => column.columnId === activeDraggingCardData.parentId
+    // );
+    // const overColumn = columnsData.find(
+    //   column => column.columnId === overDraggingCardData.parentId
+    // );
+    // if (!activeColumn || !overColumn) return;
+
+    // if (activeColumn.columnId !== overColumn.columnId) {
+    setDraggingOverColumnId(overColumnId);
+    setActiveDragItemData(activeDraggingCardData);
+    const overCardIndex = overDraggingCardData?.cardIndex;
+    console.log(overCardIndex);
+    console.log(overCardId);
+    // const cardsLength = overDraggingCardData?.cardsLength;
+    // const isBelowOverItem =
+    //   active.rect.current.translated &&
+    //   active.rect.current.translated.top > over.rect.top + over.rect.height;
+    // const modifier = isBelowOverItem ? 1 : 0;
+    // const newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : cardsLength +1;
+    setOverCardIndex(overCardIndex);
+    setOverCardId(overCardId);
+
+    // }
+  };
+
   const handleDragEnd = e => {
     const { active, over } = e;
-    console.log(e);
-    if (!over) return;
+    if (!active || !over) return;
+    if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
+      console.log('xử lý khi thả card');
+    }
     if (active.id !== over.id) {
       const oldIndex = columnsData.findIndex(column => column.columnId === active.id);
       const newIndex = columnsData.findIndex(column => column.columnId === over.id);
@@ -89,6 +157,9 @@ const SubBoardPage = () => {
       newColumnsListData = [...newColumnsListData, ...dndOrderedColumns];
       columnsListStorage.save(newColumnsListData);
     }
+    setActiveDragItemId(null);
+    setActiveDragItemType(null);
+    setActiveDragItemData(null);
   };
 
   const pageBackground =
@@ -97,8 +168,23 @@ const SubBoardPage = () => {
 
   const columnIdsList = columnsData?.map(column => column.columnId);
 
+  const dropAnimation = {
+    sideEffects: defaultDropAnimationSideEffects({
+      styles: {
+        active: {
+          opacity: '0.5'
+        }
+      }
+    })
+  };
+
   return (
-    <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
       <div className={cx('wrapper', { 'dark-layer': darkMode })} style={pageBackground}>
         {boardTitle && <SubBoardHeader boardData={boardData} />}
         <div className={cx('columns-list')}>
@@ -106,9 +192,34 @@ const SubBoardPage = () => {
             <div className={cx('columns-list__core')}>
               {/* Render Column */}
               {columnsData?.map(column => (
-                <Column key={column.columnId} {...column} handleRemoveColumn={handleRemoveColumn} />
+                <Column
+                  key={column.columnId}
+                  columnData={column}
+                  handleRemoveColumn={handleRemoveColumn}
+                  isGiver={
+                    activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD &&
+                    column.columnId === activeDragItemData.parentId
+                  }
+                  isReceiver={
+                    activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD &&
+                    // column.columnId !== activeDragItemData.parentId &&
+                    column.columnId === draggingOverColumnId
+                  }
+                  overCardId={overCardId}
+                  overCardIndex={overCardIndex}
+                  activeDragItemData={activeDragItemData ? activeDragItemData : undefined}
+                />
               ))}
             </div>
+            <DragOverlay dropAnimation={dropAnimation}>
+              {!activeDragItemType && null}
+              {activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN && (
+                <Column columnData={activeDragItemData} />
+              )}
+              {activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD && (
+                <Card cardData={activeDragItemData} />
+              )}
+            </DragOverlay>
           </SortableContext>
           {/* Add Column Form/Button */}
           {openAddColumnForm ? (
