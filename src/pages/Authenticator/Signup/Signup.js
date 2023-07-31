@@ -11,7 +11,7 @@ const Signup = () => {
   const confirmPasswordRef = useRef();
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoanding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,12 +21,12 @@ const Signup = () => {
     }
     try {
       setError("");
-      setLoanding(true);
+      setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
     } catch {
       setError("There is an error, please try again");
     }
-    setLoanding(false);
+    setLoading(false);
   };
   if (currentUser) {
     console.log("Current user: ", currentUser.email);
@@ -89,7 +89,7 @@ const Signup = () => {
                 type="submit"
                 className={signupStyles.btn}
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
