@@ -1,5 +1,6 @@
 // Under Progress...
 import { useState, useContext, useEffect, React } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import { auth } from "../Firebase";
 import { createContext } from "react";
 
@@ -17,7 +18,8 @@ export function AuthProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password);
   };
   const login = (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+   auth.signInWithEmailAndPassword(email, password);
+   console.log(currentUser)
   };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

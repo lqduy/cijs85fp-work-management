@@ -1,5 +1,5 @@
 import "./Login.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import Signup from "../Signup/Signup";
 import { AuthProvider } from "../../../contexts/AuthContext";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -12,12 +12,16 @@ const Login = () => {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
+      navigate('/')
+      
     } catch {
       setError("Incorrect email address and / or password.");
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { v4 as uuidv4 } from 'uuid';
-
+import { useAuth } from '../../contexts/AuthContext';
 import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
@@ -15,6 +15,7 @@ let cx = classNames.bind(styles);
 const HomePage = () => {
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
+  const {currentUser} = useAuth()
 
   const onFetchBoardsData = () => {
     const data = boardsListStorage.load();
@@ -110,6 +111,7 @@ const HomePage = () => {
       <div className={cx('sideBody')}>
         <section className={cx('section')}>
           <h3>
+            <p>Hello, {currentUser}</p>
             <span>{starRegularIcon}</span>
             <span>Starred boards</span>
           </h3>
