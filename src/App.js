@@ -40,17 +40,13 @@ function App() {
               const Page = route.component;
               return <Route key={index} path={route.path} element={<Page />} />;
             })}
+            
             {privateRouters.map((route, index) => {
-              const Page = route.component;
               return (
                 <Route
                   key={index}
                   path={route.path}
-                  element={
-                    <PrivateRoute>
-                      <Page />
-                    </PrivateRoute>
-                  }
+                  element={<PrivateRoute component={route.component} />}
                 />
               );
             })}

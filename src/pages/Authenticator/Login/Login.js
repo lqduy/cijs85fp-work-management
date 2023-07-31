@@ -1,5 +1,5 @@
 import "./Login.module.scss";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Signup from "../Signup/Signup";
 import { AuthProvider } from "../../../contexts/AuthContext";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -12,21 +12,22 @@ const Login = () => {
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       setError("");
-      setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate('/')
-      
-    } catch {
+      navigate("/");
+    } catch (error) {
       setError("Incorrect email address and / or password.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+  
   return (
     <AuthProvider>
       <div className={loginStyles.wrapper}>
@@ -64,7 +65,7 @@ const Login = () => {
               />
             </div>
             <div className={loginStyles.info}>
-            <div className={loginStyles.error}>{error}</div>
+              <div className={loginStyles.error}>{error}</div>
               <div className={loginStyles.infoText + " info-text"}>
                 <Link to="/signup" element={<Signup />}>
                   Don't have an account? Sign up here

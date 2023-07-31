@@ -17,10 +17,10 @@ export function AuthProvider({ children }) {
   const signup = (email, password) => {
     return auth.createUserWithEmailAndPassword(email, password);
   };
-  const login = (email, password) => {
-   auth.signInWithEmailAndPassword(email, password);
-   console.log(currentUser)
+  const login = async (email, password) => {
+    await auth.signInWithEmailAndPassword(email, password);
   };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
