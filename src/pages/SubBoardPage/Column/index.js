@@ -30,9 +30,9 @@ const Column = ({
   const [editingColumnTitle, setEditingColumnTitle] = useState(false);
 
   const settingBoxRef = useRef(null);
-  const prevCardsData = useRef(null);
-  const prevCardId = useRef(null);
-  const prevCardIndex = useRef(null);
+  // const prevCardsData = useRef(null);
+  // const prevCardId = useRef(null);
+  // const prevCardIndex = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     if (settingBoxRef.current && !settingBoxRef.current.contains(e.target)) {
@@ -66,62 +66,31 @@ const Column = ({
   };
 
   const handleDndCard = () => {
-    console.log(overCardIndex);
-    if (
-      activeDragItemData &&
-      (activeDragItemData?.cardId !== overCardId && activeDragItemData?.columnId !== overCardId)
-    ) {
-      setCardsData(prev => {
-        if (isReceiver) {
-          const shouldAdd = cardsData.every(card => card.cardId !== activeDragItemData.cardId);
-          if (shouldAdd) {
-            const newCardsData = [...cardsData];
-            newCardsData.splice(overCardIndex, 0, activeDragItemData);
-            return newCardsData;
-          }
-        }
-        if (!isReceiver) {
-          const shouldRemove = cardsData.some(card => card.cardId === activeDragItemData.cardId);
-          if (shouldRemove) {
-            const newCardsData = cardsData.filter(
-              card => card.cardId !== activeDragItemData.cardId
-            );
-            return newCardsData;
-          }
-        }
-        prevCardId.current = overCardId;
-        prevCardIndex.current = overCardIndex;
-        return [...prev];
-      });
-    }
+    const shouldAddCard =
+      isReceiver && cardsData.every(card => card.cardId !== activeDragItemData.cardId);
+    const shouldRemoveCard =
+      !isReceiver && cardsData.some(card => card.cardId === activeDragItemData.cardId);
+    setCardsData(prev => {
+      if (shouldAddCard) {
+        const newCardsData = [...cardsData];
+        newCardsData.splice(overCardIndex, 0, activeDragItemData);
+        return newCardsData;
+      }
+      if (shouldRemoveCard) {
+        const newCardsData = cardsData.filter(card => card.cardId !== activeDragItemData.cardId);
+        return newCardsData;
+      }
+      return [...prev];
+    });
   };
 
-  // if (activeDragItemData) {
-  //   if (isGiver && isReceiver) return;
-  //   if (isGiver && !isReceiver) {
-  //     const shouldRemove = cardsData.some(card => card.cardId === activeDragItemData.cardId);
-  //     if (shouldRemove) {
-  //       prevCardsData.current = [...cardsData];
-  //       const newCardsData = cardsData.filter(card => card.cardId !== activeDragItemData.cardId);
-  //       setCardsData(newCardsData);
-  //     }
-  //   }
-  //   if (!isGiver && isReceiver) {
-  //     const shouldAdd = cardsData.every(card => card.cardId !== activeDragItemData.cardId);
-  //     if (shouldAdd) {
-  //       prevCardsData.current = [...cardsData];
-  //       const newCardsData = [...cardsData, activeDragItemData];
-  //       setCardsData(newCardsData);
-  //     }
-  //   }
-  // if (!isGiver && !isReceiver && prevCardsData.current) {
-  //   const newCardsData = prevCardsData.current;
-  //   setCardsData(newCardsData);
-  // }
-  // prevCardsData.current = null;
-
   useEffect(() => {
-    handleDndCard();
+    if (
+      activeDragItemData &&
+      activeDragItemData?.cardId !== overCardId
+    ) {
+      handleDndCard();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDragItemData, overCardId, overCardIndex]);
 

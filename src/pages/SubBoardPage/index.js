@@ -110,10 +110,10 @@ const SubBoardPage = () => {
     } = over;
     console.log(over);
 
-    const overColumnId = overDraggingCardData?.cardTitle
+    const overColumnId = overDraggingCardData?.cardId
       ? overDraggingCardData.parentId
       : overDraggingCardData.columnId;
-
+    if (!overColumnId) return;
     // const activeColumn = columnsData.find(
     //   column => column.columnId === activeDraggingCardData.parentId
     // );
@@ -136,7 +136,6 @@ const SubBoardPage = () => {
     const newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : cardsLength + 1;
     setOverCardIndex(newCardIndex);
     setOverCardId(overCardId);
-
     // }
   };
 
@@ -172,7 +171,7 @@ const SubBoardPage = () => {
     sideEffects: defaultDropAnimationSideEffects({
       styles: {
         active: {
-          opacity: '0.5',
+          opacity: '0.5'
         }
       }
     })
