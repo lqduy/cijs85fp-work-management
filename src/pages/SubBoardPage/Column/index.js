@@ -72,8 +72,9 @@ const Column = ({
       !isReceiver && cardsData.some(card => card.cardId === activeDragItemData.cardId);
     setCardsData(prev => {
       if (shouldAddCard) {
+        const newCardIndex = overCardIndex ? overCardIndex : cardsData.length + 1;
         const newCardsData = [...cardsData];
-        newCardsData.splice(overCardIndex, 0, activeDragItemData);
+        newCardsData.splice(newCardIndex, 0, activeDragItemData);
         return newCardsData;
       }
       if (shouldRemoveCard) {
@@ -82,12 +83,12 @@ const Column = ({
       }
       return [...prev];
     });
+    console.log('overIndex:', overCardId);
   };
 
   useEffect(() => {
-    if (
-      activeDragItemData &&
-      activeDragItemData?.cardId !== overCardId
+    if (activeDragItemData
+      && activeDragItemData?.cardId !== overCardId
     ) {
       handleDndCard();
     }

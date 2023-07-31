@@ -104,6 +104,7 @@ const SubBoardPage = () => {
       id: activeDraggingCardId,
       data: { current: activeDraggingCardData }
     } = active;
+
     const {
       id: overCardId,
       data: { current: overDraggingCardData }
