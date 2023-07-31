@@ -4,6 +4,7 @@ import styles from "./Templates.module.scss";
 import bckThemesIconData from "../../utils/backgroundThemesIconData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 let cx = classNames.bind(styles);
 const Templates = () => {
   return (
@@ -19,10 +20,12 @@ const Templates = () => {
         <ul className={cx("theme-list-categories")}>
           {bckThemesIconData.map((item) => {
             return (
-              <li>
-                <img src={item.img} alt={item.title} />
-                <span>{item.title}</span>
-              </li>
+              <Link to='/templateType'>
+                <li>
+                  <img src={item.img} alt={item.title} />
+                  <span>{item.title}</span>
+                </li>
+              </Link>
             );
           })}
         </ul>
