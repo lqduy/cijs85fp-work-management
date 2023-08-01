@@ -35,6 +35,7 @@ const SubBoardPage = () => {
   const [draggingOverColumnId, setDraggingOverColumnId] = useState(null);
   const [overCardId, setOverCardId] = useState(null);
   const [overCardIndex, setOverCardIndex] = useState(null);
+  const [isDragEnd, setIsDragEnd] = useState(false);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -109,12 +110,11 @@ const SubBoardPage = () => {
       id: overCardId,
       data: { current: overDraggingCardData }
     } = over;
-    console.log(over);
 
     const overColumnId = overDraggingCardData?.cardId
       ? overDraggingCardData.parentId
       : overDraggingCardData.columnId;
-    if (!overColumnId) return;
+
     // const activeColumn = columnsData.find(
     //   column => column.columnId === activeDraggingCardData.parentId
     // );
@@ -160,6 +160,7 @@ const SubBoardPage = () => {
     setActiveDragItemId(null);
     setActiveDragItemType(null);
     setActiveDragItemData(null);
+    setIsDragEnd(true);
   };
 
   const pageBackground =
@@ -196,6 +197,8 @@ const SubBoardPage = () => {
                   key={column.columnId}
                   columnData={column}
                   handleRemoveColumn={handleRemoveColumn}
+                  isDragEnd={isDragEnd}
+                  handleResetDragging={()=>setIsDragEnd(false)}
                   isGiver={
                     activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD &&
                     column.columnId === activeDragItemData.parentId

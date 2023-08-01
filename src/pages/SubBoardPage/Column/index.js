@@ -1,6 +1,11 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames/bind';
-import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  useSortable,
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove
+} from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import Button from '../../../components/Button';
@@ -15,6 +20,8 @@ let cx = classNames.bind(styles);
 const Column = ({
   columnData,
   handleRemoveColumn,
+  isDragEnd,
+  handleResetDragging,
   isGiver,
   isReceiver,
   overCardId,
@@ -28,6 +35,7 @@ const Column = ({
   const [openSettingBox, setOpenSettingBox] = useState(false);
   const [columnTitleValue, setColumnTitleValue] = useState(columnTitle);
   const [editingColumnTitle, setEditingColumnTitle] = useState(false);
+  const [dndInnerColumn, setDndInnerColumn] = useState(isGiver && isReceiver);
 
   const settingBoxRef = useRef(null);
   // const prevCardsData = useRef(null);
@@ -71,29 +79,51 @@ const Column = ({
     const shouldRemoveCard =
       !isReceiver && cardsData.some(card => card.cardId === activeDragItemData.cardId);
     setCardsData(prev => {
-      if (shouldAddCard) {
-        const newCardIndex = overCardIndex ? overCardIndex : cardsData.length + 1;
-        const newCardsData = [...cardsData];
-        newCardsData.splice(newCardIndex, 0, activeDragItemData);
-        return newCardsData;
-      }
       if (shouldRemoveCard) {
         const newCardsData = cardsData.filter(card => card.cardId !== activeDragItemData.cardId);
         return newCardsData;
       }
+      if (shouldAddCard) {
+        const newCard = { ...activeDragItemData, parentId: columnId };
+        const newCardsData = [...cardsData];
+        newCardsData.splice(overCardIndex, 0, newCard);
+        setDndInnerColumn(true);
+        return newCardsData;
+      }
+      if (dndInnerColumn) {
+        const activeCard = cardsData.find(card => card.cardId === activeDragItemData.cardId);
+        if (activeCard) {
+          const prevCardIndex = cardsData.findIndex(card => card.cardId === activeCard.cardId);
+          const newCardsData = arrayMove(cardsData, prevCardIndex, overCardIndex);
+          return newCardsData;
+        }
+      }
       return [...prev];
     });
-    console.log('overIndex:', overCardId);
+  };
+
+  const handleUpdateCardsAfterDragging = () => {
+    const dndOrderedCards = [...cardsData];
+    const cardsListData = cardsListStorage.load();
+    let newCardsListData = cardsListData.filter(card => card.parentId !== columnId);
+    newCardsListData = [...newCardsListData, ...dndOrderedCards];
+    cardsListStorage.save(newCardsListData);
+    handleResetDragging(false);
   };
 
   useEffect(() => {
-    if (activeDragItemData
-      && activeDragItemData?.cardId !== overCardId
-    ) {
+    if (activeDragItemData) {
       handleDndCard();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDragItemData, overCardId, overCardIndex]);
+
+  useEffect(() => {
+    if (isDragEnd) {
+      handleUpdateCardsAfterDragging();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDragEnd]);
 
   const handleAddNewCard = newCard => {
     const newCardsData = [...cardsData, newCard];
