@@ -38,9 +38,6 @@ const Column = ({
   const [dndInnerColumn, setDndInnerColumn] = useState(isGiver && isReceiver);
 
   const settingBoxRef = useRef(null);
-  // const prevCardsData = useRef(null);
-  // const prevCardId = useRef(null);
-  // const prevCardIndex = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     if (settingBoxRef.current && !settingBoxRef.current.contains(e.target)) {

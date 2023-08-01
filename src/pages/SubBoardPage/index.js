@@ -19,7 +19,7 @@ import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import SubBoardHeader from './SubBoardHeader';
-import { ACTIVE_DRAG_ITEM_TYPE } from '../../utils/constants';
+import { ACTIVE_DRAG_ITEM_TYPE, DISTANCE_TO_ACTIVATED_DND } from '../../utils/constants';
 import Card from './Card';
 
 let cx = classNames.bind(styles);
@@ -29,7 +29,7 @@ const SubBoardPage = () => {
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
-  const [activeDragItemId, setActiveDragItemId] = useState(null);
+  // const [activeDragItemId, setActiveDragItemId] = useState(null);
   const [activeDragItemType, setActiveDragItemType] = useState(null);
   const [activeDragItemData, setActiveDragItemData] = useState(null);
   const [draggingOverColumnId, setDraggingOverColumnId] = useState(null);
@@ -39,7 +39,7 @@ const SubBoardPage = () => {
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
-      distance: 10 // Enable sort function when dragging 10px
+      distance: DISTANCE_TO_ACTIVATED_DND // Enable sort function when dragging 10px
     }
   });
   const sensors = useSensors(mouseSensor);
@@ -89,7 +89,7 @@ const SubBoardPage = () => {
   };
 
   const handleDragStart = e => {
-    setActiveDragItemId(e?.active?.id);
+    // setActiveDragItemId(e?.active?.id);
     setActiveDragItemType(
       e?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.COLUMN : ACTIVE_DRAG_ITEM_TYPE.CARD
     );
@@ -102,11 +102,6 @@ const SubBoardPage = () => {
     if (!active || !over) return;
 
     const {
-      id: activeDraggingCardId,
-      data: { current: activeDraggingCardData }
-    } = active;
-
-    const {
       id: overCardId,
       data: { current: overDraggingCardData }
     } = over;
@@ -115,36 +110,24 @@ const SubBoardPage = () => {
       ? overDraggingCardData.parentId
       : overDraggingCardData.columnId;
 
-    // const activeColumn = columnsData.find(
-    //   column => column.columnId === activeDraggingCardData.parentId
-    // );
-    // const overColumn = columnsData.find(
-    //   column => column.columnId === overDraggingCardData.parentId
-    // );
-    // if (!activeColumn || !overColumn) return;
-
-    // if (activeColumn.columnId !== overColumn.columnId) {
-    // setActiveDragItemData(activeDraggingCardData);
-    setDraggingOverColumnId(overColumnId);
     const overCardIndex = overDraggingCardData?.cardIndex;
-    console.log(overCardIndex);
-    console.log(overCardId);
     const cardsLength = overDraggingCardData?.cardsLength;
     const isBelowOverItem =
       active.rect.current.translated &&
       active.rect.current.translated.top > over.rect.top + over.rect.height;
     const modifier = isBelowOverItem ? 1 : 0;
     const newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : cardsLength + 1;
+
+    setDraggingOverColumnId(overColumnId);
     setOverCardIndex(newCardIndex);
     setOverCardId(overCardId);
-    // }
   };
 
   const handleDragEnd = e => {
     const { active, over } = e;
     if (!active || !over) return;
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
-      console.log('xử lý khi thả card');
+      setIsDragEnd(true);
     }
     if (active.id !== over.id) {
       const oldIndex = columnsData.findIndex(column => column.columnId === active.id);
@@ -157,10 +140,9 @@ const SubBoardPage = () => {
       newColumnsListData = [...newColumnsListData, ...dndOrderedColumns];
       columnsListStorage.save(newColumnsListData);
     }
-    setActiveDragItemId(null);
+    // setActiveDragItemId(null);
     setActiveDragItemType(null);
     setActiveDragItemData(null);
-    setIsDragEnd(true);
   };
 
   const pageBackground =
@@ -198,14 +180,13 @@ const SubBoardPage = () => {
                   columnData={column}
                   handleRemoveColumn={handleRemoveColumn}
                   isDragEnd={isDragEnd}
-                  handleResetDragging={()=>setIsDragEnd(false)}
+                  handleResetDragging={() => setIsDragEnd(false)}
                   isGiver={
                     activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD &&
                     column.columnId === activeDragItemData.parentId
                   }
                   isReceiver={
                     activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD &&
-                    // column.columnId !== activeDragItemData.parentId &&
                     column.columnId === draggingOverColumnId
                   }
                   overCardId={overCardId}
