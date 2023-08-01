@@ -17,6 +17,8 @@ import {
 } from '../../../utils/icons';
 import styles from './Card.module.scss';
 import { cardsListStorage } from '../../../utils/local-storage';
+import MenuBox from '../../../components/MenuBox';
+import EditLabelSubBox from './SettingSubBox/EditLabelSubBox';
 
 let cx = classNames.bind(styles);
 
@@ -106,12 +108,17 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
   const settingBox = useMemo(
     () => (
       <div className={cx('setting-box')} ref={settingBoxRef}>
-        <Button leftIcon={openIcon} className={cx('setting-item')}>
-          Open card
-        </Button>
-        <Button leftIcon={tagIcon} className={cx('setting-item')}>
-          Edit labels
-        </Button>
+        <div className={cx('setting-part')}>
+          <Button leftIcon={openIcon} className={cx('setting-item')}>
+            Open card
+          </Button>
+        </div>
+        <div className={cx('setting-part')}>
+          <Button leftIcon={tagIcon} className={cx('setting-item')}>
+            Edit labels
+          </Button>
+          <EditLabelSubBox/>
+        </div>
         <Button leftIcon={userIcon} className={cx('setting-item')}>
           Change members
         </Button>

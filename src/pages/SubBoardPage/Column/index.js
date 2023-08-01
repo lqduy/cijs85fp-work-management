@@ -67,7 +67,7 @@ const Column = ({
     transform: CSS.Translate.toString(transform),
     transition,
     height: '100%',
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
   };
 
   const handleDndCard = () => {

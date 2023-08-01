@@ -1,0 +1,9 @@
+@import '../../styles/mixins';
+
+.setting-box {
+  @include menuBox;
+
+  .box-title {
+    margin-bottom: 16px;
+  }
+}

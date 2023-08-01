@@ -29,7 +29,6 @@ const SubBoardPage = () => {
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
-  // const [activeDragItemId, setActiveDragItemId] = useState(null);
   const [activeDragItemType, setActiveDragItemType] = useState(null);
   const [activeDragItemData, setActiveDragItemData] = useState(null);
   const [draggingOverColumnId, setDraggingOverColumnId] = useState(null);
@@ -89,7 +88,6 @@ const SubBoardPage = () => {
   };
 
   const handleDragStart = e => {
-    // setActiveDragItemId(e?.active?.id);
     setActiveDragItemType(
       e?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.COLUMN : ACTIVE_DRAG_ITEM_TYPE.CARD
     );
@@ -129,7 +127,7 @@ const SubBoardPage = () => {
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
       setIsDragEnd(true);
     }
-    if (active.id !== over.id) {
+    if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN && active.id !== over.id) {
       const oldIndex = columnsData.findIndex(column => column.columnId === active.id);
       const newIndex = columnsData.findIndex(column => column.columnId === over.id);
       const dndOrderedColumns = arrayMove(columnsData, oldIndex, newIndex);
@@ -140,7 +138,6 @@ const SubBoardPage = () => {
       newColumnsListData = [...newColumnsListData, ...dndOrderedColumns];
       columnsListStorage.save(newColumnsListData);
     }
-    // setActiveDragItemId(null);
     setActiveDragItemType(null);
     setActiveDragItemData(null);
   };
