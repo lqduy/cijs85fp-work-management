@@ -2,22 +2,71 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { v4 as uuidv4 } from 'uuid';
 
-import styles from '../../pages/HomePage/HomePage.module.scss';
+import styles from '../TemplateType/TemplateType.module.scss';
 import Button from '../../components/Button';
+import CreateBoardForm from '../../components/CreateBoardForm';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
+import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
+import  board from '../../utils/test';
 
 
 let cx = classNames.bind(styles);
 
 const TemplateType = () => {
-  const [boardsList, setBoardsList] = useState([]);
+  const [boardsList, setBoardsList] = useState(board);
+  const [openCreateForm, setOpenCreateForm] = useState(false);
+
   const onFetchBoardsData = () => {
-    const data = boardsListStorage.load();
+    const data = boardsList;
     setBoardsList(data);
   };
+
   useEffect(() => {
     onFetchBoardsData();
   }, []);
+
+  const handleAddBoard = newBoard => {
+    const newBoardsList = [...boardsList, newBoard];
+    setBoardsList(newBoardsList);
+    boardsList.save(newBoardsList);
+
+    const newColumns = [
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'Todo'
+      },
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'In Progress'
+      },
+      {
+        parentId: newBoard.boardId,
+        columnId: `co-${uuidv4()}`,
+        columnTitle: 'Completed'
+      }
+    ];
+    const columnsListData = columnsListStorage.load();
+    const newColumnList = [...columnsListData, ...newColumns];
+    columnsListStorage.save(newColumnList);
+
+    setOpenCreateForm(false);
+  };
+
+  const handleSetStarByBoardId = boardId => {
+    const newBoardList = boardsList.map(board =>
+      board.boardId === boardId ? { ...board, isStarred: !board.isStarred } : board
+    );
+    setBoardsList(newBoardList);
+    boardsListStorage.save(newBoardList);
+  };
+
+  let starredBoardsElements = [];
+  let lastestVistingBoardsElements = ([...boardsList] || [])
+    .sort((board, nextBoard) => +nextBoard.lastVisiting - +board.lastVisiting)
+    .filter(board => board.lastVisiting > 0)
+    .slice(0, 4);
   const boardsListElements = (boardsList || []).map(board => {
     const boardElements = (
       <div key={board.boardId} className={cx('boardWrap')}>
@@ -31,20 +80,65 @@ const TemplateType = () => {
         >
           {board.boardTitle}
         </Button>
+        {
+          <span
+            className={cx('starIcon', { yellowStar: board.isStarred })}
+            onClick={() => handleSetStarByBoardId(board.boardId)}
+          >
+            {board.isStarred ? starSolidIcon : starRegularIcon}
+          </span>
+        }
       </div>
     );
+    if (board.isStarred) {
+      starredBoardsElements = [...starredBoardsElements, boardElements];
+    }
+    const isTop4RecentlyVisited = lastestVistingBoardsElements.some(
+      vistedBoard => vistedBoard.boardId === board.boardId
+    );
+    if (isTop4RecentlyVisited) {
+      lastestVistingBoardsElements = lastestVistingBoardsElements.map(vistedBoard =>
+        vistedBoard.boardId === board.boardId ? boardElements : vistedBoard
+      );
+    }
+
     return boardElements;
   });
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('sideBody')}>
         <section className={cx('section')}>
-          <h3>Business</h3>
+          <h3>
+            <span>{starRegularIcon}</span>
+            <span>Starred boards</span>
+          </h3>
+          <div className={cx('boards')}>{starredBoardsElements}</div>
+        </section>
+        <section className={cx('section')}>
+          <h3>
+            <span>{clockIcon}</span>
+            <span>Recently viewed</span>
+          </h3>
+          <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
+        </section>
+        <section className={cx('section')}>
+          <h3>YOUR WORKSPACES</h3>
           <div className={cx('boards')}>
             {boardsListElements}
+            <Button className={cx('createNewBoardBtn')} onClick={() => setOpenCreateForm(true)}>
+              Create new board
+            </Button>
           </div>
         </section>
       </div>
+      {openCreateForm && (
+        <CreateBoardForm
+          handleCloseForm={() => setOpenCreateForm(false)}
+          handleAddBoard={handleAddBoard}
+          onCloseCreateForm={() => setOpenCreateForm(false)}
+        />
+      )}
     </div>
   );
 };
