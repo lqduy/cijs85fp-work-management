@@ -7,12 +7,12 @@ import styles from './MenuBox.module.scss';
 
 let cx = classNames.bind(styles);
 
-const MenuBox = ({ children, className, boxTitle }) => {
+const MenuBox = ({ children, className, boxTitle, onClickX }) => {
   return (
     <div className={cx('setting-box', className)}>
       <div className={cx('box-title')}>
         <h4>{boxTitle}</h4>
-        <Button className={cx('close-settingbox-btn')}>
+        <Button className={cx('close-settingbox-btn')} onClick={onClickX}>
           {xIcon}
         </Button>
       </div>

@@ -129,3 +129,7 @@ export const ACTIVE_DRAG_ITEM_TYPE = {
 };
 
 export const DISTANCE_TO_ACTIVATED_DND = 10;
+
+export const CARD_SETTING_SUBBOX = {
+  EDIT_LABELS: 'edit-labels',
+}

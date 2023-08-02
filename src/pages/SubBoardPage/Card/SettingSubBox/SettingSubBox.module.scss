@@ -46,4 +46,12 @@
       cursor: pointer;
     }
   }
+  .clear-all-btn{
+    margin: auto;
+    margin-top: 8px;
+    &:hover{
+      background-color: unset;
+      color: var(--bs-danger);
+    }
+  }
 }

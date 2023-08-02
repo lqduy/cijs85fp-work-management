@@ -13,7 +13,7 @@
 
   border-radius: 6px;
   background-color: var(--backgroundColor-lighter);
-  box-shadow: 0 1px 1px #091e4240,0 0 1px #091e424f;
+  box-shadow: 0 1px 1px #091e4240, 0 0 1px #091e424f;
 
   &:not(:last-of-type) {
     margin-bottom: 8px;
@@ -21,6 +21,41 @@
 
   div.card-title {
     cursor: pointer;
+  }
+
+  .textares__wrap{
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--backgroundColor-darker);
+
+    .card-labels-list{
+      padding: 8px;
+      padding-bottom: 0;
+    }
+    textarea{
+      padding-top: 0;
+    }
+  }
+
+  .card-labels-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    z-index: 1;
+
+    width: 100%;
+    margin-bottom: 8px;
+
+    .label {
+      display: block;
+      width: calc(20% - 4px * 4 / 5);
+      height: 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .label:hover {
+      filter: saturate(85%) brightness(85%);
+    }
   }
 
   .card-title {

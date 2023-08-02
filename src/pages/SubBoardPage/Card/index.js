@@ -17,16 +17,18 @@ import {
 } from '../../../utils/icons';
 import styles from './Card.module.scss';
 import { cardsListStorage } from '../../../utils/local-storage';
-import MenuBox from '../../../components/MenuBox';
 import EditLabelSubBox from './SettingSubBox/EditLabelSubBox';
+import { CARD_SETTING_SUBBOX } from '../../../utils/constants';
 
 let cx = classNames.bind(styles);
 
 const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
-  const { cardId, cardTitle } = cardData;
+  const { cardId, cardTitle, cardLabels } = cardData;
 
   const [cardTitleValue, setCardTitleValue] = useState(cardTitle);
+  const [cardLabelsArr, setCardLabelArr] = useState([...cardLabels]);
   const [openSettingBox, setOpenSettingBox] = useState(false);
+  const [openSettingSubBox, setOpenSettingSubBox] = useState(null);
   const settingBoxRef = useRef(null);
   const titleInputRef = useRef(null);
   const saveBtnRef = useRef(null);
@@ -77,6 +79,9 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
 
   useEffect(() => {
     autoSelectFormValue();
+    if (!openSettingBox) {
+      setOpenSettingSubBox(null);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openSettingBox]);
 
@@ -105,6 +110,17 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
     }
   };
 
+  const handleUpdateLabels = labelsListArr => {
+    setCardLabelArr(labelsListArr);
+
+    const newCardData = { ...cardData, cardLabels: labelsListArr };
+    const cardsListData = cardsListStorage.load();
+    const newCardListData = cardsListData.map(card =>
+      card.cardId === cardId ? newCardData : card
+    );
+    cardsListStorage.save(newCardListData);
+  };
+
   const settingBox = useMemo(
     () => (
       <div className={cx('setting-box')} ref={settingBoxRef}>
@@ -114,10 +130,20 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
           </Button>
         </div>
         <div className={cx('setting-part')}>
-          <Button leftIcon={tagIcon} className={cx('setting-item')}>
+          <Button
+            leftIcon={tagIcon}
+            className={cx('setting-item')}
+            onClick={() => setOpenSettingSubBox(CARD_SETTING_SUBBOX.EDIT_LABELS)}
+          >
             Edit labels
           </Button>
-          <EditLabelSubBox/>
+          {openSettingSubBox === CARD_SETTING_SUBBOX.EDIT_LABELS && (
+            <EditLabelSubBox
+              data={cardLabelsArr}
+              onClickX={() => setOpenSettingSubBox(null)}
+              handleUpdateLabels={handleUpdateLabels}
+            />
+          )}
         </div>
         <Button leftIcon={userIcon} className={cx('setting-item')}>
           Change members
@@ -144,7 +170,19 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
       </div>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [openSettingSubBox]
+  );
+
+  const labelsListElements = useMemo(
+    () => (
+      <div className={cx('card-labels-list')}>
+        {cardLabelsArr.length > 0 &&
+          cardLabelsArr.map(label => (
+            <span key={label} className={cx('label')} style={{ backgroundColor: label }}></span>
+          ))}
+      </div>
+    ),
+    [cardLabelsArr]
   );
 
   return (
@@ -164,17 +202,21 @@ const Card = ({ cardData, cardIndex, cardsLength, handleRemoveCard }) => {
         </button>
       )}
       {openSettingBox && (
-        <textarea
-          ref={titleInputRef}
-          className={cx('card-title')}
-          value={cardTitleValue}
-          onChange={e => setCardTitleValue(e.target.value)}
-          onKeyDown={onEnterToSave}
-          rows={4}
-        ></textarea>
+        <div className={cx('textares__wrap')}>
+          {cardLabelsArr.length > 0 && labelsListElements}
+          <textarea
+            ref={titleInputRef}
+            className={cx('card-title')}
+            value={cardTitleValue}
+            onChange={e => setCardTitleValue(e.target.value)}
+            onKeyDown={onEnterToSave}
+            rows={4}
+          ></textarea>
+        </div>
       )}
       {!openSettingBox && (
         <div className={cx('card-title')}>
+          {cardLabelsArr.length > 0 && labelsListElements}
           <p>{cardTitleValue}</p>
           <Button className={cx('edit-card-btn')} onClick={onCLickEditCard}>
             {editIcon}

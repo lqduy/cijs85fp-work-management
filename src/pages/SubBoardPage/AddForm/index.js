@@ -51,14 +51,15 @@ const AddForm = props => {
         const newColumn = {
           parentId: boardId,
           columnId: `co-${uuidv4()}`,
-          columnTitle: title,
+          columnTitle: title
         };
         handleAddNewColumn(newColumn);
       } else {
         const newCard = {
           parentId: columnId,
           cardId: `ca-${uuidv4()}`,
-          cardTitle: title
+          cardTitle: title,
+          cardLabels: []
         };
         handleAddNewCard(newCard);
       }
