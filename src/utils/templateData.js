@@ -409,7 +409,6 @@ export const businessTemplateData = {
       cardId: "ca-7fe3c641-923c-4025-8d02-786114d85fd7",
       cardTitle: "Examples",
     },
-
   ],
 };
 
@@ -760,7 +759,6 @@ export const designTemplateData = {
       cardId: "ca-92702a8a-4e36-400b-bb4c-9d06e5494b55",
       cardTitle: "Notifications",
     },
-
   ],
 };
 
@@ -774,42 +772,140 @@ export const educationTemplateData = {
       "https://cdn.pixabay.com/photo/2022/01/14/06/53/education-6936596_1280.jpg",
   },
   columns: [
+    // 1
     {
       parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
       columnId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
-      columnTitle: "aaa",
+      columnTitle: "Brainstorm & Research",
     },
+    // 2
     {
       parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
       columnId: "co-dfd38b6d-a98b-4263-9a9e-8856e38632f3",
-      columnTitle: "bbb",
+      columnTitle: "Design",
+    },
+    // 3
+    {
+      parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
+      columnId: "co-f2deb43d-752c-48f9-8cc3-8dc745c943ea",
+      columnTitle: "Development",
+    },
+    // 4
+    {
+      parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
+      columnId: "co-a591e2b9-4857-4a1f-9f92-efeb6efe4b59",
+      columnTitle: "Testing & Evaluation",
+    },
+    // 5
+    {
+      parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
+      columnId: "co-2eeddf17-2416-40ba-a295-21055cdc0a33",
+      columnTitle: "Branding",
+    },
+    // 6
+    {
+      parentId: "bo-3b11e8db-fba4-478b-8be1-6c7a71832e81",
+      columnId: "co-8ed9fdd4-3963-4c00-9303-ba04b114617e",
+      columnTitle: "Presentation",
     },
   ],
   cards: [
+    // column 1
     {
       parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
       cardId: "ca-38f638d7-65c7-445b-a1e6-a486528c3d53",
-      cardTitle: "aab",
+      cardTitle: "1. Watch this video for a background of the project.",
     },
     {
       parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
       cardId: "ca-7035ebdf-a5c8-41cf-8011-3239c0439dab",
-      cardTitle: "aab",
+      cardTitle: "2. Identify the criteria that your product must meet.",
     },
     {
       parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
       cardId: "ca-27052af3-822d-4234-ae44-36754cb4cbb9",
-      cardTitle: "aab",
+      cardTitle: "3. Write a design brief for your product.",
     },
+    {
+      parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
+      cardId: "ca-5c59cde2-5d66-4671-a3e7-b93dafb27292",
+      cardTitle: "4. Brainstorm with your partners different design ideas.",
+    },
+    {
+      parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
+      cardId: "ca-8ef6a262-ac59-4d01-b0d7-82d27362563d",
+      cardTitle:
+        "5. Evaluate all of the ideas and as a team decide which approach is the best.",
+    },
+    {
+      parentId: "co-83c5c246-9691-4177-a05d-49119f251b6d",
+      cardId: "ca-d5e7e677-2c64-43ce-bb1b-b57372e02bfb",
+      cardTitle: "6. Gain teacher approval for your design idea.",
+    },
+    // column 2
     {
       parentId: "co-dfd38b6d-a98b-4263-9a9e-8856e38632f3",
       cardId: "ca-37d38807-bf71-440e-af0e-7a54ff3b78c4",
-      cardTitle: "bbc",
+      cardTitle: "7. Work with your group to develop design sketches.",
     },
     {
       parentId: "co-dfd38b6d-a98b-4263-9a9e-8856e38632f3",
       cardId: "ca-a587ffc6-2f26-4bd9-8f62-81473e77eba0",
-      cardTitle: "bbc",
+      cardTitle:
+        "8. Share your sketches or outline with another group. Critique each other's designs.",
+    },
+    {
+      parentId: "co-dfd38b6d-a98b-4263-9a9e-8856e38632f3",
+      cardId: "ca-cd6e3d38-df70-4201-aa3e-9e81f2c7297c",
+      cardTitle: "9. List the materials, tools, and equipment necessary.",
+    },
+    // column 3
+    {
+      parentId: "co-f2deb43d-752c-48f9-8cc3-8dc745c943ea",
+      cardId: "ca-1245104a-09e3-45e4-a395-872c8db73f6c",
+      cardTitle:
+        "10. Collect the necessary materials, tools, and equipment necessary to create a prototype.",
+    },
+    {
+      parentId: "co-f2deb43d-752c-48f9-8cc3-8dc745c943ea",
+      cardId: "ca-b356c884-25c6-4ea9-a4b1-20ab73ea855b",
+      cardTitle:
+        "11. Create a model, prototype, or detailed schematic of your product.",
+    },
+    // column 4
+    {
+      parentId: "co-a591e2b9-4857-4a1f-9f92-efeb6efe4b59",
+      cardId: "ca-5098eb4d-5d5a-4f93-9910-97e5cb16fcbc",
+      cardTitle: "12. Obtain a Product Testing Guidelines resource sheet.",
+    },
+    {
+      parentId: "co-a591e2b9-4857-4a1f-9f92-efeb6efe4b59",
+      cardId: "ca-db19b3ef-834a-4aa2-af7b-37fe0f6dea9c",
+      cardTitle:
+        "13. Work with your partner to complete steps 1-4 on the Product Testing Guidelines.",
+    },
+    // column 5
+    {
+      parentId: "co-2eeddf17-2416-40ba-a295-21055cdc0a33",
+      cardId: "ca-f8c1719f-aa7f-4278-9261-960e41543348",
+      cardTitle:
+        "14. Create a fictional company to produce and sell your product.",
+    },
+    {
+      parentId: "co-2eeddf17-2416-40ba-a295-21055cdc0a33",
+      cardId: "ca-56b877eb-7e4b-43ca-a5f5-306a73030ef4",
+      cardTitle: "15. Create a marketing plan for your product.",
+    },
+    // column 6
+    {
+      parentId: "co-8ed9fdd4-3963-4c00-9303-ba04b114617e",
+      cardId: "ca-ac705937-9e63-415a-a5c0-c4ad429aa70a",
+      cardTitle: "16. Create presentation materials",
+    },
+    {
+      parentId: "co-8ed9fdd4-3963-4c00-9303-ba04b114617e",
+      cardId: "ca-72bc86ff-14f9-443d-b30b-dab88fbbf4c3",
+      cardTitle: "17. Present to class",
     },
   ],
 };
@@ -821,45 +917,107 @@ export const engineeringTemplateData = {
     isStarred: false,
     lastVisiting: 0,
     boardImageBg:
-      "https://static.vecteezy.com/system/resources/previews/001/241/194/original/business-strategy-and-digital-marketing-icon-set-vector.jpg",
+      "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2402x1600/1b101b2674301e95f8ed6abfb4f0181e/photo-1581896184337-1330180ac3e6.jpg",
   },
   columns: [
+    // 1
     {
       parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
       columnId: "co-4f3171e8-c5f6-4e7d-9bcc-4391d3e68319",
-      columnTitle: "aaa",
+      columnTitle: "Backlog",
     },
+    // 2
     {
       parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
       columnId: "co-6b6cd87c-759f-400b-a20d-eacc2d466541",
-      columnTitle: "bbb",
+      columnTitle: "New Features",
+    },
+    // 3
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-d8bef5ba-47d7-4ae7-9963-90a7b7a35c9d",
+      columnTitle: "Running Tasks",
+    },
+    // 4
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-22f99e49-c742-45ad-b4a2-46ae25833849",
+      columnTitle: "Fix & Upgrade",
+    },
+    // 5
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-b7b5eee2-babc-4100-aee7-a8a1cdf2d05e",
+      columnTitle: "Phase 1 Testing",
+    },
+    // 6
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-7ed2a76c-96a0-4993-969f-880b33d9e480",
+      columnTitle: "Phase 2 Testing",
+    },
+    // 7
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-5225fe7f-ddd1-4051-9613-ed96bca0504c",
+      columnTitle: "Ready",
+    },
+    // 8
+    {
+      parentId: "bo-b7cc6b60-bb1d-4205-bf6e-6f474694e3f6",
+      columnId: "co-bfd80efd-98e0-41fc-8cf2-b0d784b0bf45",
+      columnTitle: "Done and Deployed",
     },
   ],
   cards: [
+    // column 1
     {
       parentId: "co-4f3171e8-c5f6-4e7d-9bcc-4391d3e68319",
       cardId: "ca-f1b7fed5-b9ec-4708-8952-e7161c67e2d3",
-      cardTitle: "aab",
+      cardTitle: "Upcomming / Planned features",
     },
-    {
-      parentId: "co-4f3171e8-c5f6-4e7d-9bcc-4391d3e68319",
-      cardId: "ca-8bc4be46-2d0a-437b-b318-2f34f2d21d7c",
-      cardTitle: "aab",
-    },
-    {
-      parentId: "co-4f3171e8-c5f6-4e7d-9bcc-4391d3e68319",
-      cardId: "ca-bd99dfa5-7154-4606-a76e-6169ad38a6f9",
-      cardTitle: "aab",
-    },
+    // column 2
     {
       parentId: "co-6b6cd87c-759f-400b-a20d-eacc2d466541",
       cardId: "ca-35e793a7-c60e-400b-a855-f9d97839da5d",
-      cardTitle: "bbc",
+      cardTitle: "Queued Features or Tasks to do",
     },
+    // column 3
     {
-      parentId: "co-6b6cd87c-759f-400b-a20d-eacc2d466541",
-      cardId: "ca-e0bc6a09-474c-4526-88d9-4fe9d15b6878",
-      cardTitle: "bbc",
+      parentId: "co-d8bef5ba-47d7-4ae7-9963-90a7b7a35c9d",
+      cardId: "ca-9922fd49-860b-4c90-8a5c-a9f424754ad5",
+      cardTitle: "Features / Tasks under Development",
+    },
+    // column 4
+    {
+      parentId: "co-22f99e49-c742-45ad-b4a2-46ae25833849",
+      cardId: "ca-6054ac1c-d5d5-46ee-a48f-bccc94c0e75c",
+      cardTitle:
+        "Any task which fails and required to fix after Phase-1 or phase-2 Testing",
+    },
+    // column 5
+    {
+      parentId: "co-b7b5eee2-babc-4100-aee7-a8a1cdf2d05e",
+      cardId: "ca-f692f775-6941-4949-86e5-d3aaaa05b7db",
+      cardTitle: "Testing for Development Stage.",
+    },
+    // column 6
+    {
+      parentId: "co-7ed2a76c-96a0-4993-969f-880b33d9e480",
+      cardId: "ca-cae0245a-044f-44d2-9316-2dcbcf99bce6",
+      cardTitle: "Testing for Pre-production Stage",
+    },
+    // column 7
+    {
+      parentId: "co-5225fe7f-ddd1-4051-9613-ed96bca0504c",
+      cardId: "ca-7ff59de2-7fad-448c-a051-47df3708068d",
+      cardTitle: "Ready to move to Production after both phases of testing",
+    },
+    // column 8
+    {
+      parentId: "co-bfd80efd-98e0-41fc-8cf2-b0d784b0bf45",
+      cardId: "ca-a2b03210-3fbf-460d-b1d5-756f669bb0ab",
+      cardTitle: "Deployed on Production and Feature running live and fine.",
     },
   ],
 };
@@ -874,42 +1032,86 @@ export const marketingTemplateData = {
       "https://uiii.ac.id/assets/images/1636690539-alfons-morales-YLSwjSy7stw-unsplash-2.jpg",
   },
   columns: [
+    // 1
     {
       parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
       columnId: "co-676ae230-b3f1-4fa6-a096-8a32cc2c5af2",
-      columnTitle: "aaa",
+      columnTitle: "Blog Posts",
     },
+    // 2
     {
       parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
       columnId: "co-a803e074-81f1-40d9-b9e5-d455fffa03ad",
-      columnTitle: "bbb",
+      columnTitle: "Gated Assets",
+    },
+    // 3
+    {
+      parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
+      columnId: "co-f41c3489-5064-42ab-86ca-d7515fbdbe94",
+      columnTitle: "Webinars",
+    },
+    // 4
+    {
+      parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
+      columnId: "co-a0d98a18-8f49-4977-b8d2-4b6fc191f57f",
+      columnTitle: "Case Studies",
+    },
+    // 5
+    {
+      parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
+      columnId: "co-bc9acb02-9d8a-4fab-ad53-a9490ed9a94d",
+      columnTitle: "How this template works",
+    },
+    // 6
+    {
+      parentId: "bo-c39141e7-6693-4138-9d06-908028cc3656",
+      columnId: "co-6de4cb0a-fda1-489a-9e08-37d5d1178e6a",
+      columnTitle: "Export & Sync",
     },
   ],
   cards: [
+    // column 1
     {
       parentId: "co-676ae230-b3f1-4fa6-a096-8a32cc2c5af2",
       cardId: "ca-4a5f55d2-43a4-4e57-b711-caea7d09d83a",
-      cardTitle: "aab",
+      cardTitle:
+        "A Guide to Trello for Beginners: Creating Boards, Cards, and More",
     },
     {
       parentId: "co-676ae230-b3f1-4fa6-a096-8a32cc2c5af2",
       cardId: "ca-eeb45f62-a925-4ca2-9aba-7a8fea6d444b",
-      cardTitle: "aab",
+      cardTitle: "Tool Silos: What They Are and How to Smash Them",
     },
-    {
-      parentId: "co-676ae230-b3f1-4fa6-a096-8a32cc2c5af2",
-      cardId: "ca-3278d88c-22fe-4150-8e4a-8267fa60cc80",
-      cardTitle: "aab",
-    },
+    // column 2
     {
       parentId: "co-a803e074-81f1-40d9-b9e5-d455fffa03ad",
       cardId: "ca-84edf69f-8833-4750-8fe3-5f68d9789f08",
-      cardTitle: "bbc",
+      cardTitle: "Unito's Report on Reporting",
     },
+    // column 3
     {
-      parentId: "co-a803e074-81f1-40d9-b9e5-d455fffa03ad",
+      parentId: "co-f41c3489-5064-42ab-86ca-d7515fbdbe94",
       cardId: "ca-ccd91938-8904-4eee-8c16-ebaef4629cc6",
-      cardTitle: "bbc",
+      cardTitle: "Product Overview Webinar: Unlock the Power of Unito",
+    },
+    // column 4
+    {
+      parentId: "co-a0d98a18-8f49-4977-b8d2-4b6fc191f57f",
+      cardId: "ca-46c117c3-5a58-4079-86f1-44d2f8052b7b",
+      cardTitle:
+        "Case Study: How The Taproom Streamlines Development Work Between Basecamp and Trello with Unito",
+    },
+    // column 5
+    {
+      parentId: "co-bc9acb02-9d8a-4fab-ad53-a9490ed9a94d",
+      cardId: "ca-eab222fe-65cc-4fe1-8893-326b43b5f731",
+      cardTitle: "READ ME",
+    },
+    // column 6
+    {
+      parentId: "co-6de4cb0a-fda1-489a-9e08-37d5d1178e6a",
+      cardId: "ca-ee0c73c0-8734-4175-9ec5-87aec910578c",
+      cardTitle: "Need to get this data into Google Sheets?",
     },
   ],
 };
@@ -924,42 +1126,99 @@ export const projectManagementTemplateData = {
       "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2397x1600/0b085a9b17db7d52cc7378e67ab21da7/photo-1472289065668-ce650ac443d2.jpg",
   },
   columns: [
+    // 1
     {
       parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
       columnId: "co-aed3a5a1-d51b-412a-9016-c1edc0852146",
-      columnTitle: "aaa",
+      columnTitle: "New Client Onboarding",
     },
+    // 2
     {
       parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
       columnId: "co-03ee6956-e485-4a71-ae5e-dc8242fd05b9",
-      columnTitle: "bbb",
+      columnTitle: "Attorney Assigned",
+    },
+    // 3
+    {
+      parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
+      columnId: "co-4c06e19a-c4af-472d-a5e0-f802f7a4ec3e",
+      columnTitle: "Doing",
+    },
+    // 4
+    {
+      parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
+      columnId: "co-8863a5e0-7455-4002-9d6b-51664c841014",
+      columnTitle: "On Hold",
+    },
+    // 5
+    {
+      parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
+      columnId: "co-d2a65ef6-a5c0-4dc1-b5ba-f1b1b7797e90",
+      columnTitle: "Win",
+    },
+    // 6
+    {
+      parentId: "bo-1d33b552-10c8-4216-9b7c-b8fbbc1cd104",
+      columnId: "co-010a8f49-3aaa-41d7-a7ef-2566726b33a5",
+      columnTitle: "Lost",
     },
   ],
   cards: [
+    // column 1
     {
       parentId: "co-aed3a5a1-d51b-412a-9016-c1edc0852146",
       cardId: "ca-8fb29f07-5a57-4938-bc5c-0f17012d055f",
-      cardTitle: "aab",
+      cardTitle: "[Company Name]",
     },
-    {
-      parentId: "co-aed3a5a1-d51b-412a-9016-c1edc0852146",
-      cardId: "ca-20c29b45-82c1-45c5-aa17-7b88a12bf46a",
-      cardTitle: "aab",
-    },
-    {
-      parentId: "co-aed3a5a1-d51b-412a-9016-c1edc0852146",
-      cardId: "ca-5c25f2a2-1999-40a2-a974-99db8a1f5271",
-      cardTitle: "aab",
-    },
+    // column 2
     {
       parentId: "co-03ee6956-e485-4a71-ae5e-dc8242fd05b9",
       cardId: "ca-24470ac2-e73e-4c43-8695-8f563e8be296",
-      cardTitle: "bbc",
+      cardTitle: "Shields and Sons",
     },
     {
       parentId: "co-03ee6956-e485-4a71-ae5e-dc8242fd05b9",
       cardId: "ca-54613b7d-21f9-444e-8e05-ccc50ad48c6d",
-      cardTitle: "bbc",
+      cardTitle: "Hudson, Baumbach and Dach",
+    },
+    // column 3
+    {
+      parentId: "co-4c06e19a-c4af-472d-a5e0-f802f7a4ec3e",
+      cardId: "ca-2ca5bdb0-b501-4ece-87a8-7c0c20df7ea9",
+      cardTitle: "Conn Group",
+    },
+    // column 4
+    {
+      parentId: "co-8863a5e0-7455-4002-9d6b-51664c841014",
+      cardId: "ca-64f40210-0709-4958-931d-81e329e5ae2a",
+      cardTitle: "Stark-Kling LLC",
+    },
+    {
+      parentId: "co-8863a5e0-7455-4002-9d6b-51664c841014",
+      cardId: "ca-7c6315f4-094c-4f63-b30e-73e4249d6086",
+      cardTitle: "Tromp Group",
+    },
+    {
+      parentId: "co-8863a5e0-7455-4002-9d6b-51664c841014",
+      cardId: "ca-2945dc63-05e2-49dd-93df-2cd81eb3a14f",
+      cardTitle: "Goyette Inc",
+    },
+    // column 5
+    {
+      parentId: "co-d2a65ef6-a5c0-4dc1-b5ba-f1b1b7797e90",
+      cardId: "ca-c26dda2d-f410-408d-90ef-dc01bb3a3a38",
+      cardTitle: "Toy-Adams",
+    },
+    {
+      parentId: "co-d2a65ef6-a5c0-4dc1-b5ba-f1b1b7797e90",
+      cardId: "ca-035768a1-6be5-44b2-aeed-293c36693907",
+      cardTitle: "Tiny Pants Inc",
+    },
+    // column 6
+    {
+      parentId: "co-010a8f49-3aaa-41d7-a7ef-2566726b33a5",
+      cardId: "ca-f109b997-a1f1-4eca-8418-202156a0fd00",
+      cardTitle: "Oberbrunner Ltd",
     },
   ],
 };
@@ -974,42 +1233,83 @@ export const workingRemotelyTemplateData = {
       "https://www.agenzianova.com/news/wp-content/uploads/2022/03/Liuzzi-ferrovia-1024x683.jpeg",
   },
   columns: [
+    // 1
     {
       parentId: "bo-deb850b2-9ccc-400e-9420-7e34b1d2b42a",
       columnId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
-      columnTitle: "aaa",
+      columnTitle: "Team Info",
     },
+    // 2
     {
       parentId: "bo-deb850b2-9ccc-400e-9420-7e34b1d2b42a",
       columnId: "co-0b0bdc9e-3e06-4fe0-b19b-23b356fd01cd",
-      columnTitle: "bbb",
+      columnTitle: "Current Projects",
+    },
+    // 3
+    {
+      parentId: "bo-deb850b2-9ccc-400e-9420-7e34b1d2b42a",
+      columnId: "co-1531eb66-31bd-463d-8921-9224c1cb7458",
+      columnTitle: "Completed Projects",
     },
   ],
   cards: [
+    // column 1
     {
       parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
       cardId: "ca-db04e12c-6571-42cd-8558-88d2315cb88d",
-      cardTitle: "aab",
+      cardTitle: "Team Resources",
     },
     {
       parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
       cardId: "ca-6bb10037-4006-4681-bc73-b5380b7953ee",
-      cardTitle: "aab",
+      cardTitle: "Working Hours",
     },
     {
       parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
       cardId: "ca-f5c175b4-9a85-4fa0-ab69-93a1a7b481f4",
-      cardTitle: "aab",
+      cardTitle: "Team OKRs - Q3",
     },
+    {
+      parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
+      cardId: "ca-8b81784d-7011-4db8-b817-9e4e2c204228",
+      cardTitle: "Weekly VACATION or OOO",
+    },
+    {
+      parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
+      cardId: "ca-137a488c-fce9-426c-8ddd-ace71b04addc",
+      cardTitle: "VAC 1/17-1/24",
+    },
+    {
+      parentId: "co-17c81779-1c4e-4cf5-9f3d-65f5c554e1df",
+      cardId: "ca-6380c65d-7486-491d-9eb6-c49ab286ce9b",
+      cardTitle: "VAC 1/30",
+    },
+    // column 2
     {
       parentId: "co-0b0bdc9e-3e06-4fe0-b19b-23b356fd01cd",
       cardId: "ca-a4f445f7-9075-4319-95eb-4b6a885c769b",
-      cardTitle: "bbc",
+      cardTitle: "Current Project Template",
     },
     {
       parentId: "co-0b0bdc9e-3e06-4fe0-b19b-23b356fd01cd",
       cardId: "ca-7fe43a2f-42c9-426a-a5eb-fd0c64546b17",
-      cardTitle: "bbc",
+      cardTitle: "Blog Redesign",
+    },
+    {
+      parentId: "co-0b0bdc9e-3e06-4fe0-b19b-23b356fd01cd",
+      cardId: "ca-0e26e092-f70f-440d-b6ad-f080007cf367",
+      cardTitle: "#EmbraceRemote Campaign",
+    },
+    // column 3
+    {
+      parentId: "co-1531eb66-31bd-463d-8921-9224c1cb7458",
+      cardId: "ca-2055c82a-6271-45ca-9d46-b18c3f64b858",
+      cardTitle: "Nordic Launch",
+    },
+    {
+      parentId: "co-1531eb66-31bd-463d-8921-9224c1cb7458",
+      cardId: "ca-8110fe62-84b6-4871-8e15-ab59bf05e01c",
+      cardTitle: "Ebook Campaign",
     },
   ],
 };
