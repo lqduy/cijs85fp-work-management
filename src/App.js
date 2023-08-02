@@ -42,11 +42,12 @@ function App() {
             })}
             
             {privateRouters.map((route, index) => {
+              const Page = route.component;
               return (
                 <Route
                   key={index}
                   path={route.path}
-                  element={<PrivateRoute component={route.component} />}
+                  element={<PrivateRoute component={<Page/>} />}
                 />
               );
             })}

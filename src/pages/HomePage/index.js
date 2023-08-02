@@ -15,7 +15,6 @@ let cx = classNames.bind(styles);
 const HomePage = () => {
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
-  const {currentUser} = useAuth()
 
   const onFetchBoardsData = () => {
     const data = boardsListStorage.load();
@@ -111,7 +110,6 @@ const HomePage = () => {
       <div className={cx('sideBody')}>
         <section className={cx('section')}>
           <h3>
-            <p>Hello, {currentUser}</p>
             <span>{starRegularIcon}</span>
             <span>Starred boards</span>
           </h3>
