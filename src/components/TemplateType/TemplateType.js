@@ -7,13 +7,13 @@ import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
-import  board from '../../utils/test';
+import  {businessTemplateData} from '../../utils/templateData';
 
 
 let cx = classNames.bind(styles);
 
 const TemplateType = () => {
-  const [boardsList, setBoardsList] = useState(board);
+  const [boardsList, setBoardsList] = useState(businessTemplateData);
   const [openCreateForm, setOpenCreateForm] = useState(false);
 
   const onFetchBoardsData = () => {

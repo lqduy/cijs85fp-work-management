@@ -10,15 +10,14 @@ import AddForm from './AddForm';
 import ThemeContext from '../../contexts/ThemeContext';
 import Column from './Column';
 import SubBoardHeader from './SubBoardHeader';
-import board from '../../utils/test';
 
 let cx = classNames.bind(styles);
 
 const SubBoardPageTemplates = () => {
   const { boardId } = useParams();
 
-  const [boardData, setBoardData] = useState(board);
-  const [columnsData, setColumnsData] = useState(board);
+  const [boardData, setBoardData] = useState({});
+  const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
 
   const { darkMode } = useContext(ThemeContext);

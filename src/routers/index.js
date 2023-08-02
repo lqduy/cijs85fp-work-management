@@ -15,6 +15,6 @@ export const publicRouters = [
   { path: "/home", component: Home },
   { path: "/templates", component: Templates },
   { path: "templateType", component: TemplateType },
-  { path: "/b/:boardId", component: SubBoardPageTemplates },
+  // { path: "/b/:boardId", component: SubBoardPageTemplates },
 ];
 export const privateRouters = [];
