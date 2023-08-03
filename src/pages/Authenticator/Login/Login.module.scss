@@ -41,6 +41,7 @@ text-align: center;
   border-radius: 4px;
   font-size: 14px;
   transition: background-color 0.2s ease 0s;
+  margin-bottom: 20px;
 
   &:hover {
     opacity: 0.75;
@@ -67,9 +68,11 @@ text-align: center;
   gap: 10px;
   text-align: center;
   font-size: 1.5rem;
+  max-width: 100%;
 }
 .error {
   color: red;
+  word-wrap: break-word;
 }
 
 .formLabel {
@@ -92,4 +95,10 @@ text-align: center;
 input[type=email]:focus, input[type=password]:focus {
   border-bottom: #CCC solid 3px;
   color: #FFFFFF;
+}
+
+@media all and (min-width: 768px) {
+  .container {
+    width: 320px;
+  }
 }
