@@ -1,20 +1,24 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import MenuBox from '../../../../components/MenuBox';
-import Button from '../../../../components/Button';
-import { backgroundColorsList } from '../../../../utils/constants';
 import { checkIcon } from '../../../../utils/icons';
+import { coverColorsListData } from '../../../../utils/constants';
 import styles from './SettingSubBox.module.scss';
+import ThemeContext from '../../../../contexts/ThemeContext';
 
 let cx = classNames.bind(styles);
 
 const ChangeCoverSubBox = ({ data, onClickX, handleUpdateCover }) => {
   const { isFullSize, coverColor } = data;
 
-  const [coverColorValue, setCoverColorValue] = useState(
-    coverColor ?? backgroundColorsList.monoColor[0]
+  const { darkMode } = useContext(ThemeContext);
+  const coverColorsList = useMemo(
+    () => coverColorsListData.map(color => (darkMode ? color.dark : color.light)),
+    [darkMode]
   );
+
+  const [coverColorValue, setCoverColorValue] = useState(coverColor ?? coverColorsList[0]);
   const [isFullSizeCover, setIsFullSizeCover] = useState(isFullSize);
 
   const onColorBgSelected = color => {
@@ -29,7 +33,7 @@ const ChangeCoverSubBox = ({ data, onClickX, handleUpdateCover }) => {
 
   const colorsListElements = useMemo(
     () =>
-      backgroundColorsList.monoColor.map((color, index) => (
+      coverColorsList.map((color, index) => (
         <span
           key={index}
           className={cx('bgSelectBox')}
@@ -72,7 +76,7 @@ const ChangeCoverSubBox = ({ data, onClickX, handleUpdateCover }) => {
           </div>
         </div>
       </div>
-      <Button fullWidth>Remove cover</Button>
+      <button className={cx('remove-cover-btn')}>Remove cover</button>
       <h5>Colors</h5>
       <div className={cx('colors-list')}>{colorsListElements}</div>
     </MenuBox>

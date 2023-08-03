@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect, useMemo, useContext } from 'react';
 import classNames from 'classnames/bind';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -18,8 +18,9 @@ import {
 import styles from './Card.module.scss';
 import { cardsListStorage } from '../../../utils/local-storage';
 import EditLabelSubBox from './SettingSubBox/EditLabelSubBox';
-import { CARD_SETTING_SUBBOX } from '../../../utils/constants';
+import { CARD_SETTING_SUBBOX, coverColorsListData } from '../../../utils/constants';
 import ChangeCoverSubBox from './SettingSubBox/ChangeCoverSubBox';
+import ThemeContext from '../../../contexts/ThemeContext';
 
 let cx = classNames.bind(styles);
 
@@ -33,12 +34,16 @@ const Card = ({
 }) => {
   const { cardId, cardTitle, cardLabels, isFullSizeCover, cardColorCover } = cardData;
 
+  const { darkMode } = useContext(ThemeContext);
+
   const [cardDataState, setCardDataState] = useState({ ...cardData });
   const [cardTitleValue, setCardTitleValue] = useState(cardTitle);
   const [cardLabelsArr, setCardLabelArr] = useState([...cardLabels]);
   const [cardCoverObj, setCardCoverObj] = useState({
     isFullSize: isFullSizeCover,
-    coverColor: cardColorCover
+    coverColor: darkMode
+      ? cardColorCover && cardColorCover.dark
+      : cardColorCover && cardColorCover.light
   });
   const [openSettingBox, setOpenSettingBox] = useState(false);
   const [openSettingSubBox, setOpenSettingSubBox] = useState(null);
@@ -60,11 +65,16 @@ const Card = ({
   };
 
   const updateCardDataState = () => {
+    const coverColorObj = coverColorsListData.find(colorObj =>
+      darkMode
+        ? colorObj.dark === cardCoverObj.coverColor
+        : colorObj.light === cardCoverObj.coverColor
+    );
     const newCardData = {
       ...cardDataState,
       cardTitle: cardTitleValue,
       cardLabels: cardLabelsArr,
-      cardColorCover: cardCoverObj.coverColor,
+      cardColorCover: coverColorObj,
       isFullSizeCover: cardCoverObj.isFullSize
     };
     setCardDataState(newCardData);
@@ -74,6 +84,16 @@ const Card = ({
     updateCardDataState();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardTitleValue, cardLabelsArr, cardCoverObj]);
+
+  useEffect(() => {
+    setCardCoverObj(prev => ({
+      ...prev,
+      coverColor: darkMode
+        ? cardColorCover && cardColorCover.dark
+        : cardColorCover && cardColorCover.light
+    }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [darkMode]);
 
   const onClickOutsideSettingBox = e => {
     let isClickOutside =
@@ -98,7 +118,7 @@ const Card = ({
       document.removeEventListener('mousedown', onClickOutsideSettingBox);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [cardLabelsArr]);
 
   const autoSelectFormValue = () => {
     let timer;
@@ -154,11 +174,17 @@ const Card = ({
   };
 
   const handleUpdateCover = (isFullSizeCover, coverColor) => {
-    setCardCoverObj({ isFullSize: isFullSizeCover, coverColor: coverColor });
+    const newColorObj = coverColorsListData.find(colorObj =>
+      darkMode ? colorObj.dark === coverColor : colorObj.light === coverColor
+    );
+    setCardCoverObj({
+      isFullSize: isFullSizeCover,
+      coverColor: (darkMode ? newColorObj.dark : newColorObj.light) ?? null
+    });
     const newCardData = {
       ...cardData,
       isFullSizeCover: isFullSizeCover,
-      cardColorCover: coverColor
+      cardColorCover: newColorObj
     };
     const cardsListData = cardsListStorage.load();
     const newCardListData = cardsListData.map(card =>
@@ -309,7 +335,13 @@ const Card = ({
         >
           {cardCoverObj.coverColor && coverElements}
           {cardLabelsArr.length > 0 && labelsListElements}
-          <p>{cardTitleValue}</p>
+          <p
+            style={{
+              color: cardCoverObj.coverColor && cardCoverObj.isFullSize ? '#fafafa' : undefined
+            }}
+          >
+            {cardTitleValue}
+          </p>
           <Button className={cx('edit-card-btn')} onClick={onCLickEditCard}>
             {editIcon}
           </Button>

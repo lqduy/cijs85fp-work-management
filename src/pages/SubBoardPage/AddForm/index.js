@@ -60,7 +60,7 @@ const AddForm = props => {
           cardId: `ca-${uuidv4()}`,
           cardTitle: title,
           cardLabels: [],
-          cardColorCover: null,
+          cardColorCover: { light: null, dark: null },
           isFullSizeCover: false
         };
         handleAddNewCard(newCard);

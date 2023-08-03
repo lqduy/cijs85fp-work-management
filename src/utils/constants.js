@@ -123,6 +123,19 @@ export const backgroundImagesList = [
   }
 ];
 
+export const coverColorsListData = [
+  { light: '#4BCE97', dark: '#216E4E' },
+  { light: '#E2B203', dark: '#7F5F01' },
+  { light: '#FAA53D', dark: '#974F0C' },
+  { light: '#F87462', dark: '#AE2A19' },
+  { light: '#9F8FEF', dark: '#5E4DB2' },
+  { light: '#579DFF', dark: '#0055CC' },
+  { light: '#60C6D2', dark: '#206B74' },
+  { light: '#94C748', dark: '#4C6B1F' },
+  { light: '#E774BB', dark: '#943D73' },
+  { light: '#8590A2', dark: '#596773' }
+];
+
 export const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
@@ -132,5 +145,5 @@ export const DISTANCE_TO_ACTIVATED_DND = 10;
 
 export const CARD_SETTING_SUBBOX = {
   EDIT_LABELS: 'edit-labels',
-  CHANGE_COVER: 'change-cover',
-}
+  CHANGE_COVER: 'change-cover'
+};

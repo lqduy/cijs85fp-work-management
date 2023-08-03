@@ -1,7 +1,7 @@
 @import '../../../styles/variables';
 @import '../../../styles/mixins';
 
-$cardRadius: 8px;
+$cardRadius: 6px;
 
 .card-wrap {
   display: flex;
@@ -23,6 +23,7 @@ $cardRadius: 8px;
   }
 
   div.card-title {
+    border-radius: $cardRadius;
     cursor: pointer;
 
     .card-labels-list {
@@ -33,7 +34,7 @@ $cardRadius: 8px;
 
   .textares__wrap {
     width: 100%;
-    border-radius: $cardRadius;
+    border-radius: 12px 12px $cardRadius $cardRadius;
     background-color: var(--backgroundColor-darker);
 
     .card-labels-list {
@@ -43,16 +44,26 @@ $cardRadius: 8px;
   }
 
   .card-cover {
+    position: relative;
+
     width: 100%;
     height: 32px;
     border-radius: $cardRadius $cardRadius 0 0;
 
-    &__small{
+    &__small {
       // display: none;
-      height: $cardRadius;
+      // height: 16px;
+      ~ .card-labels-list {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .label {
+          box-shadow: 0 2px 2px #091e4240, 0 0 2px #091e424f;
+        }
+      }
     }
   }
-
 
   .card-labels-list {
     display: flex;
@@ -63,6 +74,10 @@ $cardRadius: 8px;
     width: 100%;
     margin-bottom: 8px;
     padding: 8px;
+
+    &:hover ~ .edit-card-btn {
+      display: none;
+    }
 
     .label {
       display: block;
@@ -118,6 +133,7 @@ $cardRadius: 8px;
     position: absolute;
     right: 4px;
     top: 4px;
+    z-index: 1;
 
     width: 32px;
     height: 32px;
@@ -176,7 +192,7 @@ $cardRadius: 8px;
   .card-title {
     height: 100%;
     padding: 8px;
-    border-radius: 0 0 $cardRadius $cardRadius;
+    // border-radius: 0 0 $cardRadius $cardRadius;
     overflow: hidden;
     background-color: var(--backgroundColor-darker);
   }
