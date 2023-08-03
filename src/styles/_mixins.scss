@@ -13,7 +13,12 @@
   --createFormBackLayer-bgColor: rgba(191, 191, 191, 0.75);
   --subBoardHeader-bgColor: rgba(197, 197, 197, 0.7);
   --cardEditBtn-bgColor: #c9cccf;
-
+  --logIn--bgColor: #fff;
+  --logIn--textColor: #000113;
+  --logIn-btnBgColor: #000113;
+  --logIn-btnTextColor: #fff;
+  --logIn-info: #64748B;
+  --logIn-wraper: #fff;
   color: var(--textColor);
 }
 
@@ -32,6 +37,13 @@
   --createFormBackLayer-bgColor: rgb(0, 0, 0, 0.4);
   --subBoardHeader-bgColor: rgba(27, 27, 27, 0.8);
   --cardEditBtn-bgColor: #1d1e1f;
+  --logIn--bgColor: #000113;
+  --logIn--textColor: #CCC;
+  --logIn-btnBgColor: #334155;
+  --logIn-btnTextColor: #fff;
+  --logIn-info: #94A3B8;
+  --logIn-wraper: #334155;
+
 
   color: var(--textColor);
   background-color: var(--backgroundColor);

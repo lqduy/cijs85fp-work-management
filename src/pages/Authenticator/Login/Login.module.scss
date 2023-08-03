@@ -1,46 +1,63 @@
 .wrapper {
-  margin: 20px auto;
+  margin: 0px auto;
   width: 100%;
   padding: 3rem 1rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 50px;
+  background-color: var(--logIn-wraper);
 }
 .logo {
   overflow: hidden;
   margin: 0px auto;
+}
+.logoTxt {
+margin-bottom: 20px;
+font-family: "Roboto", sans-serif;
 }
 
 .container {
   height: 70%;
   margin: 0px auto;
   padding: 2.5rem;
-  background-color: #fff;
   box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+  background-color: var(--logIn--bgColor);
+  color: var(--textColor) !important;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 50px;
 }
 .btn {
-  background-color: #36b37e;
-  color: #fff;
+  background-color: var(--logIn-btnBgColor);
+  color: var(--logIn-btnTextColor);
   font-weight: 500;
   border: 0;
-  padding: 0.5rem;
+  padding: 10px 0px;
   width: 100%;
-  font-size: 2rem;
+  border-radius: 4px;
+  font-size: 14px;
   transition: background-color 0.2s ease 0s;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.75;
   }
 }
 .infoText {
-  color: #0052cc;
   text-decoration: none;
+  color: var(--textColor) !important;
+  &:hover {
+    opacity: 0.75;
+  }
 }
 .myform {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   font-size: 1.75rem;
+  font-family: "Roboto", sans-serif;
 }
 .info {
   margin-top: 10px;
@@ -49,8 +66,29 @@
   gap: 10px;
   text-align: center;
   font-size: 1.5rem;
-
 }
 .error {
   color: red;
+}
+
+.formLabel {
+  display: none;
+}
+.formInput {
+  font-size: 1.5rem !important;
+  background-color: var(--logIn--bgColor) !important;
+  color: var(--logIn--textColor) !important;
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid var(--logIn--textColor);
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+input[type=email]:focus, input[type=password]:focus {
+  border-bottom: #CCC solid 3px;
+  color: #FFFFFF;
 }

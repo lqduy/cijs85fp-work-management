@@ -39,43 +39,44 @@ const Signup = () => {
     <AuthProvider>
       <div className={signupStyles.wrapper}>
         <div className={signupStyles.logo}>
-          <img width="200" height="42" src="/assets/trello-logo-blue.svg" />
+          <img src="/assets/logo.png"
+          width="200"
+          height="80"
+            alt="logo" />
         </div>
         <div className={signupStyles.container}>
+        <div className={signupStyles.logoTxt}><h2>Sign Up</h2></div>
           <form className={signupStyles.myform} onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Email address</label>
+            <div className="mb-3 form-section">
+              <label className={(signupStyles.formLabel)}>Email address</label>
               <input
                 type="email"
-                className="form-control font-size-lg"
+                className={(signupStyles.formInput)}
                 id="user-email"
                 aria-describedby="emailHelp"
                 placeholder="Enter your email here"
                 ref={emailRef}
                 required
               />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
-              </div>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
+            <div className="mb-3 form-section">
+              <label className={(signupStyles.formLabel)}>Password</label>
               <input
                 type="password"
-                className="form-control"
+                className={(signupStyles.formInput)}
                 id="password"
                 placeholder="Enter your password here"
                 ref={passwordRef}
                 required
               />
             </div>
-            <div className="mb-3">
-              <label className="form-label">Confirm Password</label>
+            <div className="mb-3 form-section">
+              <label className={(signupStyles.formLabel)}>Confirm Password</label>
               <input
                 type="password"
-                className="form-control"
+                className={(signupStyles.formInput)}
                 id="confirm-password"
-                placeholder="Enter your password here"
+                placeholder="Confirm your password here"
                 ref={confirmPasswordRef}
                 required
               />

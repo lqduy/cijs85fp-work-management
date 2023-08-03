@@ -34,18 +34,19 @@ const Login = () => {
         <div className={loginStyles.logo}>
           <img
             width="200"
-            height="42"
-            src="/assets/trello-logo-blue.svg"
-            alt=""
+            height="80"
+            src="/assets/logo.png"
+            alt="logo"
           />
         </div>
         <div className={loginStyles.container}>
-          <form className={loginStyles.myform} onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Email address</label>
+        <div className={loginStyles.logoTxt}><h2>Log In</h2></div>
+          <form className={(loginStyles.myform)} onSubmit={handleSubmit}>
+            <div className="mb-3 form-section">
+              <label className={(loginStyles.formLabel) + " form-label"}>Email address</label>
               <input
                 type="email"
-                className="form-control"
+                className={(loginStyles.formInput)}
                 id="user-email"
                 aria-describedby="emailHelp"
                 placeholder="Enter your email here"
@@ -54,10 +55,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Password</label>
+              <label className={(loginStyles.formLabel) + " form-label"}>Password</label>
               <input
                 type="password"
-                className="form-control"
+                className={(loginStyles.formInput)}
                 id="user-password"
                 placeholder="Enter your password here"
                 ref={passwordRef}
