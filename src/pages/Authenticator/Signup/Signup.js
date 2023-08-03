@@ -31,12 +31,16 @@ const Signup = () => {
     }
     setLoading(false);
   };
-  if (currentUser) {
-    console.log("Current user: ", currentUser.email);
-  }
 
+  const hasCurrentUser = !!currentUser;
   return (
-    <AuthProvider>
+    <AuthProvider>{hasCurrentUser ? (
+        <div className={signupStyles.wrapper}>
+          <div className={signupStyles.logoTxt}>
+            <h2>Error: Please log out first</h2>
+          </div>
+        </div>
+      ) :
       <div className={signupStyles.wrapper}>
         <div className={signupStyles.logo}>
           <img src="/assets/logo.png"
@@ -98,7 +102,7 @@ const Signup = () => {
             </div>
           </form>
         </div>
-      </div>
+      </div>}
     </AuthProvider>
   );
 };
