@@ -1,6 +1,6 @@
 // Mixin cho light mode
 @mixin light-theme {
-  --textColor: #172b4d;
+  --textColor: #383838;
   --textColorOpposition: #172b4d;
   --lineColor: hsla(218, 54%, 19.6%, 0.16);
   --backgroundColor: white;
@@ -19,7 +19,7 @@
 
 // Mixin cho dark mode
 @mixin dark-theme {
-  --textColor: #b6c2cf;
+  --textColor: #fafafa;
   --textColorOpposition: #eee;
   --lineColor: hsla(211, 18%, 68%, 0.16);
   --backgroundColor: #22262a;

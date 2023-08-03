@@ -132,4 +132,5 @@ export const DISTANCE_TO_ACTIVATED_DND = 10;
 
 export const CARD_SETTING_SUBBOX = {
   EDIT_LABELS: 'edit-labels',
+  CHANGE_COVER: 'change-cover',
 }

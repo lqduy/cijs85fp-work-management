@@ -26,7 +26,9 @@ const Column = ({
   isReceiver,
   overCardId,
   overCardIndex,
-  activeDragItemData
+  activeDragItemData,
+  extendLabels,
+  handleClickLabel
 }) => {
   const { columnId, columnTitle } = columnData;
 
@@ -212,6 +214,8 @@ const Column = ({
                 cardIndex={cardIndex}
                 cardsLength={cardsData.length}
                 handleRemoveCard={() => handleRemoveCard(card.cardId)}
+                extendLabels={extendLabels}
+                handleClickLabel={handleClickLabel}
               />
             ))}
           </div>

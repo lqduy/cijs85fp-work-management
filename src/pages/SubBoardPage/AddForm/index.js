@@ -59,7 +59,9 @@ const AddForm = props => {
           parentId: columnId,
           cardId: `ca-${uuidv4()}`,
           cardTitle: title,
-          cardLabels: []
+          cardLabels: [],
+          cardColorCover: null,
+          isFullSizeCover: false
         };
         handleAddNewCard(newCard);
       }

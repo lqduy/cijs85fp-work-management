@@ -29,6 +29,7 @@ const SubBoardPage = () => {
   const [boardData, setBoardData] = useState({});
   const [columnsData, setColumnsData] = useState([]);
   const [openAddColumnForm, setOpenAddColumnForm] = useState(false);
+  const [extendLabels, setExtendLabels] = useState(false);
   const [activeDragItemType, setActiveDragItemType] = useState(null);
   const [activeDragItemData, setActiveDragItemData] = useState(null);
   const [draggingOverColumnId, setDraggingOverColumnId] = useState(null);
@@ -189,6 +190,8 @@ const SubBoardPage = () => {
                   overCardId={overCardId}
                   overCardIndex={overCardIndex}
                   activeDragItemData={activeDragItemData ? activeDragItemData : undefined}
+                  extendLabels={extendLabels}
+                  handleClickLabel={() => setExtendLabels(prev => !prev)}
                 />
               ))}
             </div>
