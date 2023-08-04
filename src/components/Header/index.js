@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import {
@@ -9,6 +9,7 @@ import {
   infoIcon,
   darkNLightIcon
 } from '../../utils/icons';
+import { useAuth } from '../../contexts/AuthContext';
 import Button from '../Button';
 import styles from './Header.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
@@ -25,12 +26,6 @@ const Header = () => {
 
   const [focusInput, setFocusInput] = useState(false);
   const { setDarkMode } = useContext(ThemeContext);
-
-  const handleSearch = () => {};
-
-  useEffect(() => {
-    handleSearch();
-  }, [debouncedSearchKeyValue]);
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {
@@ -49,6 +44,7 @@ const Header = () => {
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
         <Button className={cx('createBtn')}>Create</Button>
+        <Button className={cx('logOutBtn')} onClick={handleLogout}>Log out</Button>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>

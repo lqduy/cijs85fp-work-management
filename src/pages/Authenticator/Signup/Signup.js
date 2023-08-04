@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "../Login/Login";
 import signupStyles from "../Login/Login.module.scss";
 import { useAuth } from "../../../contexts/AuthContext";
@@ -11,91 +11,107 @@ const Signup = () => {
   const confirmPasswordRef = useRef();
   const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoanding] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d@$!%*#?&^_-]{8,}$/;
+    if (!regex.test(passwordRef.current.value)) {
+      return setError(
+        "Your password is not strong enough; please use a stronger password"
+      );
+    }
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       return setError("Passwords do not match");
     }
     try {
       setError("");
-      setLoanding(true);
+      setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-    } catch {
+      navigate("/");
+    } catch (error) {
       setError("There is an error, please try again");
+      console.log(error);
     }
-    setLoanding(false);
+    setLoading(false);
   };
-  if (currentUser) {
-    console.log("Current user: ", currentUser.email);
-  }
 
+  const hasCurrentUser = !!currentUser;
   return (
-    <AuthProvider>
-      <div className={signupStyles.wrapper}>
-        <div className={signupStyles.logo}>
-          <img width="200" height="42" src="/assets/trello-logo-blue.svg" />
+    <>
+      {hasCurrentUser ? (
+        <div className={signupStyles.wrapper}>
+          <div className={signupStyles.logoTxt}>
+            <h2>Error: Please log out first</h2>
+          </div>
         </div>
-        <div className={signupStyles.container}>
-          <form className={signupStyles.myform} onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label className="form-label">Email address</label>
-              <input
-                type="email"
-                className="form-control font-size-lg"
-                id="user-email"
-                aria-describedby="emailHelp"
-                placeholder="Enter your email here"
-                ref={emailRef}
-                required
-              />
-              <div id="emailHelp" className="form-text">
-                We'll never share your email with anyone else.
+      ) : (
+        <div className={signupStyles.wrapper}>
+          <div className={signupStyles.logo}>
+            <img src="/assets/logo.png" width="200" height="80" alt="logo" />
+          </div>
+          <div className={signupStyles.container}>
+            <div className={signupStyles.logoTxt}>
+              <h2>Sign Up</h2>
+            </div>
+            <form className={signupStyles.myform} onSubmit={handleSubmit}>
+              <div className="mb-3 form-section">
+                <label className={signupStyles.formLabel}>Email address</label>
+                <input
+                  type="email"
+                  className={signupStyles.formInput}
+                  id="user-email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter your email here"
+                  ref={emailRef}
+                  required
+                />
               </div>
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Enter your password here"
-                ref={passwordRef}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="confirm-password"
-                placeholder="Enter your password here"
-                ref={confirmPasswordRef}
-                required
-              />
-            </div>
-            <div className={signupStyles.info}>
-              <div className={signupStyles.error}>{error}</div>
-              <div className={signupStyles.infoText + " info-text"}>
-                <Link to="/login" element={<Login />}>
-                  Already have an account? Log in here
-                </Link>
+              <div className="mb-3 form-section">
+                <label className={signupStyles.formLabel}>Password</label>
+                <input
+                  type="password"
+                  className={signupStyles.formInput}
+                  id="password"
+                  placeholder="Enter your password here"
+                  ref={passwordRef}
+                  required
+                />
               </div>
-              <button
-                disabled={loading}
-                type="submit"
-                className={signupStyles.btn}
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
+              <div className="mb-3 form-section">
+                <label className={signupStyles.formLabel}>
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  className={signupStyles.formInput}
+                  id="confirm-password"
+                  placeholder="Confirm your password here"
+                  ref={confirmPasswordRef}
+                  required
+                />
+              </div>
+              <div className={signupStyles.info}>
+                <div className={signupStyles.error}>{error}</div>
+                <div className={signupStyles.infoText + " info-text"}>
+                  <Link to="/login" element={<Login />}>
+                    Already have an account? Log in here
+                  </Link>
+                </div>
+                <button
+                  disabled={loading}
+                  type="submit"
+                  className={signupStyles.btn}
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </AuthProvider>
+      )}
+    </>
   );
 };
 export default Signup;
