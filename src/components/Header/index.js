@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import {
@@ -26,6 +27,25 @@ const Header = () => {
 
   const [focusInput, setFocusInput] = useState(false);
   const { setDarkMode } = useContext(ThemeContext);
+  const [error, setError] = useState('');
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    setError('');
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const handleSearch = () => {};
+
+  useEffect(() => {
+    handleSearch();
+  }, [debouncedSearchKeyValue]);
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {
@@ -44,7 +64,9 @@ const Header = () => {
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
         <Button className={cx('createBtn')}>Create</Button>
-        <Button className={cx('logOutBtn')} onClick={handleLogout}>Log out</Button>
+        <Button className={cx('logOutBtn')} onClick={handleLogout}>
+          Log out
+        </Button>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>
