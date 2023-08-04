@@ -7,8 +7,6 @@ import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
-import Sidebar from '../../components/Sidebar/Sidebar';
-
 
 let cx = classNames.bind(styles);
 
