@@ -85,13 +85,23 @@ const Card = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardTitleValue, cardLabelsArr, cardCoverObj]);
 
+  const handleChangeCoverByThemeMode = () => {
+    const coverColorObj = coverColorsListData.find(colorObj =>
+      darkMode
+        ? cardCoverObj && colorObj.light === cardCoverObj.coverColor
+        : cardCoverObj && colorObj.dark === cardCoverObj.coverColor
+    );
+    if (coverColorObj && (coverColorObj.dark || coverColorObj.light)) {
+      const newCardCoverObj = {
+        ...cardCoverObj,
+        coverColor: darkMode ? coverColorObj.dark : coverColorObj.light
+      };
+      setCardCoverObj(newCardCoverObj);
+    }
+  };
+
   useEffect(() => {
-    setCardCoverObj(prev => ({
-      ...prev,
-      coverColor: darkMode
-        ? cardColorCover && cardColorCover.dark
-        : cardColorCover && cardColorCover.light
-    }));
+    handleChangeCoverByThemeMode();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [darkMode]);
 
@@ -174,9 +184,12 @@ const Card = ({
   };
 
   const handleUpdateCover = (isFullSizeCover, coverColor) => {
-    const newColorObj = coverColorsListData.find(colorObj =>
+    let newColorObj = coverColorsListData.find(colorObj =>
       darkMode ? colorObj.dark === coverColor : colorObj.light === coverColor
     );
+    if (!newColorObj) {
+      newColorObj = { light: null, dark: null };
+    }
     setCardCoverObj({
       isFullSize: isFullSizeCover,
       coverColor: (darkMode ? newColorObj.dark : newColorObj.light) ?? null
@@ -266,14 +279,18 @@ const Card = ({
             <span
               key={label}
               className={cx('label')}
-              style={{ backgroundColor: label, height: extendLabels ? '16px' : undefined }}
+              style={{
+                backgroundColor: label,
+                height: extendLabels ? '16px' : undefined,
+                opacity: darkMode ? '.6' : '1'
+              }}
               onClick={handleClickLabel}
             ></span>
           ))}
       </div>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [openSettingBox, openSettingSubBox, cardLabelsArr, extendLabels]
+    [openSettingBox, openSettingSubBox, cardLabelsArr, extendLabels, darkMode]
   );
 
   const coverElements = useMemo(
@@ -287,7 +304,7 @@ const Card = ({
       ></div>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cardCoverObj, openSettingBox, cardLabelsArr]
+    [cardCoverObj, openSettingBox, cardLabelsArr, darkMode]
   );
 
   return (

@@ -31,6 +31,12 @@ const ChangeCoverSubBox = ({ data, onClickX, handleUpdateCover }) => {
     handleUpdateCover(booleanValue, coverColorValue);
   };
 
+  const onRemoveCover = () => {
+    setCoverColorValue(null);
+    setIsFullSizeCover(false);
+    handleUpdateCover(false, null);
+  };
+
   const colorsListElements = useMemo(
     () =>
       coverColorsList.map((color, index) => (
@@ -76,7 +82,9 @@ const ChangeCoverSubBox = ({ data, onClickX, handleUpdateCover }) => {
           </div>
         </div>
       </div>
-      <button className={cx('remove-cover-btn')}>Remove cover</button>
+      <button className={cx('remove-cover-btn')} onClick={onRemoveCover}>
+        Remove cover
+      </button>
       <h5>Colors</h5>
       <div className={cx('colors-list')}>{colorsListElements}</div>
     </MenuBox>

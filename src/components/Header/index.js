@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 
 import {
@@ -13,12 +13,24 @@ import Button from '../Button';
 import styles from './Header.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
 import { themeModeStorage } from '../../utils/local-storage';
+import SearchBox from './SearchBox';
+import { useDebounce } from 'use-debounce';
 
 let cx = classNames.bind(styles);
 
 const Header = () => {
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+  const [debouncedSearchKeyValue] = useDebounce(searchInputValue, 500);
+
   const [focusInput, setFocusInput] = useState(false);
   const { setDarkMode } = useContext(ThemeContext);
+
+  const handleSearch = () => {};
+
+  useEffect(() => {
+    handleSearch();
+  }, [debouncedSearchKeyValue]);
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {
@@ -45,9 +57,12 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search"
+              value={searchInputValue}
               onFocus={() => setFocusInput(true)}
+              onChange={e => setSearchInputValue(e.target.value)}
               onBlur={() => setFocusInput(false)}
             />
+            {(focusInput || searchResult.length > 0) && <SearchBox data={searchResult} />}
           </form>
         </div>
         <Button className={cx('settingBtn')} circled>
