@@ -32,14 +32,14 @@ const Signup = () => {
       navigate("/");
     } catch (error) {
       setError("There is an error, please try again");
-      console.log(error)
+      console.log(error);
     }
     setLoading(false);
   };
 
   const hasCurrentUser = !!currentUser;
   return (
-    <AuthProvider>
+    <>
       {hasCurrentUser ? (
         <div className={signupStyles.wrapper}>
           <div className={signupStyles.logoTxt}>
@@ -111,7 +111,7 @@ const Signup = () => {
           </div>
         </div>
       )}
-    </AuthProvider>
+    </>
   );
 };
 export default Signup;

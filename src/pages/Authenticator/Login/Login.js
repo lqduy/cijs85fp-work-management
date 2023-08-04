@@ -30,7 +30,7 @@ const Login = () => {
 
   const hasCurrentUser = !!currentUser;
   return (
-    <AuthProvider>
+    <>
       {hasCurrentUser ? (
         <div className={loginStyles.wrapper}>
           <div className={loginStyles.logoTxt}>
@@ -93,7 +93,7 @@ const Login = () => {
           </div>
         </div>
       )}
-    </AuthProvider>
+    </>
   );
 };
 
