@@ -12,15 +12,15 @@
 // const Main = () => {
 //     const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
 //     const [sidebarOpen, setSidebarOpen] = useState(true);
-  
+
 //     useEffect(() => {
 //       document.body.classList.toggle("dark-mode", darkMode);
 //     }, [darkMode]);
-  
+
 //     const onToggleSidebar = () => {
 //       setSidebarOpen((prev) => !prev);
 //     };
-  
+
 //     const sidebarStyles = classNames("site-sidebar", {
 //       ["open"]: sidebarOpen,
 //     });

@@ -10,6 +10,7 @@ import {
   columnsListStorage,
   cardsListStorage,
 } from "../../utils/local-storage";
+import SidebarLayout from "../../layouts/SidebarLayout/SidebarLayout";
 let cx = classNames.bind(styles);
 const Templates = () => {
   const handleGetTemplate = (templateData) => {
@@ -33,32 +34,34 @@ const Templates = () => {
     }
   };
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("theme-top")}>
-        <div className={cx("theme-title")}>
-          <p>Featured categories</p>
-          <form className={cx("theme-form")}>
-            <input placeholder={cx("Find Template")} />
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </form>
+    <SidebarLayout>
+      <div className={cx("wrapper")}>
+        <div className={cx("theme-top")}>
+          <div className={cx("theme-title")}>
+            <p>Featured categories</p>
+            <form className={cx("theme-form")}>
+              <input placeholder={cx("Find Template")} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </form>
+          </div>
+          <ul className={cx("theme-list-categories")}>
+            {bckThemesIconData.map((item) => {
+              return (
+                <Link
+                  to={`/b/${item.data.board.boardId}`}
+                  onClick={() => handleGetTemplate(item.data)}
+                >
+                  <li>
+                    <img src={item.img} alt={item.title} />
+                    <span>{item.title}</span>
+                  </li>
+                </Link>
+              );
+            })}
+          </ul>
         </div>
-        <ul className={cx("theme-list-categories")}>
-          {bckThemesIconData.map((item) => {
-            return (
-              <Link
-                to={`/b/${item.data.board.boardId}`}
-                onClick={() => handleGetTemplate(item.data)}
-              >
-                <li>
-                  <img src={item.img} alt={item.title} />
-                  <span>{item.title}</span>
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
       </div>
-    </div>
+    </SidebarLayout>
   );
 };
 

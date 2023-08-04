@@ -9,10 +9,11 @@
   padding: 8px;
   border-bottom: 1px solid var(--lineColor);
 
-  > * {
+  >* {
     display: flex;
   }
 }
+
 .menu {
   gap: 12px;
 
@@ -21,10 +22,11 @@
     color: white;
   }
 
-  > *:not(.createBtn):hover {
+  >*:not(.createBtn):hover {
     background-color: var(--backgroundColor-darker);
   }
 }
+
 .setting {
   gap: 4px;
 
@@ -61,6 +63,7 @@
       background-color: unset;
     }
   }
+
   input {
     flex-grow: 1;
 
