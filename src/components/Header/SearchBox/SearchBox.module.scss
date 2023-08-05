@@ -1,6 +1,6 @@
 @import '../../../styles/mixins';
 
-$result-item-height: 68px;
+$result-item-height: 120px;
 
 .search-wrap {
   z-index: 100;
@@ -9,7 +9,7 @@ $result-item-height: 68px;
   top: calc(100% + 8px);
 
   width: 100%;
-  min-height: 272px;
+  // min-height: 272px;
   padding: 16px 0;
   border: 1px solid var(--lineColor);
   border-radius: 12px;
@@ -18,40 +18,111 @@ $result-item-height: 68px;
   box-shadow: 0 2px 8px 1px rgba(64, 60, 67, 0.24);
 }
 
+.search-wrap .no-search-result {
+  width: 350px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+    height: auto;
+
+    margin: 0 auto;
+  }
+
+  p {
+    font-style: italic;
+    text-align: center;
+  }
+}
+
 .search-wrap .search-result-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
 
+  .selected-item {
+    background-color: var(--backgroundColor);
+  }
+
   .result-item {
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 16px;
+    // gap: 4px;
 
     width: 100%;
     height: $result-item-height;
     padding: 8px;
 
     cursor: pointer;
+    overflow: hidden;
 
     &:hover {
       background-color: var(--backgroundColor);
     }
 
     .thumbnail {
-      width: calc($result-item-height - 16px);
+      @include background-img;
+      min-width: calc($result-item-height - 16px);
       height: calc($result-item-height - 16px);
       border-radius: 4px;
-      background-color: aquamarine;
     }
 
     .details {
+      flex-grow: 1;
+
       display: flex;
-      align-items: center;
-      gap: 64px;
+      // align-items: center;
+      gap: 8px;
 
       padding: 8px;
+
+      > * {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        flex-grow: 1;
+
+        min-width: 17.5%;
+        // max-width: 65%;
+        height: calc($result-item-height - 16px);
+        padding: 0 4px;
+
+        overflow: hidden;
+        word-wrap: break-word;
+
+        p {
+          font-style: italic;
+          & + * {
+            margin-top: 4px;
+          }
+        }
+
+        .result-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2px;
+
+          > * {
+            padding: 4px 8px;
+            border-radius: 3px;
+            background-color: var(--createFormInput-borderBlueColor);
+            color: white;
+
+            font-size: 1.6rem;
+            font-weight: normal;
+          }
+        }
+      }
+
+      > *:not(:last-of-type) {
+        border-right: 1px solid var(--lineColor);
+      }
+
+      &__board {
+        max-width: 25%;
+        overflow: hidden;
+      }
 
       h3,
       p {
