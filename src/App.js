@@ -34,7 +34,6 @@ function App() {
         value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar }}
       >
         <div className="site-container">
-          <Header />
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;
