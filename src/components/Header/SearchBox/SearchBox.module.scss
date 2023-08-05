@@ -63,9 +63,26 @@ $result-item-height: 120px;
 
     .thumbnail {
       @include background-img;
+
+      position: relative;
+
       min-width: calc($result-item-height - 16px);
       height: calc($result-item-height - 16px);
       border-radius: 4px;
+
+      span{
+        display: block;
+
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+
+        color: white;
+
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1;
+      }
     }
 
     .details {

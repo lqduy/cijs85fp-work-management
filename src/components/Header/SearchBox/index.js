@@ -22,7 +22,9 @@ const SearchBox = ({ data, handleCloseSearchBox, selectedIndex }) => {
                 onClick={handleCloseSearchBox}
               >
                 <div className={cx('result-item', { 'selected-item': selectedIndex === index })}>
-                  <div className={cx('thumbnail')} style={boardThumbnail}></div>
+                  <div className={cx('thumbnail')} style={boardThumbnail}>
+                    <span>{item.board[0]}</span>
+                  </div>
                   <div className={cx('details')}>
                     <div className={cx('details__board')}>
                       <p>Board</p>

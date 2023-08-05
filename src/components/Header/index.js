@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
@@ -26,11 +26,12 @@ const Header = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
   const [debouncedSearchKeyValue] = useDebounce(searchInputValue, 500);
-
   const [focusInput, setFocusInput] = useState(false);
-  const { setDarkMode } = useContext(ThemeContext);
   const [error, setError] = useState('');
+
+  const { setDarkMode } = useContext(ThemeContext);
   const { currentUser, logout } = useAuth();
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -42,6 +43,18 @@ const Header = () => {
       setError(error);
     }
   };
+
+  const handleBlurInputAfterSearch = () => {
+    if (focusInput) return;
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
+
+  useEffect(() => {
+    handleBlurInputAfterSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusInput]);
 
   const handleSearch = inputKey => {
     if (inputKey.length === 0) return;
@@ -102,6 +115,7 @@ const Header = () => {
           >
             <Button>{searchIcon}</Button>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Search"
               value={searchInputValue}
