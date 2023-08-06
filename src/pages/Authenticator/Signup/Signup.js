@@ -53,7 +53,6 @@ const Signup = () => {
     }
     setLoading(false);
   };
-
   const hasCurrentUser = !!currentUser;
   return (
     <>
@@ -97,7 +96,7 @@ const Signup = () => {
                     className={signupStyles.formInput}
                     id="password"
                     placeholder="Enter your password here"
-                    ref={confirmPasswordRef}
+                    ref={passwordRef}
                     required
                   />
                   <span
@@ -162,7 +161,9 @@ const Signup = () => {
               </div>
             </form>
           </div>
+          
         </div>
+        
       )}
     </>
   );

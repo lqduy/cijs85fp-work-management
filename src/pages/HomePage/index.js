@@ -15,6 +15,7 @@ import SidebarLayout from "../../layouts/SidebarLayout/SidebarLayout";
 let cx = classNames.bind(styles);
 
 const HomePage = () => {
+  const {currentUser} = useAuth();
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
 
@@ -22,7 +23,7 @@ const HomePage = () => {
     const data = boardsListStorage.load();
     setBoardsList(data);
   };
-
+  console.log(currentUser)
   useEffect(() => {
     onFetchBoardsData();
   }, []);
