@@ -11,9 +11,15 @@
   margin: 0px auto;
 }
 .logoTxt {
-margin-bottom: 20px;
-font-family: "Roboto", sans-serif;
-text-align: center;
+  margin-bottom: 20px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+.errTxt {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  margin: auto;
+  white-space: break-spaces;
 }
 
 .container {
@@ -40,7 +46,7 @@ text-align: center;
   border-radius: 4px;
   font-size: 14px;
   transition: background-color 0.2s ease 0s;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 
   &:hover {
     opacity: 0.75;
@@ -49,9 +55,9 @@ text-align: center;
 .infoText {
   text-decoration: none;
   color: var(--textColor) !important;
-  &:hover {
-    opacity: 0.75;
-  }
+}
+.infoText:hover {
+  opacity: 0.75;
 }
 .myform {
   display: flex;
@@ -78,26 +84,60 @@ text-align: center;
   display: none;
 }
 .formInput {
-  font-size: 1.5rem !important;
-  background-color: var(--logIn--bgColor) !important;
-  color: var(--logIn--textColor) !important;
-  border: none;
-  width: 100%;
-  border-bottom: 1px solid var(--logIn--textColor);
+  color: var(--textColor) !important;
+  border: none !important;
   display: block;
   padding: 0.375rem 0.75rem;
   font-weight: 400;
   line-height: 1.5;
-  border-radius: 0.375rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  outline: none;
+  background-color: inherit;
 }
-input[type=email]:focus, input[type=password]:focus {
-  border-bottom: #CCC solid 3px;
-  color: #FFFFFF;
+
+.fieldControl {
+  display: flex;
+  border: 1px solid var(--lineColor);
+  color: var(--textColor);
+  font-size: 1.5rem;
+  border-radius: 4px;
+  align-items: center;
+  position: relative;
+
+}
+
+.fieldControl:has(
+    input[type="password"]:focus,
+    input[type="text"]:focus,
+    input[type="email"]:focus
+  ) {
+  border-color: 1px solid var(--headerSearchInput-outlineColor) !important;
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+  background-color: var(--backgroundColor) !important;
+}
+
+.viewpwIcon {
+  padding: 0px;
+  position: absolute;
+  right: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+.socialMedia {
+  display: flex;
+  gap: 10px;
 }
 
 @media all and (min-width: 768px) {
   .container {
     width: 320px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .socialMedia {
+    display: block;
   }
 }

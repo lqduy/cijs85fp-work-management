@@ -18,7 +18,9 @@ import {
   faUser,
   faTag,
   faArrowRight,
-  faCopy
+  faCopy,
+  faEye,
+  faEyeSlash
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -52,6 +54,9 @@ const userIcon = <FontAwesomeIcon icon={faUser} />;
 const tagIcon = <FontAwesomeIcon icon={faTag} />;
 const arrowRightIcon = <FontAwesomeIcon icon={faArrowRight} />;
 const copyIcon = <FontAwesomeIcon icon={faCopy} />;
+const eyeIcon = <FontAwesomeIcon icon={faEye} />;
+const closedEyeIcon = <FontAwesomeIcon icon={faEyeSlash} />
+
 
 export {
   tableIcon,
@@ -77,5 +82,7 @@ export {
   userIcon,
   tagIcon,
   arrowRightIcon,
-  copyIcon
+  copyIcon,
+  eyeIcon,
+  closedEyeIcon
 };

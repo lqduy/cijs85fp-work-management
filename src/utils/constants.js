@@ -147,3 +147,4 @@ export const CARD_SETTING_SUBBOX = {
   EDIT_LABELS: 'edit-labels',
   CHANGE_COVER: 'change-cover'
 };
+

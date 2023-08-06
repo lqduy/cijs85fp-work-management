@@ -1,7 +1,7 @@
 // Under Progress...
 import { useState, useContext, useEffect, React } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { auth } from "../Firebase";
+import { auth, provider } from "../Firebase";
 import { createContext } from "react";
 
 const AuthContext = createContext();
@@ -21,6 +21,9 @@ export function AuthProvider({ children }) {
     await auth.signInWithEmailAndPassword(email, password);
   };
 
+  const signInWithGoogle = () => auth.signInWithPopup(provider)
+  
+
   const logout = () => {
     return auth.signOut()
   }
@@ -33,7 +36,7 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = { currentUser, signup, login, logout };
+  const value = { currentUser, signup, login, logout, signInWithGoogle };
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
