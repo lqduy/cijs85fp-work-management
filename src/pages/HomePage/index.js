@@ -52,7 +52,6 @@ const HomePage = () => {
     const columnsListData = columnsListStorage.load();
     const newColumnList = [...columnsListData, ...newColumns];
     columnsListStorage.save(newColumnList);
-
     setOpenCreateForm(false);
   };
 

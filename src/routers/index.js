@@ -4,6 +4,7 @@ import Login from "../pages/Authenticator/Login/Login";
 import Signup from "../pages/Authenticator/Signup/Signup";
 import Home from "../pages/Home/Home";
 import Templates from "../pages/Templates/Templates";
+import TemplateType from "../components/TemplatePreview/TemplatePreview";
 
 export const publicRouters = [
   { path: "/login", component: Login },
@@ -14,4 +15,5 @@ export const privateRouters = [
   { path: "/b/:boardId", component: SubBoardPage },
   { path: "/home", component: Home },
   { path: "/templates", component: Templates },
+  { path: "/templates/preview/:type/:boardId", component: TemplateType },
 ];
