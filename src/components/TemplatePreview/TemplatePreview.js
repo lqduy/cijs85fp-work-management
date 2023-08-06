@@ -41,17 +41,15 @@ const TemplatePreview = () => {
     <SidebarLayout>
       <div>
         {currentImg ? (
-          <Link to={`/b/${templatesData.data.board.boardId}`}>
+          <Link to={`/b/${templatesData.TemplateData.board.boardId}`}>
             <div>
               <img src={currentImg} />
             </div>
-            <button onClick={() => handleGetTemplate(templatesData.data)}>
+            <button onClick={() => handleGetTemplate(templatesData.TemplateData)}>
               Use This Template
             </button>
           </Link>
-        ) : (
-          ""
-        )}
+        ) : ("")}
       </div>
     </SidebarLayout>
   );

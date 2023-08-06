@@ -9,7 +9,7 @@ import SidebarLayout from "../../layouts/SidebarLayout/SidebarLayout";
 import ThemeContext from "../../contexts/ThemeContext";
 let cx = classNames.bind(styles);
 const Templates = () => {
-  const { currentImg, setCurrentImg } = useContext(ThemeContext);
+  const { setCurrentImg } = useContext(ThemeContext);
   // Prev Templates
   const handleGetTemplateByType = (img) => {
     setCurrentImg(img);
