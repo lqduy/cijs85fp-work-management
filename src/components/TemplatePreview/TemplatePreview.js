@@ -17,35 +17,35 @@ const TemplatePreview = () => {
   const { currentImg } = useContext(ThemeContext);
   const { type, boardId } = useParams();
   // Use Templates
-const handleGetTemplate = (templateData) => {
-  const boardId = templateData.board.boardId;
-  const boardListData = boardsListStorage.load();
-  const shouldAdd = !boardListData.some((board) => boardId === board.boardId);
-  if (shouldAdd) {
-    // Update board data
-    const newBoardsListData = [...boardListData, templateData.board];
-    boardsListStorage.save(newBoardsListData);
+  const handleGetTemplate = (templateData) => {
+    const boardId = templateData.board.boardId;
+    const boardListData = boardsListStorage.load();
+    const shouldAdd = !boardListData.some((board) => boardId === board.boardId);
+    if (shouldAdd) {
+      // Update board data
+      const newBoardsListData = [...boardListData, templateData.board];
+      boardsListStorage.save(newBoardsListData);
 
-    // update columns data
-    const columnsListData = columnsListStorage.load();
-    const newColumnsListData = [...columnsListData, ...templateData.columns];
-    columnsListStorage.save(newColumnsListData);
+      // update columns data
+      const columnsListData = columnsListStorage.load();
+      const newColumnsListData = [...columnsListData, ...templateData.columns];
+      columnsListStorage.save(newColumnsListData);
 
-    // update cards data
-    const cardsListData = cardsListStorage.load();
-    const newCardsListData = [...cardsListData, ...templateData.cards];
-    cardsListStorage.save(newCardsListData);
-  }
-}
+      // update cards data
+      const cardsListData = cardsListStorage.load();
+      const newCardsListData = [...cardsListData, ...templateData.cards];
+      cardsListStorage.save(newCardsListData);
+    }
+  };
   return (
     <SidebarLayout>
       <div>
         {currentImg ? (
-          <Link to={`/b/${templatesData.TemplateData.board.boardId}`}>
+          <Link to={`/b/${templatesData.data.board.boardId}`}>
             <div>
               <img src={currentImg} />
             </div>
-            <button onClick={() => handleGetTemplate(templatesData.TemplateData)}>
+            <button onClick={() => handleGetTemplate(templatesData.data)}>
               Use This Template
             </button>
           </Link>
@@ -56,18 +56,21 @@ const handleGetTemplate = (templateData) => {
     </SidebarLayout>
   );
 };
-
 export default TemplatePreview;
-// {bckThemesIconData.map((item) => {
-//   return (
-//     <Link
-//      to={`/b/${item.data.board.boardId}`}
-//      onClick={() => handleGetTemplate(item.data)}
-//     >
-//       <li>
-//         <img src={item.img} alt={item.title} />
-//         <span>{item.title}</span>
-//       </li>
-//     </Link>
-//   );
-// })}
+
+{
+  /* <div>
+{currentImg ? (
+  <Link to={`/b/${boardId}`}>
+    <div>
+      <img src={currentImg} />
+    </div>
+    <button onClick={() => handleGetTemplate(templatesData.data)}>
+      Use This Template
+    </button>
+  </Link>
+) : (
+  ""
+)}
+</div> */
+}

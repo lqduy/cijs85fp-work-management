@@ -29,7 +29,7 @@ const Templates = () => {
             {bckThemesIconData.map((item) => {
               return (
                 <Link
-                  to={`/templates/preview/${item.title}/${item.data.board.boardId}`}
+                  to={`/templates/preview/${item.data.board.boardId}`}
                   onClick={() =>
                     handleGetTemplateByType(item.data.board.boardImageBg)
                   }

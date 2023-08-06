@@ -15,5 +15,5 @@ export const privateRouters = [
   { path: "/b/:boardId", component: SubBoardPage },
   { path: "/home", component: Home },
   { path: "/templates", component: Templates },
-  { path: "/templates/preview/:type/:boardId", component: TemplateType },
+  { path: "/templates/preview/:boardId", component: TemplateType },
 ];
