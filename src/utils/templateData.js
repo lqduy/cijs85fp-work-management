@@ -5,7 +5,7 @@ export const businessTemplateData = {
     isStarred: false,
     lastVisiting: 0,
     boardImageBg:
-      "https://img.freepik.com/free-photo/aerial-view-business-data-analysis-graph_53876-146152.jpg?w=2000",
+      "https://wallpapers.com/images/featured/business-jzw8ax93flqonkce.jpg",
   },
   columns: [
     // 1
@@ -769,7 +769,7 @@ export const educationTemplateData = {
     isStarred: false,
     lastVisiting: 0,
     boardImageBg:
-      "https://cdn.pixabay.com/photo/2022/01/14/06/53/education-6936596_1280.jpg",
+      "https://wallpaperaccess.com/full/1850572.jpg",
   },
   columns: [
     // 1
@@ -1029,7 +1029,7 @@ export const marketingTemplateData = {
     isStarred: false,
     lastVisiting: 0,
     boardImageBg:
-      "https://uiii.ac.id/assets/images/1636690539-alfons-morales-YLSwjSy7stw-unsplash-2.jpg",
+      "https://wallpaperaccess.com/full/4907599.jpg",
   },
   columns: [
     // 1
@@ -1230,7 +1230,7 @@ export const workingRemotelyTemplateData = {
     isStarred: false,
     lastVisiting: 0,
     boardImageBg:
-      "https://www.agenzianova.com/news/wp-content/uploads/2022/03/Liuzzi-ferrovia-1024x683.jpeg",
+      "https://wallpaperset.com/w/full/d/2/3/509749.jpg",
   },
   columns: [
     // 1

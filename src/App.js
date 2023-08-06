@@ -32,7 +32,14 @@ function App() {
   return (
     <AuthProvider>
       <ThemeContext.Provider
-        value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar, currentImg, setCurrentImg }}
+        value={{
+          darkMode,
+          setDarkMode,
+          sidebarOpen,
+          onToggleSidebar,
+          currentImg,
+          setCurrentImg,
+        }}
       >
         <div className="site-container">
           <Header />

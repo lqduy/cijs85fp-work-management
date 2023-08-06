@@ -39,18 +39,21 @@ const TemplatePreview = () => {
   };
   return (
     <SidebarLayout>
-      <div>
-        {currentImg ? (
-          <Link to={`/b/${templatesData.TemplateData.board.boardId}`}>
-            <div>
-              <img src={currentImg} />
-            </div>
-            <button onClick={() => handleGetTemplate(templatesData.TemplateData)}>
-              Use This Template
-            </button>
-          </Link>
-        ) : ("")}
-      </div>
+      {currentImg ? (
+        <Link to={`/b/${templatesData.TemplateData.board.boardId}`}>
+          <button
+            className={cx("useBtn")}
+            onClick={() => handleGetTemplate(templatesData.TemplateData)}
+          >
+            Use This Template
+          </button>
+          <div className={cx("prevImgTemplate")}>
+            <img src={currentImg} />
+          </div>
+        </Link>
+      ) : (
+        ""
+      )}
     </SidebarLayout>
   );
 };
