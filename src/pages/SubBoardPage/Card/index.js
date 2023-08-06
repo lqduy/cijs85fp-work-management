@@ -21,6 +21,7 @@ import EditLabelSubBox from './SettingSubBox/EditLabelSubBox';
 import { CARD_SETTING_SUBBOX, coverColorsListData } from '../../../utils/constants';
 import ChangeCoverSubBox from './SettingSubBox/ChangeCoverSubBox';
 import ThemeContext from '../../../contexts/ThemeContext';
+import { useParams } from 'react-router-dom';
 
 let cx = classNames.bind(styles);
 
@@ -33,7 +34,7 @@ const Card = ({
   handleClickLabel
 }) => {
   const { cardId, cardTitle, cardLabels = [], isFullSizeCover, cardColorCover } = cardData;
-
+  const { boardId } = useParams();
   const { darkMode } = useContext(ThemeContext);
 
   const [cardDataState, setCardDataState] = useState({ ...cardData });
@@ -210,7 +211,7 @@ const Card = ({
     () => (
       <div className={cx('setting-box')} ref={settingBoxRef}>
         <div className={cx('setting-part')}>
-          <Button leftIcon={openIcon} className={cx('setting-item')}>
+          <Button leftIcon={openIcon} className={cx('setting-item')} to={`/b/${boardId}/${cardId}`}>
             Open card
           </Button>
         </div>
@@ -253,7 +254,7 @@ const Card = ({
           Move
         </Button>
         <Button leftIcon={copyIcon} className={cx('setting-item')}>
-          Copy
+          Duplicate
         </Button>
         <Button leftIcon={clockIcon} className={cx('setting-item')}>
           Edit dates

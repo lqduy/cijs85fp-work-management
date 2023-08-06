@@ -19,7 +19,8 @@ const getKeysToSearch = () => {
       ...(board.boardColorBg && { colorBg: board.boardColorBg }),
       board: board.boardTitle,
       column: columnsList.map(column => column.columnTitle),
-      card: cardsList.map(card => card.cardTitle)
+      card: cardsList.map(card => card.cardTitle),
+      card_id: cardsList.map(card => card.cardId)
     };
     keysListToSearch.push(keyItem);
   });
@@ -53,12 +54,20 @@ export const getSearchResult = inputKey => {
       }
 
       if (haveCard) {
-        const cardResult = newItem.card.filter(
-          title => title.toLowerCase().includes(key) || key.includes(title.toLowerCase())
-        );
-        newItem = { ...newItem, card: cardResult };
+        let cardIdList = [...newItem.card_id];
+        const cardResult = newItem.card.filter((title, index) => {
+          const isContainedKey =
+            title.toLowerCase().includes(key) || key.includes(title.toLowerCase());
+          if (!isContainedKey) {
+            cardIdList[index] = null;
+          }
+          return isContainedKey;
+        });
+        cardIdList = cardIdList.filter(id => id !== null);
+        newItem = { ...newItem, card: cardResult, card_id: cardIdList };
       } else {
         delete newItem.card;
+        delete newItem.card_id;
       }
 
       return haveBoard || haveColumn || haveCard ? newItem : null;

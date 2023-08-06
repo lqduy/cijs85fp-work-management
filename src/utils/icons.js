@@ -18,13 +18,17 @@ import {
   faUser,
   faTag,
   faArrowRight,
-  faCopy
+  faCopy,
+  faPaperclip,
+  faGear,
+  faShareNodes
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
   faClock,
   faPenToSquare,
   faQuestionCircle,
+  faSquareCheck,
   faStar as faStarRegular
 } from '@fortawesome/free-regular-svg-icons';
 
@@ -52,6 +56,10 @@ const userIcon = <FontAwesomeIcon icon={faUser} />;
 const tagIcon = <FontAwesomeIcon icon={faTag} />;
 const arrowRightIcon = <FontAwesomeIcon icon={faArrowRight} />;
 const copyIcon = <FontAwesomeIcon icon={faCopy} />;
+const checkListIcon = <FontAwesomeIcon icon={faSquareCheck} />;
+const paperClipIcon = <FontAwesomeIcon icon={faPaperclip} />;
+const gearIcon = <FontAwesomeIcon icon={faGear} />;
+const shareIcon = <FontAwesomeIcon icon={faShareNodes} />;
 
 export {
   tableIcon,
@@ -77,5 +85,9 @@ export {
   userIcon,
   tagIcon,
   arrowRightIcon,
-  copyIcon
+  copyIcon,
+  checkListIcon,
+  paperClipIcon,
+  gearIcon,
+  shareIcon
 };
