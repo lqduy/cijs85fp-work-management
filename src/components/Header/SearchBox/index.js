@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import styles from './SearchBox.module.scss';
+import { starSolidIcon } from '../../../utils/icons';
 let cx = classNames.bind(styles);
 
 const SearchBox = ({ data, handleCloseSearchBox, selectedIndex }) => {
@@ -29,6 +30,7 @@ const SearchBox = ({ data, handleCloseSearchBox, selectedIndex }) => {
                     <div className={cx('details__board')}>
                       <p>Board</p>
                       <h3>{item.board}</h3>
+                      {item.isStarred && <span className={cx('star-icon')}>{starSolidIcon}</span>}
                     </div>
                     {item.column && item.column.length > 0 && (
                       <div className={cx('details__column')}>

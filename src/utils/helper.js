@@ -14,6 +14,7 @@ const getKeysToSearch = () => {
     });
     const keyItem = {
       _id: board.boardId,
+      isStarred: board.isStarred,
       ...(board.boardImageBg && { imageBg: board.boardImageBg }),
       ...(board.boardColorBg && { colorBg: board.boardColorBg }),
       board: board.boardTitle,
@@ -31,12 +32,12 @@ export const getSearchResult = inputKey => {
   const keysData = getKeysToSearch();
   const searchResult = keysData
     .map(item => {
-      let haveBoard =
+      const haveBoard =
         item.board.toLowerCase().includes(key) || key.includes(item.board.toLowerCase());
-      let haveColumn = item.column.some(
+      const haveColumn = item.column.some(
         title => title.toLowerCase().includes(key) || key.includes(title.toLowerCase())
       );
-      let haveCard = item.card.some(
+      const haveCard = item.card.some(
         title => title.toLowerCase().includes(key) || key.includes(title.toLowerCase())
       );
 

@@ -70,7 +70,7 @@ $result-item-height: 120px;
       height: calc($result-item-height - 16px);
       border-radius: 4px;
 
-      span{
+      span {
         display: block;
 
         position: absolute;
@@ -121,7 +121,7 @@ $result-item-height: 120px;
           gap: 2px;
 
           > * {
-            padding: 4px 8px;
+            padding: 3px 6px;
             border-radius: 3px;
             background-color: var(--createFormInput-borderBlueColor);
             color: white;
@@ -137,8 +137,19 @@ $result-item-height: 120px;
       }
 
       &__board {
-        max-width: 25%;
+        max-width: 40%;
         overflow: hidden;
+
+        position: relative;
+        .star-icon {
+          position: absolute;
+          top: 0;
+          right: 4px;
+
+          color: rgb(238, 201, 37);
+
+          line-height: 1;
+        }
       }
 
       h3,
