@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import classNames from "classnames";
-
 import "firebase/firestore";
 import "firebase/auth";
-
-import Header from "./components/Header";
 import ThemeContext from "./contexts/ThemeContext";
 import { themeModeStorage } from "./utils/local-storage";
 import PrivateRoute from "./routers/PrivateRoute";
 import { privateRouters, publicRouters } from "./routers";
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
@@ -42,7 +40,6 @@ function App() {
         }}
       >
         <div className="site-container">
-          <Header />
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;

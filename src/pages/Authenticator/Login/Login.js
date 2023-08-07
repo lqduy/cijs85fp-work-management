@@ -1,17 +1,20 @@
 import "./Login.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Signup from "../Signup/Signup";
-import { AuthProvider } from "../../../contexts/AuthContext";
 import { useAuth } from "../../../contexts/AuthContext";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import loginStyles from "./Login.module.scss";
+import SidebarLayout from "../../../layouts/SidebarLayout/SidebarLayout";
+import { eyeIcon, closedEyeIcon } from "../../../utils/icons";
+import Loading from '../../../components/Loading/Loading'
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login, currentUser } = useAuth();
+  const { login, currentUser, signInWithGoogle } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -27,16 +30,30 @@ const Login = () => {
       setLoading(false);
     }
   };
+  const googleSignUpHandler = async (e) => {
+    e.preventDefault();
+    try {
+      setError("");
+      setLoading(true);
+      await signInWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
+    setLoading(false);
+  };
 
   const hasCurrentUser = !!currentUser;
   return (
     <>
       {hasCurrentUser ? (
-        <div className={loginStyles.wrapper}>
-          <div className={loginStyles.logoTxt}>
-            <h2>Error: Please log out first</h2>
+        <SidebarLayout>
+          <div className={loginStyles.wrapper}>
+            <div className={loginStyles.errTxt}>
+              <h2>Error: Please log out first</h2>
+            </div>
           </div>
-        </div>
+        </SidebarLayout>
       ) : (
         <div className={loginStyles.wrapper}>
           <div className={loginStyles.logo}>
@@ -51,6 +68,7 @@ const Login = () => {
                 <label className={loginStyles.formLabel + " form-label"}>
                   Email address
                 </label>
+                <div className={loginStyles.fieldControl}>
                 <input
                   type="email"
                   className={loginStyles.formInput}
@@ -60,19 +78,25 @@ const Login = () => {
                   ref={emailRef}
                   required
                 />
+                </div>
               </div>
               <div className="mb-3">
                 <label className={loginStyles.formLabel + " form-label"}>
                   Password
                 </label>
-                <input
-                  type="password"
-                  className={loginStyles.formInput}
-                  id="user-password"
-                  placeholder="Enter your password here"
-                  ref={passwordRef}
-                  required
-                />
+                <div className={loginStyles.fieldControl}>
+                  <input
+                    type={hidePassword ? "password" : "text"}
+                    className={loginStyles.formInput}
+                    id="user-password"
+                    placeholder="Enter your password here"
+                    ref={passwordRef}
+                    required
+                  />
+                  <span className={loginStyles.viewpwIcon} onClick={() => setHidePassword(!hidePassword)}>
+                    {hidePassword? eyeIcon : closedEyeIcon}
+                  </span>
+                </div>
               </div>
               <div className={loginStyles.info}>
                 <div className={loginStyles.error}>{error}</div>
@@ -88,6 +112,25 @@ const Login = () => {
                 >
                   Log in
                 </button>
+                <div className={loginStyles.infoText}>Or log in with:</div>
+                <div className={loginStyles.socialMedia}>
+                  <button
+                    disabled={loading}
+                    type="button"
+                    className={loginStyles.btn}
+                    onClick={googleSignUpHandler}
+                  >
+                    Google
+                  </button>
+                  <button
+                    disabled={loading}
+                    type="button"
+                    className={loginStyles.btn}
+                    onClick={googleSignUpHandler}
+                  >
+                    Facebook
+                  </button>
+                </div>
               </div>
             </form>
           </div>

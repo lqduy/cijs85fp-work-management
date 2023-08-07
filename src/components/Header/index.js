@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import {
@@ -15,28 +15,37 @@ import Button from '../Button';
 import styles from './Header.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
 import { themeModeStorage } from '../../utils/local-storage';
+import SearchBox from './SearchBox';
+import { useDebounce } from 'use-debounce';
 
 let cx = classNames.bind(styles);
 
 const Header = () => {
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+  const [debouncedSearchKeyValue] = useDebounce(searchInputValue, 500);
+
   const [focusInput, setFocusInput] = useState(false);
   const { setDarkMode } = useContext(ThemeContext);
-  const [error, setError] = useState('')
-  const {currentUser, logout } = useAuth()
-  const navigate = useNavigate()
+  const [error, setError] = useState('');
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    setError('')
+    setError('');
     try {
       await logout();
       navigate('/login');
+    } catch (error) {
+      setError(error);
     }
+  };
 
-    catch(error) {
-      setError(error)
+  const handleSearch = () => {};
 
-    }
-  }
+  useEffect(() => {
+    handleSearch();
+  }, [debouncedSearchKeyValue]);
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {
@@ -55,7 +64,9 @@ const Header = () => {
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
         <Button className={cx('createBtn')}>Create</Button>
-        <Button className={cx('logOutBtn')} onClick={handleLogout}>Log out</Button>
+        <Button className={cx('logOutBtn')} onClick={handleLogout}>
+          Log out
+        </Button>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>
@@ -64,9 +75,12 @@ const Header = () => {
             <input
               type="text"
               placeholder="Search"
+              value={searchInputValue}
               onFocus={() => setFocusInput(true)}
+              onChange={e => setSearchInputValue(e.target.value)}
               onBlur={() => setFocusInput(false)}
             />
+            {(focusInput || searchResult.length > 0) && <SearchBox data={searchResult} />}
           </form>
         </div>
         <Button className={cx('settingBtn')} circled>
