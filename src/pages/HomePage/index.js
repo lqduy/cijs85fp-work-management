@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
+import { useAuth } from '../../contexts/AuthContext';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
 import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
@@ -12,6 +13,7 @@ import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
 let cx = classNames.bind(styles);
 
 const HomePage = () => {
+  const {currentUser} = useAuth();
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const HomePage = () => {
     const data = boardsListStorage.load();
     setBoardsList(data);
   };
-
+  console.log(currentUser)
   useEffect(() => {
     onFetchBoardsData();
   }, []);

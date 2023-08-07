@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import classNames from "classnames";
 import ThemeContext from "../../contexts/ThemeContext";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import Header from "../../components/Header";
 
 const SidebarLayout = ({ children }) => {
   const { sidebarOpen, onToggleSidebar } = useContext(ThemeContext);
@@ -11,6 +12,7 @@ const SidebarLayout = ({ children }) => {
   });
   return (
     <main>
+      <Header/>
       <div className="site-main-content">
         <nav className={sidebarStyles}>
           <Sidebar
