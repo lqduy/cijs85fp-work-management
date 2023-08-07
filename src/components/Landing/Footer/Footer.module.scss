@@ -1,0 +1,34 @@
+.footer {
+    background-color: rgb(23, 43, 77);
+    color: rgb(255, 255, 255);
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .footer-top {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+
+        .descript {
+            width: 270px;
+            padding: 20px;
+            transition: .3s;
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1.25rem;
+            }
+
+            &.text:hover {
+                background-color: #3f66aa;
+                border-radius: 6px;
+            }
+
+        }
+    }
+}

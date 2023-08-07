@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Hero.module.scss";
-import { imgHeroLandingPage } from "../../../utils/imgHeroLandingPage";
-import { imgHeroRdLandingPage } from "../../../utils/imgHeroLandingPage";
+import {
+  imgHeroLandingPage,
+  imgHeroEndPage,
+  imgHeroRdLandingPage,
+} from "../../../utils/imgHeroLandingPage";
 import Carousel from "../Carousel/Carousel";
 import Slide from "../Slide/Slide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleDot, faCircleLeft, faCircleRight } from "@fortawesome/free-regular-svg-icons";
+import {
+  faCircleDot,
+  faCircleLeft,
+  faCircleRight,
+} from "@fortawesome/free-regular-svg-icons";
 
 let cx = classNames.bind(styles);
 const Hero = () => {
@@ -41,8 +48,8 @@ const Hero = () => {
         <div className={cx("hero-top-left")}>
           <div className={cx("descript")}>
             <h1>
-              Trello tập hợp tất cả nhiệm vụ, thành viên nhóm và công cụ của bạn
-              lại với nhau
+              Work Management tập hợp tất cả nhiệm vụ, thành viên nhóm và công
+              cụ của bạn lại với nhau
             </h1>
             <p>
               Duy trì mọi thứ ở cùng một nơi—dù cho nhóm của bạn không ở cùng
@@ -98,20 +105,47 @@ const Hero = () => {
         </div>
         <div className={cx("carousel")}>
           <div className={cx("btnCarousel")}>
-            <FontAwesomeIcon icon={faCircleLeft} onClick={() => updateSlideIndex(activeSlideIndex -1)}/>
-            <FontAwesomeIcon icon={faCircleRight}  onClick={() => updateSlideIndex(activeSlideIndex + 1)}/>
+            <FontAwesomeIcon
+              icon={faCircleLeft}
+              onClick={() => updateSlideIndex(activeSlideIndex - 1)}
+            />
+            <FontAwesomeIcon
+              icon={faCircleRight}
+              onClick={() => updateSlideIndex(activeSlideIndex + 1)}
+            />
           </div>
-          <div className={cx("itemCarousel")} style={{ transform: `translate(-${activeSlideIndex * 100}%)` }}>
+          <div
+            className={cx("itemCarousel")}
+            style={{ transform: `translate(-${activeSlideIndex * 100}%)` }}
+          >
             {imgHeroRdLandingPage.map((item) => {
-              return <Slide item={item}/>
+              return <Slide item={item} />;
             })}
           </div>
-       
         </div>
-        <div></div>
       </div>
       <div className={cx("hero-footer")}>
-
+        <div className={cx("hero-footer-title")}>
+          <h2>Theo dõi công việc theo một cách hoàn toàn mới</h2>
+          <h3>
+            Xem các dự án của nhóm từ mọi góc độ và mang lại góc nhìn mới mẻ cho
+            nhiệm vụ đang thực hiện.
+          </h3>
+        </div>
+        {imgHeroEndPage.map((item) => {
+          return (
+            <div className={cx("hero-footer-img")}>
+              <img src={item.img} />
+              <div className={cx("hero-footer-img-title")}>
+                <h3>
+                  <FontAwesomeIcon icon={item.icon} style={{color: item.color}}/>
+                  {item.title}
+                </h3>
+                <p>{item.detail}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

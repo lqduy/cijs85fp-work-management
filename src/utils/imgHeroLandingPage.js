@@ -5,7 +5,10 @@ import {
   faCalendarCheck,
   faCloudSun,
   faBook,
+  faCalendarDays,
+  faBusinessTime,
 } from "@fortawesome/free-solid-svg-icons";
+
 export const imgHeroLandingPage = [
   {
     img: "https://images.ctfassets.net/rz1oowkt5gyp/3N2U3C71rApm61cGFxnc2E/970b010002488a09a420282df5e7b43a/Carousel_Image_Boards_2x.png?w=1536&fm=webp",
@@ -70,3 +73,76 @@ export const imgHeroRdLandingPage = [
       "Tiết kiệm thời gian nhờ trung tâm được thiết kế hợp lý để giúp các nhóm tìm thông tin nhanh chóng và dễ dàng.",
   },
 ];
+
+export const imgHeroEndPage = [
+  {
+    icon: faBusinessTime,
+    color: "#8777d9",
+    img: "https://images.ctfassets.net/rz1oowkt5gyp/5Hb09iiMrK6mSpThW5HS89/f5683a167ad3f74bed4dc7592ae5a002/TrelloBoard_Timeline_2x.png?w=1212&fm=webp",
+    title: "Luôn hoàn thành công việc đúng thời hạn",
+    detail:
+      " Từ những dự án gấp hằng tuần đến việc lập kế hoạch hằng năm, Lịch trình giúp mọi nhiệm vụ luôn theo đúng lộ trình. Nhanh chóng tiên liệu những điều sẽ phát sinh và xác định mọi thiếu sót có thể cản trở tiến độ của nhóm bạn.",
+  },
+  {
+    icon: faCalendarDays,
+    color: "#00c7e5",
+    img: "https://images.ctfassets.net/rz1oowkt5gyp/7sxChS4x6XAcUgDpp4VAZk/25377d162e964f4243e329c447bfd7dc/TrelloBoard_Calendar_2x.png?w=1212&fm=webp",
+    title: "Nắm bắt mọi nhiệm vụ",
+    detail:
+      "Bắt đầu mỗi ngày thật chủ động. Cho dù là việc lên lịch biên tập hay nắm bắt những việc cần làm, chế độ xem Lịch giống như một quả cầu pha lê giúp bạn thấy rõ những công việc trước mắt.",
+  },
+];
+
+export const imgHeroFooterPage = [
+  {
+    title: "Tìm hiểu về Trello",
+    detail: "Công nghệ nền tảng",
+  },
+  {
+    title: "Việc làm",
+    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+  },
+  {
+    title: "Ứng dụng",
+    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+  },
+  {
+    title: "Liên hệ với chúng tôi",
+    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+  },
+];
+
+export const imgHeroFooterEndPage = {
+  laws: [
+    {
+      title: "Chính sách Riêng tư",
+    },
+    {
+      title: "Thông báo & Bộ sưu tập",
+    },
+    {
+      title: "Thuật ngữ",
+    },
+    {
+      title: "Bản quyền © 2023 Atlassian",
+    },
+  ],
+
+  contact: [
+    {
+      title: "Tìm hiểu về Trello",
+    },
+    {
+      title: "Việc làm",
+    },
+    {
+      title: "Ứng dụng",
+    },
+    {
+      title: "Liên hệ với chúng tôi",
+    },
+    {
+      title: "Liên hệ với chúng tôi",
+    },
+  ],
+};
