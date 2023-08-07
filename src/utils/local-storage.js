@@ -49,3 +49,14 @@ export const updateNewBoardToStorage = (boardId, newBoardData) => {
   );
   boardsListStorage.save(newBoardsList);
 };
+
+export const descriptionStorage = {
+  load: () => {
+    const data = localStorage.getItem('description');
+    return data ? JSON.parse(data) : [];
+  },
+  save: descriptionArr => {
+    const data = JSON.stringify(descriptionArr);
+    localStorage.setItem('description', data);
+  }
+}

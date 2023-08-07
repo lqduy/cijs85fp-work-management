@@ -1,0 +1,19 @@
+.card-wrapper {
+    margin: 10px auto;
+    padding: 18px;
+}
+
+.save-btn {
+    background-color: var(--backgroundColor);
+
+}
+
+.createBtn {
+    background-color: var(--createBoardBtn-bgColor);
+    color: white;
+  }
+
+
+.hidden {
+    visibility: hidden
+}
