@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
 import { useAuth } from '../../contexts/AuthContext';
@@ -10,27 +9,32 @@ import { boardsListStorage, columnsListStorage } from '../../utils/local-storage
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
 import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
 
+import styles from './HomePage.module.scss';
 let cx = classNames.bind(styles);
 
 const HomePage = () => {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
   const navigate = useNavigate();
 
   const onFetchBoardsData = () => {
-    const data = boardsListStorage.load();
+    const userId = `user-${currentUser.uid}`;
+    const data = boardsListStorage.load().filter(board => board.userId === userId);
     setBoardsList(data);
   };
-  console.log(currentUser)
   useEffect(() => {
     onFetchBoardsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddBoard = newBoard => {
     const newBoardsList = [...boardsList, newBoard];
     setBoardsList(newBoardsList);
-    boardsListStorage.save(newBoardsList);
+
+    const boardsListData = boardsListStorage.load();
+    const newBoardsListData = [...boardsListData, newBoard];
+    boardsListStorage.save(newBoardsListData);
 
     const newColumns = [
       {
