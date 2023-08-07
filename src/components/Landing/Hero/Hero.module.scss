@@ -1,58 +1,184 @@
-.hero {}
+.hero {
+    height: 100vh;
 
-.hero-top {
-    display: flex;
-    justify-content: space-around;
-    background: url('https://images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266ed4cb8cc63bd0c388071f01ff6/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
-    background-blend-mode: normal, normal;
-    color: rgb(255, 255, 255);
-    height: 650px;
-    padding-top: 80px;
+    .hero-top {
+        display: flex;
+        justify-content: space-around;
+        background: url('https://images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266ed4cb8cc63bd0c388071f01ff6/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+        background-blend-mode: normal, normal;
+        color: rgb(255, 255, 255);
+        height: 650px;
+        padding-top: 80px;
+        margin-bottom: 0px;
 
+        .hero-top-left {
+            width: 600px;
 
-    .hero-top-left {
-        width: 600px;
+            .descript {
+                padding-bottom: 10px;
 
-        .descript {
-            padding-bottom: 10px;
-            h1 {
-                font-weight: 600;
-                margin-bottom: 0.5rem;
-                margin-top: 0px;
-                font-size: 5rem;
-                line-height: 1.25;
+                h1 {
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                    margin-top: 0px;
+                    font-size: 5rem;
+                    line-height: 1.25;
+                }
+
+                p {
+                    font-weight: 400;
+                    margin-bottom: 0.5rem;
+                    margin-top: 0px;
+                    font-size: 2.5rem;
+                    line-height: 1.25;
+                }
             }
 
-            p {
-                font-weight: 400;
-                margin-bottom: 0.5rem;
-                margin-top: 0px;
-                font-size: 2.5rem;
-                line-height: 1.25;
+            .singup {
+                color: white;
+
+                button {
+                    border-radius: 10px;
+                    background-color: #0065ff;
+                    width: 300px;
+                    height: 60px;
+                    border: none;
+                    outline: none;
+                    transition: .3s;
+                }
+                button:hover{
+                    background-color: #eb4fb3;
+                    transform: scale(1.1);
+                }
             }
         }
 
-        .singup {
-            color: white;
+        .hero-top-right {
+            .imgBck img {
+                width: 600px;
+                height: 550px;
 
-            button {
-                border-radius: 10px;
-                background-color: #0065ff;
-                width: 300px;
-                height: 60px;
-                border: none;
-                outline: none;
+            }
+        }
+
+    }
+
+    .hero-mid {
+        background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
+        background-blend-mode: normal;
+        color: rgb(9, 30, 66);
+        padding-left: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+
+
+        .infoBasic {
+            padding-bottom: 50px;
+        }
+
+        .infoCarousel {
+            overflow: hidden;
+            width: 1250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .imgDetail {
+                white-space: nowrap;
+                transition: 0.7s;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .btnSlide {
+                padding-top: 10px;
+                display: flex;
+                gap: 15px;
+                margin: 0 auto;
+
+                button {
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+
+                    .symbol svg {
+                        width: 30px;
+                        height: 30px;
+                        transition: .3s;
+                    }
+                    .active {
+                        color: rgb(160, 73, 175);
+                    }
+                    .symbol svg:hover {
+                        color: rgba(221, 88, 245, 0.826);
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    .hero-3rd {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 100px;
+        padding-left: 202px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+        .carousel {
+            overflow: hidden;
+            width: 100%;
+            padding-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .itemCarousel {
+                width: 650px;
+                height: 300px;
+                white-space: nowrap;
+                transition: 0.7s;
+                padding-top: 20px;
+                padding-bottom: 0px;
+            }
+            .btnCarousel{
+                display: flex;
+                gap: 40px;
+                cursor: pointer;
+
+                svg{
+                    width: 30px;
+                    height: 30px;
+                    transition: .3s;
+                }
+                svg:hover{
+                    color: rgb(57, 164, 226);
+                }
+
             }
         }
     }
+}
 
+h3 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
 
-    .hero-top-right {
-        .imgBck img {
-            width: 300px;
-            height: 300px;
-
-        }
-    }
-
+h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-size: 2.5rem;
+    line-height: 1.33333;
 }
