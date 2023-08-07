@@ -21,11 +21,13 @@ import {
   faCopy,
   faPaperclip,
   faGear,
-  faShareNodes
+  faShareNodes,
+  faAlignLeft
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
   faClock,
+  faComments,
   faPenToSquare,
   faQuestionCircle,
   faSquareCheck,
@@ -60,6 +62,8 @@ const checkListIcon = <FontAwesomeIcon icon={faSquareCheck} />;
 const paperClipIcon = <FontAwesomeIcon icon={faPaperclip} />;
 const gearIcon = <FontAwesomeIcon icon={faGear} />;
 const shareIcon = <FontAwesomeIcon icon={faShareNodes} />;
+const commentsIcon = <FontAwesomeIcon icon={faComments} />;
+const textIcon = <FontAwesomeIcon icon={faAlignLeft} />;
 
 export {
   tableIcon,
@@ -89,5 +93,7 @@ export {
   checkListIcon,
   paperClipIcon,
   gearIcon,
-  shareIcon
+  shareIcon,
+  commentsIcon,
+  textIcon
 };

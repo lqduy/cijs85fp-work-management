@@ -15,7 +15,10 @@ import {
   copyIcon,
   photoIcon,
   trashIcon,
-  shareIcon
+  shareIcon,
+  plusIcon,
+  commentsIcon,
+  textIcon
 } from '../../utils/icons';
 import { useParams, useNavigate } from 'react-router-dom';
 import { cardsListStorage, columnsListStorage } from '../../utils/local-storage';
@@ -103,14 +106,23 @@ const SubCardPage = () => {
             <div className={cx('body__details')}>
               <div className={cx('body__details--labels')}>
                 <h4>Labels</h4>
-                <div className={cx('list')}>{labelsElements}</div>
+                <div className={cx('list')}>
+                  {labelsElements}
+                  <span className={cx('add-labels-btn')}>{plusIcon}</span>
+                </div>
               </div>
               <div className={cx('body__details--description')}>
-                <h4>Description</h4>
+                <h2>
+                  <span>{textIcon}</span>
+                  <span>Description</span>
+                </h2>
                 <div className={cx('description-quill')}></div>
               </div>
               <div className={cx('body__details--activity')}>
-                <h4>Activity</h4>
+                <h2>
+                  <span>{commentsIcon}</span>
+                  <span>Activity</span>
+                </h2>
                 <div className={cx('activity-content')}></div>
               </div>
             </div>

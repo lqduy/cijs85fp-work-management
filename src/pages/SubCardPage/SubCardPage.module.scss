@@ -60,6 +60,12 @@ $subcard-width: 768px;
     }
   }
 
+  .title {
+    h1 {
+      font-size: 3.6rem;
+    }
+  }
+
   .column-title {
     span {
       font-style: italic;
@@ -72,6 +78,14 @@ $subcard-width: 768px;
     &__details {
       width: 75%;
 
+      > * {
+        margin-top: 24px;
+        h2 {
+          display: flex;
+          gap: 12px;
+        }
+      }
+
       &--labels .list {
         display: flex;
         gap: 4px;
@@ -81,6 +95,21 @@ $subcard-width: 768px;
           width: 48px;
           height: 32px;
           border-radius: 3px;
+
+          cursor: pointer;
+        }
+
+        .add-labels-btn {
+          position: relative;
+
+          color: white;
+          background-color: var(--backgroundColor-lighter);
+          svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
       }
     }
