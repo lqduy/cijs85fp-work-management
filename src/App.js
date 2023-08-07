@@ -29,7 +29,7 @@ function App() {
   return (
     <AuthProvider>
       <ThemeContext.Provider
-        value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar }}
+        value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar, setSidebarOpen }}
       >
         <div className="site-container">
           <Routes>

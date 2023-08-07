@@ -4,6 +4,7 @@
   --textColorOpposition: #172b4d;
   --lineColor: hsla(218, 54%, 19.6%, 0.16);
   --backgroundColor: white;
+  --sidebar-bgColor: rgba(255, 255, 255, 0.8);
   --backgroundColor-darker: #f6f5f5;
   --backgroundColor-lighter: rgb(232, 234, 234);
   --createBoardBtn-bgColor: #0c66e4;
@@ -17,7 +18,7 @@
   --logIn--textColor: #000113;
   --logIn-btnBgColor: #000113;
   --logIn-btnTextColor: #fff;
-  --logIn-info: #64748B;
+  --logIn-info: #64748b;
   --logIn-wraper: #fff;
   color: var(--textColor);
 }
@@ -28,6 +29,7 @@
   --textColorOpposition: #eee;
   --lineColor: hsla(211, 18%, 68%, 0.16);
   --backgroundColor: #22262a;
+  --sidebar-bgColor: rgba(27, 27, 27, 0.8);
   --backgroundColor-darker: #343a3f;
   --backgroundColor-lighter: #3f484f;
   --createBoardBtn-bgColor: #579dff;
@@ -38,12 +40,11 @@
   --subBoardHeader-bgColor: rgba(27, 27, 27, 0.8);
   --cardEditBtn-bgColor: #1d1e1f;
   --logIn--bgColor: #000113;
-  --logIn--textColor: #CCC;
+  --logIn--textColor: #ccc;
   --logIn-btnBgColor: #334155;
   --logIn-btnTextColor: #fff;
-  --logIn-info: #94A3B8;
+  --logIn-info: #94a3b8;
   --logIn-wraper: #334155;
-
 
   color: var(--textColor);
   background-color: var(--backgroundColor);

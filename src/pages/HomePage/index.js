@@ -114,23 +114,27 @@ const HomePage = () => {
   });
 
   return (
-    <SidebarLayout>
+    <SidebarLayout mainClassName={cx('layout-wrapper')} sidebarClassName={cx('sidebar-wrapper')}>
       <div className={cx('wrapper')}>
         <div className={cx('sideBody')}>
-          <section className={cx('section')}>
-            <h3>
-              <span>{starRegularIcon}</span>
-              <span>Starred boards</span>
-            </h3>
-            <div className={cx('boards')}>{starredBoardsElements}</div>
-          </section>
-          <section className={cx('section')}>
-            <h3>
-              <span>{clockIcon}</span>
-              <span>Recently viewed</span>
-            </h3>
-            <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
-          </section>
+          {starredBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{starRegularIcon}</span>
+                <span>Starred boards</span>
+              </h3>
+              <div className={cx('boards')}>{starredBoardsElements}</div>
+            </section>
+          )}
+          {lastestVistingBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{clockIcon}</span>
+                <span>Recently viewed</span>
+              </h3>
+              <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
+            </section>
+          )}
           <section className={cx('section')}>
             <h3>YOUR WORKSPACES</h3>
             <div className={cx('boards')}>
