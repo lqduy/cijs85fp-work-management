@@ -17,11 +17,6 @@
 .menu {
   gap: 12px;
 
-  .createBtn {
-    background-color: var(--createBoardBtn-bgColor);
-    color: white;
-  }
-
   > *:not(.createBtn):hover {
     background-color: var(--backgroundColor-darker);
   }
@@ -35,40 +30,53 @@
 
     height: 100%;
   }
+}
+.setting-item__wrap {
+  position: relative;
 
-  .setting-item__wrap {
-    position: relative;
+  .createBtn,
+  .userBtn {
+    height: 32px;
+    border-radius: 3px;
+    color: white;
+    background-color: var(--createBoardBtn-bgColor);
+  }
 
-    .userBtn {
-      height: 32px;
-      border-radius: 100px;
-      color: white;
-      background-color: var(--createFormInput-borderBlueColor);
-    }
+  .menu-subbox {
+    position: absolute;
 
-    .menu-subbox {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      transform: translateY(calc(100% + 12px));
+    bottom: 0;
+    transform: translateY(calc(100% + 12px));
 
-      &__btn {
-        justify-content: start;
-        &:hover{
-          background-color: var(--backgroundColor-lighter);
-        }
+    background-color: var(--backgroundColor-darker);
+
+    &__btn {
+      justify-content: start;
+      &:hover {
+        background-color: var(--backgroundColor-lighter);
       }
     }
   }
+  .left-align {
+    left: 0;
+  }
+  .right-align {
+    right: 0;
+  }
+}
 
-  .settingBtn {
-    width: 32px;
-    height: 32px;
-    padding: 8px;
+.userBtn__wrap {
+  padding-left: 10px;
+  border-left: 2px solid var(--lineColor);
+}
 
-    &:hover {
-      background-color: var(--backgroundColor-darker);
-    }
+.settingBtn {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+
+  &:hover {
+    background-color: var(--backgroundColor-darker);
   }
 }
 

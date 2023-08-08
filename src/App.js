@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext";
-import classNames from "classnames";
-import "firebase/firestore";
-import "firebase/auth";
-import ThemeContext from "./contexts/ThemeContext";
-import { themeModeStorage } from "./utils/local-storage";
-import PrivateRoute from "./routers/PrivateRoute";
-import { privateRouters, publicRouters } from "./routers";
-
+import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import classNames from 'classnames';
+import 'firebase/firestore';
+import 'firebase/auth';
+import ThemeContext from './contexts/ThemeContext';
+import { themeModeStorage } from './utils/local-storage';
+import PrivateRoute from './routers/PrivateRoute';
+import { privateRouters, publicRouters } from './routers';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
+    document.body.classList.toggle('dark-mode', darkMode);
   }, [darkMode]);
 
   const onToggleSidebar = () => {
-    setSidebarOpen((prev) => !prev);
+    setSidebarOpen(prev => !prev);
   };
 
-  const sidebarStyles = classNames("site-sidebar", {
-    ["open"]: sidebarOpen,
+  const sidebarStyles = classNames('site-sidebar', {
+    ['open']: sidebarOpen
   });
 
   return (

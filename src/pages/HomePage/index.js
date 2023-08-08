@@ -114,7 +114,11 @@ const HomePage = () => {
   });
 
   return (
-    <SidebarLayout mainClassName={cx('layout-wrapper')} sidebarClassName={cx('sidebar-wrapper')}>
+    <SidebarLayout
+      mainClassName={cx('layout-wrapper')}
+      sidebarClassName={cx('sidebar-wrapper')}
+      onClickCreateBtn={() => setOpenCreateForm(true)}
+    >
       <div className={cx('wrapper')}>
         <div className={cx('sideBody')}>
           {starredBoardsElements.length > 0 && (

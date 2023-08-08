@@ -80,7 +80,7 @@
 
   .sidebar-top a:hover {
     border-radius: 5px;
-    background-color: var(--backgroundColor-lighter);
+    background-color: var(--lineColor);
   }
 }
 
@@ -108,7 +108,7 @@
       }
 
       &:hover {
-        background-color: var(--backgroundColor-lighter);
+        background-color: var(--lineColor);
       }
     }
   }

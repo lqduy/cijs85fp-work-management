@@ -20,12 +20,12 @@ import { themeModeStorage } from '../../utils/local-storage';
 import SearchBox from './SearchBox';
 import { useDebounce } from 'use-debounce';
 import { getSearchResult } from '../../utils/helper';
-import styles from './Header.module.scss';
 import { HEADER_SUBMENU } from '../../utils/constants';
+import styles from './Header.module.scss';
 
 let cx = classNames.bind(styles);
 
-const Header = () => {
+const Header = ({ onClickCreateBtn }) => {
   const [searchInputValue, setSearchInputValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
@@ -109,7 +109,11 @@ const Header = () => {
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
-        <Button className={cx('createBtn')}>Create</Button>
+        <div className={cx('setting-item__wrap')}>
+          <Button className={cx('createBtn')} onClick={onClickCreateBtn}>
+            Create
+          </Button>
+        </div>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>
@@ -146,17 +150,17 @@ const Header = () => {
         <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
           {darkNLightIcon}
         </Button>
-        <div className={cx('setting-item__wrap')}>
+        <div className={cx('setting-item__wrap', 'userBtn__wrap')}>
           <Button
             className={cx('userBtn')}
-            leftIcon={userIcon}
+            rigthIcon={userIcon}
             onClick={() => setOpenSubMenu(HEADER_SUBMENU.USER)}
           >
             {userName}
           </Button>
           {openSubMenu === HEADER_SUBMENU.USER && (
             <MenuBox
-              className={cx('menu-subbox')}
+              className={cx('menu-subbox', 'right-align')}
               boxTitle={'ACCOUNT'}
               onClickX={() => setOpenSubMenu(null)}
             >

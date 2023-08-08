@@ -1,4 +1,5 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .wrapper {
   display: flex;
@@ -59,8 +60,8 @@
     }
   }
 }
-// .right-part{
-//   > * > button:hover{
-//     background-color: var(--backgroundColor-lighter);
-//   }
-// }
+.right-part {
+  > * > button:hover {
+    background-color: var(--lineColor);
+  }
+}

@@ -4,7 +4,7 @@ import ThemeContext from '../../contexts/ThemeContext';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Header from '../../components/Header';
 
-const SidebarLayout = ({ children, mainClassName = null, sidebarClassName = null }) => {
+const SidebarLayout = ({ children, mainClassName = null, sidebarClassName = null, onClickCreateBtn }) => {
   const { sidebarOpen, onToggleSidebar } = useContext(ThemeContext);
 
   const sidebarStyles = classNames('site-sidebar', {
@@ -18,7 +18,7 @@ const SidebarLayout = ({ children, mainClassName = null, sidebarClassName = null
 
   return (
     <>
-      <Header />
+      <Header onClickCreateBtn={onClickCreateBtn} />
       <main className={mainClassName}>
         <div className="site-main-content">
           <nav className={sidebarStyles} style={mainClassName && sidebarHomepageStyles}>

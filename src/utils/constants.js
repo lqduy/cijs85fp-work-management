@@ -149,5 +149,6 @@ export const CARD_SETTING_SUBBOX = {
 };
 
 export const HEADER_SUBMENU = {
+  CREATE_BOARD: 'create-board',
   USER: 'user'
 };

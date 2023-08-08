@@ -61,7 +61,8 @@ const AddForm = props => {
           cardTitle: title,
           cardLabels: [],
           cardColorCover: { light: null, dark: null },
-          isFullSizeCover: false
+          isFullSizeCover: false,
+          description: '',
         };
         handleAddNewCard(newCard);
       }
