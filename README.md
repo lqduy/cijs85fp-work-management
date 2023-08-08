@@ -1,25 +1,26 @@
-# Getting Started with Create React App
+# Work Management React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tổng quan: Là trang web dùng để quản lý công việc theo hướng kanban board 
 
-## Available Scripts
 
-In the project directory, you can run:
+## Functions 
 
-### `npm start`
+Trang web đã có thể xử lý những tính năng sau:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Authentication
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- User có thể sign up account mới: sign up bằng cách tạo mới password và email, hoặc sign up bằng google
+- Có regex kiểm tra password khi sign up
+- User có thể log in nếu đã sign up
+- Từng user (email riêng) sẽ có data riêng
+- Platform sử dụng: Firebase
 
-### `npm test`
+### Tạo board, tạo card
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Drag-and-drop feature
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,7 +30,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### Template Feature
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
@@ -39,32 +40,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Xem preview sản phẩm ở: https://cijs85fp-work-management.vercel.app/
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
