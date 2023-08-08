@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
@@ -12,23 +12,26 @@ import {
 } from '../../utils/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../Button';
-import styles from './Header.module.scss';
 import ThemeContext from '../../contexts/ThemeContext';
 import { themeModeStorage } from '../../utils/local-storage';
 import SearchBox from './SearchBox';
 import { useDebounce } from 'use-debounce';
+import { getSearchResult } from '../../utils/helper';
+import styles from './Header.module.scss';
 
 let cx = classNames.bind(styles);
 
 const Header = () => {
   const [searchInputValue, setSearchInputValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
+  const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
   const [debouncedSearchKeyValue] = useDebounce(searchInputValue, 500);
-
   const [focusInput, setFocusInput] = useState(false);
-  const { setDarkMode } = useContext(ThemeContext);
   const [error, setError] = useState('');
+
+  const { setDarkMode } = useContext(ThemeContext);
   const { currentUser, logout } = useAuth();
+  const inputRef = useRef(null);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -41,11 +44,47 @@ const Header = () => {
     }
   };
 
-  const handleSearch = () => {};
+  const handleBlurInputAfterSearch = () => {
+    if (focusInput) return;
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
 
   useEffect(() => {
-    handleSearch();
+    handleBlurInputAfterSearch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusInput]);
+
+  const handleSearch = inputKey => {
+    if (inputKey.length === 0) return;
+    const result = getSearchResult(inputKey);
+    setSearchResult(result);
+  };
+
+  useEffect(() => {
+    handleSearch(debouncedSearchKeyValue);
   }, [debouncedSearchKeyValue]);
+
+  const handleKeyDown = e => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedResultIndex(prevIndex => {
+        const newIndex = prevIndex > 0 ? prevIndex - 1 : searchResult.length - 1;
+        return newIndex;
+      });
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedResultIndex(prevIndex => {
+        const newIndex = prevIndex < searchResult.length - 1 ? prevIndex + 1 : 0;
+        return newIndex;
+      });
+    } else if (e.key === 'Enter' && selectedResultIndex !== -1) {
+      const selectedBoardId = searchResult[selectedResultIndex]._id;
+      navigate(`/b/${selectedBoardId}`);
+      setFocusInput(false);
+    }
+  };
 
   const handleSetThemeMode = () => {
     setDarkMode(prevMode => {
@@ -59,7 +98,7 @@ const Header = () => {
     <header className={cx('header')}>
       <nav className={cx('menu')}>
         <Button leftIcon={tableIcon} to={'/'}>
-          Trello
+          Work M
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
@@ -70,17 +109,28 @@ const Header = () => {
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>
-          <form className={cx('inputBar', { focusInput: focusInput })}>
+          <form
+            className={cx('inputBar', { focusInput: focusInput })}
+            onSubmit={e => e.preventDefault()}
+          >
             <Button>{searchIcon}</Button>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Search"
               value={searchInputValue}
               onFocus={() => setFocusInput(true)}
               onChange={e => setSearchInputValue(e.target.value)}
               onBlur={() => setFocusInput(false)}
+              onKeyDown={handleKeyDown}
             />
-            {(focusInput || searchResult.length > 0) && <SearchBox data={searchResult} />}
+            {focusInput && (
+              <SearchBox
+                data={searchResult}
+                handleCloseSearchBox={() => setFocusInput(false)}
+                selectedIndex={selectedResultIndex}
+              />
+            )}
           </form>
         </div>
         <Button className={cx('settingBtn')} circled>

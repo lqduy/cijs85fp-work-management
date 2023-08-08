@@ -35,7 +35,7 @@ body {
   @include light-theme;
 
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
@@ -49,7 +49,6 @@ body.dark-mode {
   width: 100%;
   height: 100%;
 
-
   main {
     position: relative;
     overflow-y: auto;
@@ -59,7 +58,6 @@ body.dark-mode {
     flex-grow: 1;
   }
 }
-
 
 // Layouts
 .site-main-content {
@@ -74,8 +72,8 @@ body.dark-mode {
     min-height: 100%;
     z-index: 5;
     position: relative;
-    transition: width .3s;
-    height: 100vh;
+    transition: width 0.3s;
+    height: calc(100vh - $header-height);
 
     &.open {
       width: 280px;

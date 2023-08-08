@@ -1,0 +1,26 @@
+.card-wrapper {
+
+margin: 10px;
+}
+
+.createBtn {
+    background-color: var(--createBoardBtn-bgColor);
+    color: white;
+    margin-right: 8px;
+    display: block;
+    margin: 0 5px;
+    width: 15%;
+  }
+
+
+.display-descr {
+    padding: 8px;
+    border: 1px solid var(--lineColor);
+    position: relative;
+}
+.editIcon {
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    cursor: pointer;
+}

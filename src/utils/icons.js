@@ -20,13 +20,17 @@ import {
   faArrowRight,
   faCopy,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faPaperclip,
+  faGear,
+  faShareNodes
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
   faClock,
   faPenToSquare,
   faQuestionCircle,
+  faSquareCheck,
   faStar as faStarRegular
 } from '@fortawesome/free-regular-svg-icons';
 
@@ -57,6 +61,10 @@ const copyIcon = <FontAwesomeIcon icon={faCopy} />;
 const eyeIcon = <FontAwesomeIcon icon={faEye} />;
 const closedEyeIcon = <FontAwesomeIcon icon={faEyeSlash} />
 
+const checkListIcon = <FontAwesomeIcon icon={faSquareCheck} />;
+const paperClipIcon = <FontAwesomeIcon icon={faPaperclip} />;
+const gearIcon = <FontAwesomeIcon icon={faGear} />;
+const shareIcon = <FontAwesomeIcon icon={faShareNodes} />;
 
 export {
   tableIcon,
@@ -84,5 +92,9 @@ export {
   arrowRightIcon,
   copyIcon,
   eyeIcon,
-  closedEyeIcon
+  closedEyeIcon,
+  checkListIcon,
+  paperClipIcon,
+  gearIcon,
+  shareIcon
 };
