@@ -5,14 +5,12 @@ import "react-quill/dist/quill.snow.css";
 import styles from "./TextEditor.module.scss";
 import Button from "../Button";
 import { cardsListStorage } from "../../utils/local-storage";
-import { FORM_MODE } from "../../utils/constants";
 import { penIcon } from "../../utils/icons";
 
 let cx = classNames.bind(styles);
 
 const TextEditor = ({ cardId, cardDescription }) => {
   const [descValue, setDescValue] = useState(cardDescription);
-  const [formMode, setFormMode] = useState(FORM_MODE.ADD);
 
   const hasInitialValues = cardId && cardDescription;
   const initialValues = cardDescription;
@@ -25,7 +23,6 @@ const TextEditor = ({ cardId, cardDescription }) => {
       );
       cardsListStorage.save(newCardsListData);
     }
-    setFormMode(FORM_MODE.ADD);
   };
 
   useEffect(() => {

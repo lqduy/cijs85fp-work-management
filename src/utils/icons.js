@@ -23,7 +23,8 @@ import {
   faEyeSlash,
   faPaperclip,
   faGear,
-  faShareNodes
+  faShareNodes,
+  faPen
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -60,7 +61,7 @@ const arrowRightIcon = <FontAwesomeIcon icon={faArrowRight} />;
 const copyIcon = <FontAwesomeIcon icon={faCopy} />;
 const eyeIcon = <FontAwesomeIcon icon={faEye} />;
 const closedEyeIcon = <FontAwesomeIcon icon={faEyeSlash} />
-
+const penIcon = <FontAwesomeIcon icon={faPen} />;
 const checkListIcon = <FontAwesomeIcon icon={faSquareCheck} />;
 const paperClipIcon = <FontAwesomeIcon icon={faPaperclip} />;
 const gearIcon = <FontAwesomeIcon icon={faGear} />;
@@ -96,5 +97,6 @@ export {
   checkListIcon,
   paperClipIcon,
   gearIcon,
-  shareIcon
+  shareIcon,
+  penIcon
 };
