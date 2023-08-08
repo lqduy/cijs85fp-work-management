@@ -9,7 +9,7 @@
   padding: 8px;
   border-bottom: 1px solid var(--lineColor);
 
-  >* {
+  > * {
     display: flex;
   }
 }
@@ -22,7 +22,7 @@
     color: white;
   }
 
-  >*:not(.createBtn):hover {
+  > *:not(.createBtn):hover {
     background-color: var(--backgroundColor-darker);
   }
 }
@@ -34,6 +34,31 @@
     position: relative;
 
     height: 100%;
+  }
+
+  .setting-item__wrap {
+    position: relative;
+
+    .userBtn {
+      height: 32px;
+      border-radius: 100px;
+      color: white;
+      background-color: var(--createFormInput-borderBlueColor);
+    }
+
+    .menu-subbox {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      transform: translateY(calc(100% + 12px));
+
+      &__btn {
+        justify-content: start;
+        &:hover{
+          background-color: var(--backgroundColor-lighter);
+        }
+      }
+    }
   }
 
   .settingBtn {

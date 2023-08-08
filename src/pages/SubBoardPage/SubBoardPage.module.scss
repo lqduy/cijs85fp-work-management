@@ -14,7 +14,7 @@
 
   height: calc(100vh - $header-height - $subBoardHeader-height);
   padding: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   &__core {
     display: flex;

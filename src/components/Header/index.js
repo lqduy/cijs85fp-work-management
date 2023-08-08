@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
@@ -8,16 +8,20 @@ import {
   searchIcon,
   bellIcon,
   infoIcon,
-  darkNLightIcon
+  darkNLightIcon,
+  userIcon,
+  logOutIcon
 } from '../../utils/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../Button';
+import MenuBox from '../MenuBox';
 import ThemeContext from '../../contexts/ThemeContext';
 import { themeModeStorage } from '../../utils/local-storage';
 import SearchBox from './SearchBox';
 import { useDebounce } from 'use-debounce';
 import { getSearchResult } from '../../utils/helper';
 import styles from './Header.module.scss';
+import { HEADER_SUBMENU } from '../../utils/constants';
 
 let cx = classNames.bind(styles);
 
@@ -27,6 +31,7 @@ const Header = () => {
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
   const [debouncedSearchKeyValue] = useDebounce(searchInputValue, 500);
   const [focusInput, setFocusInput] = useState(false);
+  const [openSubMenu, setOpenSubMenu] = useState(null);
   const [error, setError] = useState('');
 
   const { setDarkMode } = useContext(ThemeContext);
@@ -53,7 +58,7 @@ const Header = () => {
 
   useEffect(() => {
     handleBlurInputAfterSearch();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusInput]);
 
   const handleSearch = inputKey => {
@@ -94,6 +99,8 @@ const Header = () => {
     });
   };
 
+  const userName = useMemo(() => currentUser.bc.email.split('@')[0], [currentUser]);
+
   return (
     <header className={cx('header')}>
       <nav className={cx('menu')}>
@@ -103,9 +110,6 @@ const Header = () => {
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
         <Button className={cx('createBtn')}>Create</Button>
-        <Button className={cx('logOutBtn')} onClick={handleLogout}>
-          Log out
-        </Button>
       </nav>
       <div className={cx('setting')}>
         <div className={cx('inputBar__wrap')}>
@@ -142,6 +146,31 @@ const Header = () => {
         <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
           {darkNLightIcon}
         </Button>
+        <div className={cx('setting-item__wrap')}>
+          <Button
+            className={cx('userBtn')}
+            leftIcon={userIcon}
+            onClick={() => setOpenSubMenu(HEADER_SUBMENU.USER)}
+          >
+            {userName}
+          </Button>
+          {openSubMenu === HEADER_SUBMENU.USER && (
+            <MenuBox
+              className={cx('menu-subbox')}
+              boxTitle={'ACCOUNT'}
+              onClickX={() => setOpenSubMenu(null)}
+            >
+              <Button
+                className={cx('menu-subbox__btn')}
+                leftIcon={logOutIcon}
+                onClick={handleLogout}
+                fullWidth
+              >
+                Log out
+              </Button>
+            </MenuBox>
+          )}
+        </div>
       </div>
     </header>
   );

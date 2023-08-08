@@ -24,7 +24,8 @@ import {
   faShareNodes,
   faAlignLeft,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faArrowRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faBell,
@@ -68,6 +69,7 @@ const commentsIcon = <FontAwesomeIcon icon={faComments} />;
 const textIcon = <FontAwesomeIcon icon={faAlignLeft} />;
 const eyeIcon = <FontAwesomeIcon icon={faEye} />;
 const closedEyeIcon = <FontAwesomeIcon icon={faEyeSlash} />;
+const logOutIcon = <FontAwesomeIcon icon={faArrowRightFromBracket} />;
 
 export {
   tableIcon,
@@ -101,5 +103,6 @@ export {
   commentsIcon,
   textIcon,
   eyeIcon,
-  closedEyeIcon
+  closedEyeIcon,
+  logOutIcon
 };
