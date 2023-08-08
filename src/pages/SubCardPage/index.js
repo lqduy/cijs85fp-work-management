@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-
+import TextEditor from '../../components/TextEditor/TextEditor';
 import SubBoardPage from '../SubBoardPage';
 import Button from '../../components/Button';
 import {
@@ -71,7 +71,7 @@ const SubCardPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { cardTitle, cardColorCover, cardLabels } = cardData;
+  const { cardTitle, cardColorCover, cardLabels, description } = cardData;
   const { columnTitle } = columnData;
 
   const coverElements = useMemo(() => {
@@ -116,7 +116,9 @@ const SubCardPage = () => {
                   <span>{textIcon}</span>
                   <span>Description</span>
                 </h2>
-                <div className={cx('description-quill')}></div>
+                <div className={cx('description-quill')}>
+                  <TextEditor cardId={cardId} cardDescription={description} />
+                </div>
               </div>
               <div className={cx('body__details--activity')}>
                 <h2>

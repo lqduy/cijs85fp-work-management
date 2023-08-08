@@ -8,7 +8,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
 import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
-
 import styles from './HomePage.module.scss';
 let cx = classNames.bind(styles);
 
