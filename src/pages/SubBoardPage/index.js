@@ -45,7 +45,7 @@ const SubBoardPage = () => {
   });
   const sensors = useSensors(mouseSensor);
 
-  const { darkMode } = useContext(ThemeContext);
+  const { darkMode, sidebarOpen } = useContext(ThemeContext);
 
   const handleFetchData = () => {
     const boardsListData = boardsListStorage.load();
@@ -168,7 +168,10 @@ const SubBoardPage = () => {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <div className={cx('wrapper', { 'dark-layer': darkMode })} style={pageBackground}>
+        <div
+          className={cx('wrapper', { 'dark-layer': darkMode, 'sidebar-open': sidebarOpen })}
+          style={pageBackground}
+        >
           {boardTitle && <SubBoardHeader boardData={boardData} />}
           <div className={cx('columns-list')}>
             <SortableContext items={columnIdsList} strategy={horizontalListSortingStrategy}>

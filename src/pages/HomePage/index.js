@@ -2,34 +2,38 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './HomePage.module.scss';
 import Button from '../../components/Button';
 import CreateBoardForm from '../../components/CreateBoardForm';
+import { useAuth } from '../../contexts/AuthContext';
 import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
 import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
-import { useAuth } from '../../contexts/AuthContext';
+import styles from './HomePage.module.scss';
 let cx = classNames.bind(styles);
 
 const HomePage = () => {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
   const navigate = useNavigate();
 
   const onFetchBoardsData = () => {
-    const data = boardsListStorage.load();
+    const userId = `user-${currentUser.uid}`;
+    const data = boardsListStorage.load().filter(board => board.userId === userId);
     setBoardsList(data);
   };
-  console.log(currentUser)
   useEffect(() => {
     onFetchBoardsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddBoard = newBoard => {
     const newBoardsList = [...boardsList, newBoard];
     setBoardsList(newBoardsList);
-    boardsListStorage.save(newBoardsList);
+
+    const boardsListData = boardsListStorage.load();
+    const newBoardsListData = [...boardsListData, newBoard];
+    boardsListStorage.save(newBoardsListData);
 
     const newColumns = [
       {
@@ -109,23 +113,31 @@ const HomePage = () => {
   });
 
   return (
-    <SidebarLayout>
+    <SidebarLayout
+      mainClassName={cx('layout-wrapper')}
+      sidebarClassName={cx('sidebar-wrapper')}
+      onClickCreateBtn={() => setOpenCreateForm(true)}
+    >
       <div className={cx('wrapper')}>
         <div className={cx('sideBody')}>
-          <section className={cx('section')}>
-            <h3>
-              <span>{starRegularIcon}</span>
-              <span>Starred boards</span>
-            </h3>
-            <div className={cx('boards')}>{starredBoardsElements}</div>
-          </section>
-          <section className={cx('section')}>
-            <h3>
-              <span>{clockIcon}</span>
-              <span>Recently viewed</span>
-            </h3>
-            <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
-          </section>
+          {starredBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{starRegularIcon}</span>
+                <span>Starred boards</span>
+              </h3>
+              <div className={cx('boards')}>{starredBoardsElements}</div>
+            </section>
+          )}
+          {lastestVistingBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{clockIcon}</span>
+                <span>Recently viewed</span>
+              </h3>
+              <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
+            </section>
+          )}
           <section className={cx('section')}>
             <h3>YOUR WORKSPACES</h3>
             <div className={cx('boards')}>
