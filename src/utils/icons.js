@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
   faMagnifyingGlass,
@@ -21,16 +21,17 @@ import {
   faCopy,
   faPaperclip,
   faGear,
-  faShareNodes
-} from '@fortawesome/free-solid-svg-icons';
+  faShareNodes,
+  faPen,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faBell,
   faClock,
   faPenToSquare,
   faQuestionCircle,
   faSquareCheck,
-  faStar as faStarRegular
-} from '@fortawesome/free-regular-svg-icons';
+  faStar as faStarRegular,
+} from "@fortawesome/free-regular-svg-icons";
 
 const tableIcon = <FontAwesomeIcon icon={faTableList} />;
 const downCaretIcon = <FontAwesomeIcon icon={faAngleDown} />;
@@ -60,6 +61,7 @@ const checkListIcon = <FontAwesomeIcon icon={faSquareCheck} />;
 const paperClipIcon = <FontAwesomeIcon icon={faPaperclip} />;
 const gearIcon = <FontAwesomeIcon icon={faGear} />;
 const shareIcon = <FontAwesomeIcon icon={faShareNodes} />;
+const penIcon = <FontAwesomeIcon icon={faPen} />;
 
 export {
   tableIcon,
@@ -89,5 +91,6 @@ export {
   checkListIcon,
   paperClipIcon,
   gearIcon,
-  shareIcon
+  shareIcon,
+  penIcon,
 };

@@ -147,3 +147,8 @@ export const CARD_SETTING_SUBBOX = {
   EDIT_LABELS: 'edit-labels',
   CHANGE_COVER: 'change-cover'
 };
+
+export const FORM_MODE = {
+  ADD: 'add',
+  EDIT: 'edit'
+}

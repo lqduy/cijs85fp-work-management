@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import Quill from '../../components/Quill/Quill';
+import TextEditor from '../../components/TextEditor/TextEditor';
 import SubBoardPage from '../SubBoardPage';
 import Button from '../../components/Button';
 import {
@@ -108,7 +108,7 @@ const SubCardPage = () => {
               <div className={cx('body__details--description')}>
                 <h4>Description</h4>
                 <div className={cx('description-quill')}>
-                  <Quill/>
+                  <TextEditor cardId={cardId} cardDescription={cardData.description}/>
                 </div>
               </div>
               <div className={cx('body__details--activity')}>
