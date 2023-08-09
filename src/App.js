@@ -42,7 +42,7 @@ function App() {
         }}
       >
         <div className="site-container">
-          <Header />
+         
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;

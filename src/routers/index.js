@@ -9,9 +9,9 @@ import LandingPage from "../pages/LandingPage/LandingPage";
 export const publicRouters = [
   { path: "/login", component: Login },
   { path: "/signup", component: Signup },
+  { path: "/", component: LandingPage }
 ];
 export const privateRouters = [
-  { path: "/aboutus", component: LandingPage },
   { path: "/", component: HomePage },
   { path: "/b/:boardId", component: SubBoardPage },
   { path: "/home", component: Home },

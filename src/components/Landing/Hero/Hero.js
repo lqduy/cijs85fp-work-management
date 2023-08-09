@@ -71,7 +71,7 @@ const Hero = () => {
       </div>
       <div className={cx("hero-mid")}>
         <div className={cx("infoBasic")}>
-          <h3>Thông tin cơ bản về Trello</h3>
+          <h3>Thông tin cơ bản về Work Management</h3>
           <h2>Đỉnh cao về năng suất</h2>
         </div>
         <div className={cx("infoCarousel")}>

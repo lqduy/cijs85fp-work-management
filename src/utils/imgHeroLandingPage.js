@@ -20,13 +20,13 @@ export const imgHeroLandingPage = [
     img: "https://images.ctfassets.net/rz1oowkt5gyp/3N2U3C71rApm61cGFxnc2E/970b010002488a09a420282df5e7b43a/Carousel_Image_Boards_2x.png?w=1536&fm=webp",
     title: "Các Bảng",
     detail:
-      " Bảng Trello giúp bạn sắp xếp hợp lý các nhiệm vụ và thúc đẩycông việc. Bạn có thể xem mọi thông tin, từ việc cần làm đến việc đã hoàn thành, chỉ trong nháy mắt.",
+      " Bảng giúp bạn sắp xếp hợp lý các nhiệm vụ và thúc đẩycông việc. Bạn có thể xem mọi thông tin, từ việc cần làm đến việc đã hoàn thành, chỉ trong nháy mắt.",
   },
   {
     img: "https://images.ctfassets.net/rz1oowkt5gyp/4U0VUZYX2tQmB5KVGxBabp/7321ac088fe8ec39dbe3069c47d7df99/Carousel_Image_Lists_2x.png?w=1536&fm=webp",
     title: "Danh Sách",
     detail:
-      "Các giai đoạn khác nhau của một nhiệm vụ. Hãy bắt đầu thật đơn giản với Việc cần làm, Việc đang làm hoặc Việc đã xong—hoặc xây dựng một quy trình làm việc tùy chỉnh theo đúng nhu cầu của nhóm bạn. Với Trello, cách nào cũng phát huy hiệu quả.",
+      "Các giai đoạn khác nhau của một nhiệm vụ. Hãy bắt đầu thật đơn giản với Việc cần làm, Việc đang làm hoặc Việc đã xong—hoặc xây dựng một quy trình làm việc tùy chỉnh theo đúng nhu cầu của nhóm bạn. Với Work M, cách nào cũng phát huy hiệu quả.",
   },
   {
     img: "https://images.ctfassets.net/rz1oowkt5gyp/26CA6JZeRgoOK4nuRHnIlY/060702a80cf7c3be3651d9297d196267/Carousel_Image_Cards_2x.png?w=1536&fm=webp",
@@ -42,7 +42,7 @@ export const imgHeroRdLandingPage = [
     icon: faFolder,
     title: "Quản lý dự án",
     detail:
-      "Sắp xếp nhiệm vụ, bám sát thời hạn và giúp các thành viên nhóm theo sát Trello.",
+      "Sắp xếp nhiệm vụ, bám sát thời hạn và giúp các thành viên nhóm theo sát Work M.",
   },
   {
     color: "#2684FF",
@@ -55,14 +55,14 @@ export const imgHeroRdLandingPage = [
     icon: faLeaf,
     title: "Đào tạo nhập môn",
     detail:
-      "Dễ dàng làm quen với công ty mới hoặc tiếp nhận dự án mới nhờ bố cục trực quan của Trello về việc cần làm, tài nguyên và theo dõi tiến độ.",
+      "Dễ dàng làm quen với công ty mới hoặc tiếp nhận dự án mới nhờ bố cục trực quan của Work M về việc cần làm, tài nguyên và theo dõi tiến độ.",
   },
   {
     color: "#FFC400",
     icon: faCalendarCheck,
     title: "Quản lý nhiệm vụ",
     detail:
-      "Sử dụng Trello để theo dõi, quản lý, hoàn thành và tập hợp các nhiệm vụ. Giúp dự án của nhóm luôn gặt hái thành công mang tính gắn kết.",
+      "Sử dụng Work M để theo dõi, quản lý, hoàn thành và tập hợp các nhiệm vụ. Giúp dự án của nhóm luôn gặt hái thành công mang tính gắn kết.",
   },
   {
     color: "#00C7E5",
@@ -101,20 +101,20 @@ export const imgHeroEndPage = [
 
 export const imgHeroFooterPage = [
   {
-    title: "Tìm hiểu về Trello",
+    title: "Tìm hiểu về Work M",
     detail: "Công nghệ nền tảng",
   },
   {
     title: "Việc làm",
-    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Work M.",
   },
   {
     title: "Ứng dụng",
-    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+    detail: "Tải xuống Ứng dụng Work M cho Máy tính hoặc Thiết bị di động.",
   },
   {
     title: "Liên hệ với chúng tôi",
-    detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
+    detail: "Bạn cần giúp đỡ? Hãy liên lạc để chúng tôi có thể trợ giúp.",
   },
 ];
 export const imgHeroFooterEndPage = {
