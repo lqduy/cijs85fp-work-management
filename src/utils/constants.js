@@ -150,5 +150,9 @@ export const CARD_SETTING_SUBBOX = {
 
 export const OPEN_EDITOR = {
   OPEN: 'open',
-  CLOSE: 'close'
+  CLOSE: 'close'}
+  
+export const HEADER_SUBMENU = {
+  CREATE_BOARD: 'create-board',
+  USER: 'user'
 };

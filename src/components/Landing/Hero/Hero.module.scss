@@ -1,0 +1,249 @@
+.hero {
+    .hero-top {
+        display: flex;
+        justify-content: space-around;
+        background: url('https://images.ctfassets.net/rz1oowkt5gyp/7lTGeXbBRNRLaVk2MdBjtJ/99c266ed4cb8cc63bd0c388071f01ff6/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+        background-blend-mode: normal, normal;
+        color: rgb(255, 255, 255);
+        height: 650px;
+        padding-top: 80px;
+
+        .hero-top-left {
+            width: 600px;
+
+            .descript {
+                padding-bottom: 10px;
+
+                h1 {
+                    font-weight: 600;
+                    margin-bottom: 0.5rem;
+                    margin-top: 0px;
+                    font-size: 5rem;
+                    line-height: 1.25;
+                }
+
+                p {
+                    font-weight: 400;
+                    margin-bottom: 0.5rem;
+                    margin-top: 0px;
+                    font-size: 2.5rem;
+                    line-height: 1.25;
+                }
+            }
+
+            .singup {
+                color: white;
+
+                button {
+                    border-radius: 10px;
+                    background-color: #0065ff;
+                    width: 300px;
+                    height: 60px;
+                    border: none;
+                    outline: none;
+                    transition: .3s;
+                }
+
+                button:hover {
+                    background-color: #eb4fb3;
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .hero-top-right {
+            .imgBck img {
+                width: 600px;
+                height: 550px;
+
+            }
+        }
+
+    }
+
+    .hero-mid {
+        background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
+        background-blend-mode: normal;
+        color: rgb(9, 30, 66);
+        padding-left: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+
+
+        .infoBasic {
+            padding-bottom: 50px;
+        }
+
+        .infoCarousel {
+            overflow: hidden;
+            width: 1250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .imgDetail {
+                white-space: nowrap;
+                transition: 0.7s;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .btnSlide {
+                padding-top: 10px;
+                display: flex;
+                gap: 15px;
+                margin: 0 auto;
+
+                button {
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+
+                    .symbol svg {
+                        width: 30px;
+                        height: 30px;
+                        transition: .3s;
+                    }
+
+                    .active {
+                        color: rgb(160, 73, 175);
+                    }
+
+                    .symbol svg:hover {
+                        color: rgba(221, 88, 245, 0.826);
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    .hero-3rd {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 100px;
+        padding-left: 202px;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+        .carousel {
+            overflow: hidden;
+            width: 100%;
+            padding-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .itemCarousel {
+                width: 650px;
+                height: 300px;
+                white-space: nowrap;
+                transition: 0.7s;
+                padding-top: 20px;
+                padding-bottom: 0px;
+            }
+
+            .btnCarousel {
+                display: flex;
+                gap: 40px;
+                cursor: pointer;
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    transition: .3s;
+                }
+
+                svg:hover {
+                    color: rgb(57, 164, 226);
+                }
+
+            }
+        }
+    }
+
+    .hero-footer {
+        height: 100%;
+        background: url('https://images.ctfassets.net/rz1oowkt5gyp/7KgS3XVFhGu3TiclJKloEp/c10aad15fb171a6c245db9cb7910247d/ViewsBackground_Left_Narrow.svg') left center / contain no-repeat scroll padding-box border-box, url('https://images.ctfassets.net/rz1oowkt5gyp/2HisRmboWIdXSYaaUSDzon/dadecff4be8a39bf2cf3cc537bd4d9c1/ViewsBackground_Right_Narrow.svg') right center / contain no-repeat scroll padding-box border-box, linear-gradient(240deg, rgb(0, 184, 217), rgb(0, 101, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(0, 101, 255);
+        background-blend-mode: normal, normal, normal;
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        height: 900px;
+
+
+        .hero-footer-title {
+            padding-top: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            h2 {
+                font-weight: 700;
+                font-size: 3rem;
+            }
+        }
+
+        .hero-footer-img {
+            color: black;
+            background-color: #ffffff;
+            width: 1000px;
+            height: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+            margin-top: 30px;
+
+            img {
+                width: 500px;
+            }
+
+            .hero-footer-img-title {
+                padding-left: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                line-height: 3.5rem;
+                font-size: 2rem;
+
+                h3 {
+                    display: flex;
+                    gap: 10px;
+                }
+            }
+        }
+
+    }
+}
+
+h3 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-top: 0px;
+    font-size: 2.5rem;
+    line-height: 1.33333;
+}

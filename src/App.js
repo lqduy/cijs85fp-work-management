@@ -13,6 +13,7 @@ import { privateRouters, publicRouters } from "./routers";
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [currentImg, setCurrentImg] = useState(null);
 
   useEffect(() => {
     document.body.classList.toggle("dark-mode", darkMode);
@@ -29,9 +30,18 @@ function App() {
   return (
     <AuthProvider>
       <ThemeContext.Provider
-        value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar }}
+        value={{
+          darkMode,
+          setDarkMode,
+          sidebarOpen,
+          setSidebarOpen,
+          onToggleSidebar,
+          currentImg,
+          setCurrentImg,
+        }}
       >
         <div className="site-container">
+         
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;

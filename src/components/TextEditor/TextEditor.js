@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { OPEN_EDITOR } from "../../utils/constants";
 import ReactQuill from "react-quill";
@@ -7,6 +8,16 @@ import styles from "./TextEditor.module.scss";
 import Button from "../Button";
 import { cardsListStorage } from "../../utils/local-storage";
 import { penIcon } from "../../utils/icons";
+=======
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import ReactQuill from 'react-quill';
+import classNames from 'classnames/bind';
+import 'react-quill/dist/quill.snow.css';
+import styles from './TextEditor.module.scss';
+import Button from '../Button';
+import { cardsListStorage } from '../../utils/local-storage';
+import { penIcon } from '../../utils/icons';
+>>>>>>> 9b543f125dd89f3307630890b44a06f529a8d06a
 
 let cx = classNames.bind(styles);
 
@@ -17,9 +28,9 @@ const TextEditor = ({ cardId, cardDescription }) => {
   const initialValues = cardDescription;
 
   const handleUpdateCardDescription = () => {
-    if (descValue !== "") {
+    if (descValue !== '') {
       const cardsListData = cardsListStorage.load();
-      const newCardsListData = cardsListData.map((card) =>
+      const newCardsListData = cardsListData.map(card =>
         card.cardId === cardId ? { ...card, description: descValue } : card
       );
       cardsListStorage.save(newCardsListData);
@@ -33,12 +44,13 @@ const TextEditor = ({ cardId, cardDescription }) => {
     } else setDescValue("");
   }, [initialValues]);
 
-  const controlDataHandler = (e) => {
+  const controlDataHandler = e => {
     e.preventDefault();
     handleUpdateCardDescription(e);
   };
 
   return (
+<<<<<<< HEAD
     <div className={cx("card-wrapper")}>
       <div className={cx("text-editor-wrapper")}>
         {editor === OPEN_EDITOR.OPEN ? (
@@ -81,6 +93,18 @@ const TextEditor = ({ cardId, cardDescription }) => {
               ? cx("hidden") :  cx("edit-icon")}
           onClick={() => setEditor(OPEN_EDITOR.OPEN)}
         >
+=======
+    <div className={cx('card-wrapper')}>
+      <div className={cx('card-wrapper')}>
+        <ReactQuill theme="snow" value={descValue} onChange={setDescValue} />
+      </div>
+      <Button className={cx('createBtn')} onClick={controlDataHandler}>
+        Save
+      </Button>
+      <div className={cx('display-descr')}>
+        <div dangerouslySetInnerHTML={{ __html: descValue }} />
+        <span className={cx('editIcon')} onClick={() => controlDataHandler}>
+>>>>>>> 9b543f125dd89f3307630890b44a06f529a8d06a
           {penIcon}
         </span>
       </div>

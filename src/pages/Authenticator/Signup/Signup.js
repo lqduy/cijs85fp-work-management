@@ -1,53 +1,50 @@
-import { Link, useNavigate } from "react-router-dom";
-import Login from "../Login/Login";
-import signupStyles from "../Login/Login.module.scss";
-import { useAuth } from "../../../contexts/AuthContext";
-import { useRef, useState } from "react";
-import SidebarLayout from "../../../layouts/SidebarLayout/SidebarLayout";
-import { eyeIcon, closedEyeIcon } from "../../../utils/icons";
+import { Link, useNavigate } from 'react-router-dom';
+import Login from '../Login/Login';
+import signupStyles from '../Login/Login.module.scss';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useRef, useState } from 'react';
+import SidebarLayout from '../../../layouts/SidebarLayout/SidebarLayout';
+import { eyeIcon, closedEyeIcon } from '../../../utils/icons';
 
 const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const { signup, currentUser, signInWithGoogle } = useAuth();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     let regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d@$!%*#?&^_-]{8,}$/;
     if (!regex.test(passwordRef.current.value)) {
-      return setError(
-        "Your password is not strong enough; please use a stronger password"
-      );
+      return setError('Your password is not strong enough; please use a stronger password');
     }
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      return setError("Passwords do not match");
+      return setError('Passwords do not match');
     }
     try {
-      setError("");
+      setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      localStorage.clear();
-      navigate("/");
+      navigate('/');
     } catch (error) {
       setError(error.message);
     }
     setLoading(false);
   };
 
-  const googleSignUpHandler = async (e) => {
+  const googleSignUpHandler = async e => {
     e.preventDefault();
     try {
-      setError("");
+      setError('');
       setLoading(true);
       await signInWithGoogle();
       localStorage.clear();
-      navigate("/");
+      navigate('/');
     } catch (error) {
       setError(error.message);
     }
@@ -92,7 +89,7 @@ const Signup = () => {
                 <label className={signupStyles.formLabel}>Password</label>
                 <div className={signupStyles.fieldControl}>
                   <input
-                    type={hidePassword ? "password" : "text"}
+                    type={hidePassword ? 'password' : 'text'}
                     className={signupStyles.formInput}
                     id="password"
                     placeholder="Enter your password here"
@@ -111,7 +108,7 @@ const Signup = () => {
                 <label className={signupStyles.formLabel}>Password</label>
                 <div className={signupStyles.fieldControl}>
                   <input
-                    type={hidePassword ? "password" : "text"}
+                    type={hidePassword ? 'password' : 'text'}
                     className={signupStyles.formInput}
                     id="password"
                     placeholder="Enter your password here"
@@ -128,16 +125,12 @@ const Signup = () => {
               </div>
               <div className={signupStyles.info}>
                 <div className={signupStyles.error}>{error}</div>
-                <div className={signupStyles.infoText + " info-text"}>
+                <div className={signupStyles.infoText + ' info-text'}>
                   <Link to="/login" element={<Login />}>
                     Already have an account? Log in here
                   </Link>
                 </div>
-                <button
-                  disabled={loading}
-                  type="submit"
-                  className={signupStyles.btn}
-                >
+                <button disabled={loading} type="submit" className={signupStyles.btn}>
                   Sign up
                 </button>
                 <div className={signupStyles.infoText}>Or sign up with:</div>
@@ -150,20 +143,14 @@ const Signup = () => {
                   >
                     Google
                   </button>
-                  <button
-                    disabled={loading}
-                    type="button"
-                    className={signupStyles.btn}
-                  >
+                  <button disabled={loading} type="button" className={signupStyles.btn}>
                     Facebook
                   </button>
                 </div>
               </div>
             </form>
           </div>
-          
         </div>
-        
       )}
     </>
   );

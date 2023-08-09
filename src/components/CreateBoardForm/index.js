@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import classNames from 'classnames/bind';
 import { v4 as uuidv4 } from 'uuid';
 
-import styles from './CreateBoardForm.module.scss';
 import Button from '../Button';
 import BackgroundForm from './_BackgroundForm';
 import { backgroundColorsList, backgroundImagesList } from '../../utils/constants';
 import { checkIcon, threeDotsIcon, xIcon } from '../../utils/icons';
+import { useAuth } from '../../contexts/AuthContext';
+import styles from './CreateBoardForm.module.scss';
 
 let cx = classNames.bind(styles);
 
@@ -16,6 +17,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
   const [bgImageValue, setBgImageValue] = useState(backgroundImagesList[0].imgSrc);
   const [bgColorValue, setBgColorValue] = useState(null);
   const [openSubForm, setOpenSubForm] = useState(false);
+  const { currentUser } = useAuth();
 
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
@@ -40,6 +42,7 @@ const CreateBoardForm = ({ handleCloseForm, handleAddBoard, onCloseCreateForm })
     if (titleValue.length > 0) {
       const newBoard = {
         boardId: `bo-${uuidv4()}`,
+        userId: `user-${currentUser.uid}`,
         boardTitle: titleValue,
         isStarred: false,
         lastVisiting: 0
