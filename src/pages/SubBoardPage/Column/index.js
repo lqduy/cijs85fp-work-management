@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo, useContext } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames/bind';
 import {
   useSortable,

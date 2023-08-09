@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import classNames from 'classnames/bind';
 import 'react-quill/dist/quill.snow.css';
@@ -17,34 +17,32 @@ const TextEditor = ({ cardId, cardDescription }) => {
   const hasInitialValues = cardId && cardDescription;
   const initialValues = cardDescription;
 
-  useEffect(() => {
-    if (cardDescription && cardDescription === '') {
-      setOpenEditor(true);
-    }
-  }, []);
-
   const handleUpdateCardDescription = () => {
-    // if (descValue !== '') {
-    const cardsListData = cardsListStorage.load();
-    const newCardsListData = cardsListData.map(card =>
-      card.cardId === cardId ? { ...card, description: descValue } : card
-    );
-    cardsListStorage.save(newCardsListData);
-
+    if (descValue !== '') {
+      const cardsListData = cardsListStorage.load();
+      const newCardsListData = cardsListData.map(card =>
+        card.cardId === cardId ? { ...card, description: descValue } : card
+      );
+      cardsListStorage.save(newCardsListData);
+    } else if (descPrevValueRef.current) {
+      setDescValue(descPrevValueRef.current);
+    }
     setOpenEditor(false);
-    // }
   };
 
-  // useEffect(() => {
-  //   if (hasInitialValues) {
-  //     setDescValue(initialValues);
-  //   } else setDescValue('');
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [initialValues]);
+  useEffect(() => {
+    if (hasInitialValues) {
+      setDescValue(initialValues);
+    } else setDescValue('');
+    if (initialValues === '') {
+      setOpenEditor(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialValues]);
 
   const controlDataHandler = e => {
     e.preventDefault();
-    handleUpdateCardDescription(e);
+    handleUpdateCardDescription();
   };
 
   const OnClickToEdit = () => {
@@ -58,8 +56,6 @@ const TextEditor = ({ cardId, cardDescription }) => {
     }
     setOpenEditor(false);
   };
-
-  // const shouldOpenEditor = openEditor || cardDescription === '';
 
   return (
     <div className={cx('wrapper')}>

@@ -15,7 +15,7 @@ export const publicRouters = [
   { path: '/', component: LandingPage }
 ];
 export const privateRouters = [
-  { path: '/', component: HomePage },
+  { path: '/homepage', component: HomePage },
   { path: '/b/:boardId', component: SubBoardPage },
   { path: '/b/:boardId/:cardId', component: SubCardPage },
   { path: '/home', component: Home },
