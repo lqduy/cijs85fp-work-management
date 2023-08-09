@@ -30,7 +30,7 @@ const Signup = () => {
       setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate('/');
+      navigate(`/u/home`);
     } catch (error) {
       setError(error.message);
     }
@@ -43,8 +43,7 @@ const Signup = () => {
       setError('');
       setLoading(true);
       await signInWithGoogle();
-      localStorage.clear();
-      navigate('/');
+      navigate(`/u/home`);
     } catch (error) {
       setError(error.message);
     }

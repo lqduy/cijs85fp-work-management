@@ -22,8 +22,9 @@ const Login = () => {
     setLoading(true);
     try {
       setError("");
-      await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      await login(emailRef.current.value, passwordRef.current.value, currentUser);
+      console.log(currentUser);
+      navigate(`/u/home`);
     } catch (error) {
       setError("Incorrect email address and / or password.");
     } finally {
@@ -36,7 +37,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await signInWithGoogle();
-      navigate("/");
+      navigate(`/u/home`);
     } catch (error) {
       setError(error.message);
     }

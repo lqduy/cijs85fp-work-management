@@ -9,15 +9,15 @@ import SubCardPage from '../pages/SubCardPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 
 export const publicRouters = [
+  { path: '/', component: LandingPage },
   { path: '/login', component: Login },
   { path: '/signup', component: Signup },
-  { path: '/not-found', component: NotFoundPage },
-  { path: '/', component: LandingPage }
+  { path: '/not-found', component: NotFoundPage }
 ];
 export const privateRouters = [
-  { path: '/homepage', component: HomePage },
+  { path: '/u/home', component: HomePage },
   { path: '/b/:boardId', component: SubBoardPage },
   { path: '/b/:boardId/:cardId', component: SubCardPage },
-  { path: '/home', component: Home },
+  // { path: '/home', component: Home },
   { path: '/templates', component: Templates }
 ];
