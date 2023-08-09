@@ -38,7 +38,7 @@ $subcard-width: 768px;
     z-index: 1;
 
     border-radius: 50%;
-    color: white;
+    color: var(--textColor);
 
     svg {
       vertical-align: middle;
@@ -74,6 +74,7 @@ $subcard-width: 768px;
 
   .body {
     display: flex;
+    gap: 24px;
 
     &__details {
       width: 75%;
@@ -112,6 +113,46 @@ $subcard-width: 768px;
           }
         }
       }
+
+      &--activity {
+        .activity-content {
+          .input-bar {
+            display: flex;
+            gap: 8px;
+            height: 40px;
+            margin-top: 16px;
+            .user-avatar {
+              display: block;
+
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+
+              background-color: plum;
+              text-align: center;
+              p {
+                margin: 0;
+                line-height: 40px;
+                font-weight: bold;
+              }
+            }
+            .input-fake {
+              flex-grow: 1;
+              border-radius: 8px;
+              border: 1px solid var(--lineColor);
+              outline: none;
+              padding: 8px;
+
+              background-color: var(--backgroundColor);
+              box-shadow: 0px 1px 1px #091e4240, 0px 0px 1px #091e424f;
+              cursor: pointer;
+              &:hover {
+                background-color: var(--backgroundColor-darker);
+              }
+            }
+          }
+        }
+      }
     }
 
     &__setting {
@@ -137,4 +178,3 @@ $subcard-width: 768px;
     }
   }
 }
-

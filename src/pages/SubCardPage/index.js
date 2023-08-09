@@ -24,6 +24,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { cardsListStorage, columnsListStorage } from '../../utils/local-storage';
 import ThemeContext from '../../contexts/ThemeContext';
 import styles from './SubCardPage.module.scss';
+import { useAuth } from '../../contexts/AuthContext';
 let cx = classNames.bind(styles);
 
 const SubCardPage = () => {
@@ -33,6 +34,7 @@ const SubCardPage = () => {
   const cardRef = useRef(null);
   const { darkMode } = useContext(ThemeContext);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const onClickOutsideSettingBox = e => {
     if (cardRef.current && !cardRef.current.contains(e.target)) {
@@ -125,7 +127,14 @@ const SubCardPage = () => {
                   <span>{commentsIcon}</span>
                   <span>Activity</span>
                 </h2>
-                <div className={cx('activity-content')}></div>
+                <div className={cx('activity-content')}>
+                  <div className={cx('input-bar')}>
+                    <span className={cx('user-avatar')}>
+                      <p>{currentUser.bc.email[0].toUpperCase()}</p>
+                    </span>
+                    <span className={cx('input-fake')}>Write a comment...</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className={cx('body__setting')}>

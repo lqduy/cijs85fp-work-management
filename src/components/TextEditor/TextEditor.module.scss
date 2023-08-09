@@ -1,26 +1,46 @@
-.card-wrapper {
+.editor-wrapper {
+  margin-top: 16px;
 
-margin: 10px;
-}
+  .editor-btn {
+    display: flex;
+    gap: 4px;
 
-.createBtn {
-    background-color: var(--createBoardBtn-bgColor);
-    color: white;
-    margin-right: 8px;
-    display: block;
-    margin: 0 5px;
-    width: 15%;
+    height: 38px;
+    margin-top: 8px;
+
+    .createBtn {
+      padding: 0 24px;
+      background-color: var(--createBoardBtn-bgColor);
+      color: white;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
-
+}
 
 .display-descr {
-    padding: 8px;
-    border: 1px solid var(--lineColor);
-    position: relative;
-}
-.editIcon {
+  position: relative;
+
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 8px;
+  border: 1px solid var(--lineColor);
+
+  background-color: var(--backgroundColor);
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .editIcon {
     position: absolute;
-    right: 15px;
-    bottom: 10px;
+    right: 4px;
+    top: 4px;
+
+    width: 32px;
+    height: 32px;
+
     cursor: pointer;
+  }
 }
