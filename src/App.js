@@ -34,6 +34,7 @@ function App() {
           darkMode,
           setDarkMode,
           sidebarOpen,
+          setSidebarOpen,
           onToggleSidebar,
           currentImg,
           setCurrentImg,
