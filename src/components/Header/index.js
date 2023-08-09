@@ -144,7 +144,7 @@ const Header = ({ onClickCreateBtn }) => {
         <Button className={cx('settingBtn')} circled>
           {bellIcon}
         </Button>
-        <Button className={cx('settingBtn')} circled>
+        <Button className={cx('settingBtn')} to={'/'} circled>
           {infoIcon}
         </Button>
         <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
