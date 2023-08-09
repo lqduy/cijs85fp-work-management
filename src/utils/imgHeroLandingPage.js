@@ -8,7 +8,13 @@ import {
   faCalendarDays,
   faBusinessTime,
 } from "@fortawesome/free-solid-svg-icons";
-
+import {
+  faFacebookF,
+  faInstagram,
+  faLinkedinIn,
+  faTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
 export const imgHeroLandingPage = [
   {
     img: "https://images.ctfassets.net/rz1oowkt5gyp/3N2U3C71rApm61cGFxnc2E/970b010002488a09a420282df5e7b43a/Carousel_Image_Boards_2x.png?w=1536&fm=webp",
@@ -111,7 +117,6 @@ export const imgHeroFooterPage = [
     detail: "Tìm hiểu về các vai trò chưa ai đảm nhiệm trong nhóm Trello.",
   },
 ];
-
 export const imgHeroFooterEndPage = {
   laws: [
     {
@@ -130,19 +135,24 @@ export const imgHeroFooterEndPage = {
 
   contact: [
     {
-      title: "Tìm hiểu về Trello",
+      icon: faInstagram,
+      link: "https://www.instagram.com/trelloapp/",
     },
     {
-      title: "Việc làm",
+      icon: faFacebookF,
+      link: "https://www.facebook.com/trelloapp/",
     },
     {
-      title: "Ứng dụng",
+      icon: faLinkedinIn,
+      link: "https://www.linkedin.com/company/trello/",
     },
     {
-      title: "Liên hệ với chúng tôi",
+      icon: faTwitter,
+      link: "https://twitter.com/trello",
     },
     {
-      title: "Liên hệ với chúng tôi",
+      icon: faYoutube,
+      link: "https://www.youtube.com/channel/UCRcOkXoOrU6sN1yCz20VmQw",
     },
   ],
 };

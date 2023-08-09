@@ -14,6 +14,7 @@ import {
   faCircleLeft,
   faCircleRight,
 } from "@fortawesome/free-regular-svg-icons";
+import { Link } from "react-router-dom";
 
 let cx = classNames.bind(styles);
 const Hero = () => {
@@ -57,12 +58,14 @@ const Hero = () => {
             </p>
           </div>
           <div className={cx("singup")}>
-            <button>Đăng ký - hoàn toàn miễn phí!</button>
+            <Link to={"/login"}>
+              <button>Đăng ký - hoàn toàn miễn phí!</button>
+            </Link>
           </div>
         </div>
         <div className={cx("hero-top-right")}>
           <div className={cx("imgBck")}>
-            <img src="https://images.ctfassets.net/rz1oowkt5gyp/75rDABL8fyMtNLlUAtBxrg/c5e145977a86c41c47e17c69410c64f7/TrelloUICollage_4x.png?w=2280&fm=webp" />
+            <img src="https://images.ctfassets.net/rz1oowkt5gyp/75rDABL8fyMtNLlUAtBxrg/c5e145977a86c41c47e17c69410c64f7/TrelloUICollage_4x.png?w=2280&fm=webp" alt="detail"/>
           </div>
         </div>
       </div>
@@ -135,10 +138,13 @@ const Hero = () => {
         {imgHeroEndPage.map((item) => {
           return (
             <div className={cx("hero-footer-img")}>
-              <img src={item.img} />
+              <img src={item.img} alt={item.title}/>
               <div className={cx("hero-footer-img-title")}>
                 <h3>
-                  <FontAwesomeIcon icon={item.icon} style={{color: item.color}}/>
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    style={{ color: item.color }}
+                  />
                   {item.title}
                 </h3>
                 <p>{item.detail}</p>
@@ -152,3 +158,4 @@ const Hero = () => {
 };
 
 export default Hero;
+  
