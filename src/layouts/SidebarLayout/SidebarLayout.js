@@ -18,6 +18,7 @@ const SidebarLayout = ({ children, mainClassName = null, sidebarClassName = null
 
   return (
     <main>
+      <Header />
       <div className="site-main-content">
         <nav className={sidebarStyles}>
           <Sidebar

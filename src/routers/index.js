@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import Templates from "../pages/Templates/Templates";
 import TemplateType from "../components/TemplatePreview/TemplatePreview";
 import LandingPage from "../pages/LandingPage/LandingPage";
+import SubCardPage from "../pages/SubCardPage"
 export const publicRouters = [
   { path: "/login", component: Login },
   { path: "/signup", component: Signup },
@@ -17,4 +18,6 @@ export const privateRouters = [
   { path: "/home", component: Home },
   { path: "/templates", component: Templates },
   { path: "/templates/preview/:boardId", component: TemplateType },
+  { path: '/b/:boardId', component: SubBoardPage },
+  { path: '/b/:boardId/:cardId', component: SubCardPage },
 ];
