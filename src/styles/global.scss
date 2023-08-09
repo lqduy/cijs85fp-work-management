@@ -35,7 +35,7 @@ body {
   @include light-theme;
 
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
@@ -47,8 +47,8 @@ body.dark-mode {
 
 .site-container {
   width: 100%;
+  // max-width: 1236px;
   height: 100%;
-
 
   main {
     position: relative;
@@ -56,14 +56,17 @@ body.dark-mode {
     outline: none;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     flex-grow: 1;
+    // max-width: 1236px;
+    // margin: 0 auto;
   }
 }
-
 
 // Layouts
 .site-main-content {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   flex: 1 1 0%;
   position: relative;
@@ -72,10 +75,15 @@ body.dark-mode {
   .site-sidebar {
     width: 16px;
     min-height: 100%;
+    height: calc(100vh - $header-height);
     z-index: 5;
-    position: relative;
-    transition: width .3s;
-    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 0.3s;
+
+    border-right: 1px solid var(--lineColor);
+    background-color: var(--sidebar-bgColor);
 
     &.open {
       width: 280px;
@@ -87,6 +95,8 @@ body.dark-mode {
     flex-direction: column;
     flex: 1 1 0%;
     overflow-y: auto;
+
+    // padding-left: 16px;
 
     .site-content {
       flex-grow: 1;

@@ -1,11 +1,27 @@
-.wrapper {
-  display: flex;
+@import '../../styles/variables';
+
+.layout-wrapper {
   max-width: 1236px;
+  margin: 0 auto;
+
+  .sidebar-wrapper {
+    // position: relative;
+    // margin-top: 40px;
+    height: fit-content;
+    background-color: transparent;
+  }
+}
+
+.wrapper {
+  height: calc(100vh - $header-height);
+  display: flex;
+  // justify-content: center;
   padding-top: 40px;
 
   .sideBody {
-    width: 75%;
+    width: 100%;
     padding: 16px;
+    margin-left: 280px;
   }
 }
 
@@ -29,7 +45,7 @@
 
   margin-top: 16px;
 
-  >* {
+  > * {
     width: calc(25% - 12px * 3 / 4);
     height: 96px;
   }

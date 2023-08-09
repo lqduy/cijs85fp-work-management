@@ -4,15 +4,20 @@ import ThemeContext from "../../contexts/ThemeContext";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 
-const SidebarLayout = ({ children }) => {
+const SidebarLayout = ({ children, mainClassName = null, sidebarClassName = null, onClickCreateBtn }) => {
   const { sidebarOpen, onToggleSidebar } = useContext(ThemeContext);
 
-  const sidebarStyles = classNames("site-sidebar", {
-    open: sidebarOpen,
+  const sidebarStyles = classNames('site-sidebar', {
+    open: sidebarOpen
   });
+
+  const sidebarHomepageStyles = {
+    background: 'transparent',
+    borderRight: 'none'
+  };
+
   return (
     <main>
-       <Header/>
       <div className="site-main-content">
         <nav className={sidebarStyles}>
           <Sidebar

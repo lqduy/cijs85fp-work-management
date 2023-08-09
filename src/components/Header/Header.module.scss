@@ -9,7 +9,7 @@
   padding: 8px;
   border-bottom: 1px solid var(--lineColor);
 
-  >* {
+  > * {
     display: flex;
   }
 }
@@ -17,12 +17,7 @@
 .menu {
   gap: 12px;
 
-  .createBtn {
-    background-color: var(--createBoardBtn-bgColor);
-    color: white;
-  }
-
-  >*:not(.createBtn):hover {
+  > *:not(.createBtn):hover {
     background-color: var(--backgroundColor-darker);
   }
 }
@@ -35,15 +30,56 @@
 
     height: 100%;
   }
+}
+.setting-item__wrap {
+  position: relative;
 
-  .settingBtn {
-    width: 32px;
+  .createBtn,
+  .userBtn {
     height: 32px;
-    padding: 8px;
+    border-radius: 3px;
+  }
 
-    &:hover {
-      background-color: var(--backgroundColor-darker);
+  .createBtn {
+    color: white;
+    background-color: var(--createBoardBtn-bgColor);
+  }
+
+  .menu-subbox {
+    position: absolute;
+
+    bottom: 0;
+    transform: translateY(calc(100% + 12px));
+
+    background-color: var(--backgroundColor-darker);
+
+    &__btn {
+      justify-content: start;
+      &:hover {
+        background-color: var(--backgroundColor-lighter);
+      }
     }
+  }
+  .left-align {
+    left: 0;
+  }
+  .right-align {
+    right: 0;
+  }
+}
+
+.userBtn__wrap {
+  padding-left: 10px;
+  border-left: 1px solid var(--lineColor);
+}
+
+.settingBtn {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+
+  &:hover {
+    background-color: var(--backgroundColor-darker);
   }
 }
 
