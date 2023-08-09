@@ -7,12 +7,15 @@ import styles from './MenuBox.module.scss';
 
 let cx = classNames.bind(styles);
 
-const MenuBox = ({ children, className, boxTitle = false, onClickX }) => {
+const MenuBox = ({ children, className, boxTitle = false, onClickX, resetFunction }) => {
   const boxRef = useRef(null);
 
   const onClickOutsideSettingBox = e => {
     if (boxRef.current && !boxRef.current.contains(e.target)) {
       onClickX();
+      if (resetFunction) {
+        resetFunction();
+      }
     }
   };
 

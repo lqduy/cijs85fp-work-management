@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { OPEN_EDITOR } from "../../utils/constants";
 import ReactQuill from "react-quill";
@@ -7,108 +6,82 @@ import "react-quill/dist/quill.snow.css";
 import styles from "./TextEditor.module.scss";
 import Button from "../Button";
 import { cardsListStorage } from "../../utils/local-storage";
-import { penIcon } from "../../utils/icons";
-=======
-import React, { useCallback, useEffect, useState, useRef } from 'react';
-import ReactQuill from 'react-quill';
-import classNames from 'classnames/bind';
-import 'react-quill/dist/quill.snow.css';
-import styles from './TextEditor.module.scss';
-import Button from '../Button';
-import { cardsListStorage } from '../../utils/local-storage';
-import { penIcon } from '../../utils/icons';
->>>>>>> 9b543f125dd89f3307630890b44a06f529a8d06a
+import { penIcon, xIcon } from '../../utils/icons';
+
 
 let cx = classNames.bind(styles);
 
 const TextEditor = ({ cardId, cardDescription }) => {
-  const [descValue, setDescValue] = useState(cardDescription);
-  const [editor, setEditor] = useState(OPEN_EDITOR.CLOSE);
+  const [descValue, setDescValue] = useState(cardDescription);  
+  const [openEditor, setOpenEditor] = useState(false);
+  const descPrevValueRef = useRef(null);  
   const hasInitialValues = cardId && cardDescription;
   const initialValues = cardDescription;
 
   const handleUpdateCardDescription = () => {
     if (descValue !== '') {
       const cardsListData = cardsListStorage.load();
-      const newCardsListData = cardsListData.map(card =>
+      const newCardsListData = cardsListData.map((card) =>
         card.cardId === cardId ? { ...card, description: descValue } : card
       );
       cardsListStorage.save(newCardsListData);
+      setOpenEditor(false);
+
     }
-    setEditor(OPEN_EDITOR.CLOSE);
   };
 
   useEffect(() => {
     if (hasInitialValues) {
       setDescValue(initialValues);
     } else setDescValue("");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [initialValues]);
 
-  const controlDataHandler = e => {
+  const controlDataHandler = (e) => {
     e.preventDefault();
     handleUpdateCardDescription(e);
   };
+  const OnClickToEdit = () => {
+    descPrevValueRef.current = descValue;
+    setOpenEditor(true);
+  };
 
+  const onClickToCancelEdit = () => {
+    if (descPrevValueRef.current) {
+      setDescValue(descPrevValueRef.current);
+    }
+    setOpenEditor(false);
+  };
+
+  const shouldOpenEditor = openEditor || cardDescription === '';
   return (
-<<<<<<< HEAD
-    <div className={cx("card-wrapper")}>
-      <div className={cx("text-editor-wrapper")}>
-        {editor === OPEN_EDITOR.OPEN ? (
+    <div className={cx('wrapper')}>
+      {shouldOpenEditor && (
+        <div className={cx('editor-wrapper')}>
           <ReactQuill
             theme="snow"
             value={descValue}
             onChange={setDescValue}
-            className={cx("text-editor-wrapper")}
+            style={{ backgroundColor: 'var(--backgroundColor)', color: 'var(--textColor)' }}
           />
-        ) : (
-          <ReactQuill
-            theme="snow"
-            value={descValue}
-            onChange={setDescValue}
-            className={cx("hidden")}
-          />
-        )}
+          <div className={cx('editor-btn')}>
+            <Button className={cx('createBtn')} onClick={controlDataHandler}>
+              Save
+            </Button>
+            {openEditor && <Button onClick={onClickToCancelEdit}>{xIcon}</Button>}
+          </div>
+        </div>
+      )}
+      {!shouldOpenEditor && (
+        <div className={cx('display-descr')}>
+          <div dangerouslySetInnerHTML={{ __html: descValue }} />
+          <Button className={cx('editIcon')} onClick={OnClickToEdit}>
+            {penIcon}
+          </Button>
+        </div>
+      )}
       </div>
-
-      <Button
-        className={
-          editor === OPEN_EDITOR.OPEN ? cx("createBtn") : cx("hidden")
-        }
-        onClick={controlDataHandler}
-      >
-        Save
-      </Button>
-
-      <div
-        className={
-          editor === OPEN_EDITOR.OPEN
-            ? cx("hidden")
-            : cx("display-descr")
-        }
-      >
-        <div dangerouslySetInnerHTML={{ __html: descValue }} />
-        <span
-          className={
-            editor === OPEN_EDITOR.OPEN
-              ? cx("hidden") :  cx("edit-icon")}
-          onClick={() => setEditor(OPEN_EDITOR.OPEN)}
-        >
-=======
-    <div className={cx('card-wrapper')}>
-      <div className={cx('card-wrapper')}>
-        <ReactQuill theme="snow" value={descValue} onChange={setDescValue} />
-      </div>
-      <Button className={cx('createBtn')} onClick={controlDataHandler}>
-        Save
-      </Button>
-      <div className={cx('display-descr')}>
-        <div dangerouslySetInnerHTML={{ __html: descValue }} />
-        <span className={cx('editIcon')} onClick={() => controlDataHandler}>
->>>>>>> 9b543f125dd89f3307630890b44a06f529a8d06a
-          {penIcon}
-        </span>
-      </div>
-    </div>
   );
 };
 

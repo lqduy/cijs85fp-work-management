@@ -147,12 +147,11 @@ export const CARD_SETTING_SUBBOX = {
   EDIT_LABELS: 'edit-labels',
   CHANGE_COVER: 'change-cover'
 };
-
-export const OPEN_EDITOR = {
-  OPEN: 'open',
-  CLOSE: 'close'}
-  
 export const HEADER_SUBMENU = {
   CREATE_BOARD: 'create-board',
   USER: 'user'
+};
+
+export const SUBBOARD_HEADER_SUBMENU = {
+  SETTING: 'setting'
 };

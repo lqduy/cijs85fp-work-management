@@ -64,4 +64,46 @@
   > * > button:hover {
     background-color: var(--lineColor);
   }
+  .setting-item__wrap {
+    position: relative;
+
+    .right-align {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      transform: translateY(calc(100% + 12px));
+
+      .setting-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .remove-board {
+        .remove-btn {
+          justify-content: start;
+          color: var(--bs-danger);
+        }
+        .disable-hover {
+          &:hover {
+            background-color: unset;
+          }
+        }
+        .preparing-remove-btn {
+          display: flex;
+          justify-content: space-between;
+          gap: 4px;
+          height: 28px;
+
+          .submit-remove-btn {
+            background-color: var(--bs-danger);
+            color: white;
+          }
+          .cancel-remove-btn {
+            background-color: var(--backgroundColor-lighter);
+          }
+        }
+      }
+    }
+  }
 }

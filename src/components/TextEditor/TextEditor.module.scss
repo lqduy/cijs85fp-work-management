@@ -1,45 +1,44 @@
-.card-wrapper {
-position: relative;
-margin: 10px;
-height: 180px;
-}
+.editor-wrapper {
+  margin-top: 16px;
 
-.createBtn {
-    background-color: var(--createBoardBtn-bgColor);
-    color: white;
-    margin-right: 8px;
-    display: block;
-    margin: 0 5px;
-    width: 15%;
-    float: right;
-    z-index: 100;
-    bottom: 0px;
-    right: 10px;
-    position: absolute
+  .editor-btn {
+    display: flex;
+    gap: 4px;
+
+    height: 38px;
+    margin-top: 8px;
+
+    .createBtn {
+      padding: 0 24px;
+      background-color: var(--createBoardBtn-bgColor);
+      color: white;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
-.text-editor-wrapper {
-    position: absolute;
-    top: 0px;
-    width: 100%;
 }
 
 .display-descr {
-    padding: 10px;
-    border: 1px solid var(--lineColor);
-    position: relative;
-    position: absolute;
-    top: 0px;
-    left: 5px;
-    width: 100%;
-}
-.editIcon {
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-    cursor: pointer;
-    z-index: 10
-}
+  position: relative;
 
-.hidden { 
-    display: none !important;
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 8px;
+  border: 1px solid var(--lineColor);
+
+  background-color: var(--backgroundColor);
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .editIcon {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
 }
