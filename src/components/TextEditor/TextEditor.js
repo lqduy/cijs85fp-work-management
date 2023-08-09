@@ -17,24 +17,30 @@ const TextEditor = ({ cardId, cardDescription }) => {
   const hasInitialValues = cardId && cardDescription;
   const initialValues = cardDescription;
 
-  const handleUpdateCardDescription = () => {
-    if (descValue !== '') {
-      const cardsListData = cardsListStorage.load();
-      const newCardsListData = cardsListData.map(card =>
-        card.cardId === cardId ? { ...card, description: descValue } : card
-      );
-      cardsListStorage.save(newCardsListData);
-
-      setOpenEditor(false);
+  useEffect(() => {
+    if (cardDescription && cardDescription === '') {
+      setOpenEditor(true);
     }
+  }, []);
+
+  const handleUpdateCardDescription = () => {
+    // if (descValue !== '') {
+    const cardsListData = cardsListStorage.load();
+    const newCardsListData = cardsListData.map(card =>
+      card.cardId === cardId ? { ...card, description: descValue } : card
+    );
+    cardsListStorage.save(newCardsListData);
+
+    setOpenEditor(false);
+    // }
   };
 
-  useEffect(() => {
-    if (hasInitialValues) {
-      setDescValue(initialValues);
-    } else setDescValue('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialValues]);
+  // useEffect(() => {
+  //   if (hasInitialValues) {
+  //     setDescValue(initialValues);
+  //   } else setDescValue('');
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [initialValues]);
 
   const controlDataHandler = e => {
     e.preventDefault();
@@ -53,11 +59,11 @@ const TextEditor = ({ cardId, cardDescription }) => {
     setOpenEditor(false);
   };
 
-  const shouldOpenEditor = openEditor || cardDescription === '';
+  // const shouldOpenEditor = openEditor || cardDescription === '';
 
   return (
     <div className={cx('wrapper')}>
-      {shouldOpenEditor && (
+      {openEditor && (
         <div className={cx('editor-wrapper')}>
           <ReactQuill
             theme="snow"
@@ -73,7 +79,7 @@ const TextEditor = ({ cardId, cardDescription }) => {
           </div>
         </div>
       )}
-      {!shouldOpenEditor && (
+      {!openEditor && (
         <div className={cx('display-descr')}>
           <div dangerouslySetInnerHTML={{ __html: descValue }} />
           <Button className={cx('editIcon')} onClick={OnClickToEdit}>
