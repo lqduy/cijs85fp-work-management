@@ -148,3 +148,7 @@ export const CARD_SETTING_SUBBOX = {
   CHANGE_COVER: 'change-cover'
 };
 
+export const HEADER_SUBMENU = {
+  CREATE_BOARD: 'create-board',
+  USER: 'user'
+};

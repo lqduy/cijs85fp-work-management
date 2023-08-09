@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect, useMemo, useContext } from 'react';
 import classNames from 'classnames/bind';
 import {
   useSortable,
@@ -69,7 +69,7 @@ const Column = ({
     transform: CSS.Translate.toString(transform),
     transition,
     height: '100%',
-    opacity: isDragging ? 0.5 : undefined,
+    opacity: isDragging ? 0.5 : undefined
   };
 
   const handleDndCard = () => {

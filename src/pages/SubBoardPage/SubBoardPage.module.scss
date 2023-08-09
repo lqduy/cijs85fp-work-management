@@ -5,8 +5,8 @@
   @include background-img;
 
   position: relative;
-
   height: calc(100vh - $header-height);
+  padding-left: 16px;
 }
 .columns-list {
   display: flex;
@@ -14,7 +14,7 @@
 
   height: calc(100vh - $header-height - $subBoardHeader-height);
   padding: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
 
   &__core {
     display: flex;
@@ -66,4 +66,8 @@
   height: calc(100% - $subBoardHeader-height);
   background-color: rgba(0, 0, 0, 0.4); /* Màu nền với độ mờ phủ (opacity) 0.5 */
   pointer-events: none;
+}
+
+.sidebar-open {
+  padding-left: 280px;
 }

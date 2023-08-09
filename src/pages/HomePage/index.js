@@ -1,66 +1,67 @@
-import React, { useState, useEffect } from "react";
-import classNames from "classnames/bind";
-import { v4 as uuidv4 } from "uuid";
-import { useAuth } from "../../contexts/AuthContext";
-import styles from "./HomePage.module.scss";
-import Button from "../../components/Button";
-import CreateBoardForm from "../../components/CreateBoardForm";
-import {
-  boardsListStorage,
-  columnsListStorage,
-} from "../../utils/local-storage";
-import { clockIcon, starRegularIcon, starSolidIcon } from "../../utils/icons";
-import SidebarLayout from "../../layouts/SidebarLayout/SidebarLayout";
-
+import React, { useState, useEffect } from 'react';
+import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import Button from '../../components/Button';
+import CreateBoardForm from '../../components/CreateBoardForm';
+import { useAuth } from '../../contexts/AuthContext';
+import { boardsListStorage, columnsListStorage } from '../../utils/local-storage';
+import { clockIcon, starRegularIcon, starSolidIcon } from '../../utils/icons';
+import SidebarLayout from '../../layouts/SidebarLayout/SidebarLayout';
+import styles from './HomePage.module.scss';
 let cx = classNames.bind(styles);
 
 const HomePage = () => {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [boardsList, setBoardsList] = useState([]);
   const [openCreateForm, setOpenCreateForm] = useState(false);
+  const navigate = useNavigate();
 
   const onFetchBoardsData = () => {
-    const data = boardsListStorage.load();
+    const userId = `user-${currentUser.uid}`;
+    const data = boardsListStorage.load().filter(board => board.userId === userId);
     setBoardsList(data);
   };
-  console.log(currentUser)
   useEffect(() => {
     onFetchBoardsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleAddBoard = (newBoard) => {
+  const handleAddBoard = newBoard => {
     const newBoardsList = [...boardsList, newBoard];
     setBoardsList(newBoardsList);
-    boardsListStorage.save(newBoardsList);
+
+    const boardsListData = boardsListStorage.load();
+    const newBoardsListData = [...boardsListData, newBoard];
+    boardsListStorage.save(newBoardsListData);
 
     const newColumns = [
       {
         parentId: newBoard.boardId,
         columnId: `co-${uuidv4()}`,
-        columnTitle: "Todo",
+        columnTitle: 'Todo'
       },
       {
         parentId: newBoard.boardId,
         columnId: `co-${uuidv4()}`,
-        columnTitle: "In Progress",
+        columnTitle: 'In Progress'
       },
       {
         parentId: newBoard.boardId,
         columnId: `co-${uuidv4()}`,
-        columnTitle: "Completed",
-      },
+        columnTitle: 'Completed'
+      }
     ];
     const columnsListData = columnsListStorage.load();
     const newColumnList = [...columnsListData, ...newColumns];
     columnsListStorage.save(newColumnList);
     setOpenCreateForm(false);
+    navigate(`/b/${newBoard.boardId}`);
   };
 
-  const handleSetStarByBoardId = (boardId) => {
-    const newBoardList = boardsList.map((board) =>
-      board.boardId === boardId
-        ? { ...board, isStarred: !board.isStarred }
-        : board
+  const handleSetStarByBoardId = boardId => {
+    const newBoardList = boardsList.map(board =>
+      board.boardId === boardId ? { ...board, isStarred: !board.isStarred } : board
     );
     setBoardsList(newBoardList);
     boardsListStorage.save(newBoardList);
@@ -69,17 +70,17 @@ const HomePage = () => {
   let starredBoardsElements = [];
   let lastestVistingBoardsElements = ([...boardsList] || [])
     .sort((board, nextBoard) => +nextBoard.lastVisiting - +board.lastVisiting)
-    .filter((board) => board.lastVisiting > 0)
+    .filter(board => board.lastVisiting > 0)
     .slice(0, 4);
-  const boardsListElements = (boardsList || []).map((board) => {
+  const boardsListElements = (boardsList || []).map(board => {
     const boardElements = (
-      <div key={board.boardId} className={cx("boardWrap")}>
+      <div key={board.boardId} className={cx('boardWrap')}>
         <Button
-          className={cx("board")}
+          className={cx('board')}
           to={`/b/${board.boardId}`}
           style={
             (board.boardImageBg && {
-              backgroundImage: `url(${board.boardImageBg})`,
+              backgroundImage: `url(${board.boardImageBg})`
             }) ||
             (board.boardColorBg && { backgroundColor: board.boardColorBg })
           }
@@ -88,7 +89,7 @@ const HomePage = () => {
         </Button>
         {
           <span
-            className={cx("starIcon", { yellowStar: board.isStarred })}
+            className={cx('starIcon', { yellowStar: board.isStarred })}
             onClick={() => handleSetStarByBoardId(board.boardId)}
           >
             {board.isStarred ? starSolidIcon : starRegularIcon}
@@ -100,44 +101,47 @@ const HomePage = () => {
       starredBoardsElements = [...starredBoardsElements, boardElements];
     }
     const isTop4RecentlyVisited = lastestVistingBoardsElements.some(
-      (vistedBoard) => vistedBoard.boardId === board.boardId
+      vistedBoard => vistedBoard.boardId === board.boardId
     );
     if (isTop4RecentlyVisited) {
-      lastestVistingBoardsElements = lastestVistingBoardsElements.map(
-        (vistedBoard) =>
-          vistedBoard.boardId === board.boardId ? boardElements : vistedBoard
+      lastestVistingBoardsElements = lastestVistingBoardsElements.map(vistedBoard =>
+        vistedBoard.boardId === board.boardId ? boardElements : vistedBoard
       );
     }
-
     return boardElements;
   });
 
   return (
-    <SidebarLayout>
-      <div className={cx("wrapper")}>
-        <div className={cx("sideBody")}>
-          <section className={cx("section")}>
-            <h3>
-              <span>{starRegularIcon}</span>
-              <span>Starred boards</span>
-            </h3>
-            <div className={cx("boards")}>{starredBoardsElements}</div>
-          </section>
-          <section className={cx("section")}>
-            <h3>
-              <span>{clockIcon}</span>
-              <span>Recently viewed</span>
-            </h3>
-            <div className={cx("boards")}>{lastestVistingBoardsElements}</div>
-          </section>
-          <section className={cx("section")}>
+    <SidebarLayout
+      mainClassName={cx('layout-wrapper')}
+      sidebarClassName={cx('sidebar-wrapper')}
+      onClickCreateBtn={() => setOpenCreateForm(true)}
+    >
+      <div className={cx('wrapper')}>
+        <div className={cx('sideBody')}>
+          {starredBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{starRegularIcon}</span>
+                <span>Starred boards</span>
+              </h3>
+              <div className={cx('boards')}>{starredBoardsElements}</div>
+            </section>
+          )}
+          {lastestVistingBoardsElements.length > 0 && (
+            <section className={cx('section')}>
+              <h3>
+                <span>{clockIcon}</span>
+                <span>Recently viewed</span>
+              </h3>
+              <div className={cx('boards')}>{lastestVistingBoardsElements}</div>
+            </section>
+          )}
+          <section className={cx('section')}>
             <h3>YOUR WORKSPACES</h3>
-            <div className={cx("boards")}>
+            <div className={cx('boards')}>
               {boardsListElements}
-              <Button
-                className={cx("createNewBoardBtn")}
-                onClick={() => setOpenCreateForm(true)}
-              >
+              <Button className={cx('createNewBoardBtn')} onClick={() => setOpenCreateForm(true)}>
                 Create new board
               </Button>
             </div>
