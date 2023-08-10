@@ -1,36 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import classNames from 'classnames';
-import 'firebase/firestore';
-import 'firebase/auth';
-import ThemeContext from './contexts/ThemeContext';
-import { themeModeStorage } from './utils/local-storage';
-import PrivateRoute from './routers/PrivateRoute';
-import { privateRouters, publicRouters } from './routers';
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import classNames from "classnames";
+import "firebase/firestore";
+import "firebase/auth";
+import ThemeContext from "./contexts/ThemeContext";
+import { themeModeStorage } from "./utils/local-storage";
+import PrivateRoute from "./routers/PrivateRoute";
+import { privateRouters, publicRouters } from "./routers";
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => themeModeStorage.load());
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [currentImg, setCurrentImg] = useState(null);
 
   useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
+    document.body.classList.toggle("dark-mode", darkMode);
   }, [darkMode]);
 
   const onToggleSidebar = () => {
-    setSidebarOpen(prev => !prev);
+    setSidebarOpen((prev) => !prev);
   };
 
-  const sidebarStyles = classNames('site-sidebar', {
-    ['open']: sidebarOpen
+  const sidebarStyles = classNames("site-sidebar", {
+    ["open"]: sidebarOpen,
   });
 
   return (
     <AuthProvider>
       <ThemeContext.Provider
-        value={{ darkMode, setDarkMode, sidebarOpen, onToggleSidebar, setSidebarOpen }}
+        value={{
+          darkMode,
+          setDarkMode,
+          sidebarOpen,
+          setSidebarOpen,
+          onToggleSidebar,
+          currentImg,
+          setCurrentImg,
+        }}
       >
         <div className="site-container">
+         
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;

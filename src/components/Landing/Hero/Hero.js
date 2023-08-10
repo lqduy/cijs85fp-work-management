@@ -4,12 +4,16 @@ import styles from './Hero.module.scss';
 import {
   imgHeroLandingPage,
   imgHeroEndPage,
-  imgHeroRdLandingPage
+  imgHeroRdLandingPage,
 } from '../../../utils/imgHeroLandingPage';
 import Carousel from '../Carousel/Carousel';
 import Slide from '../Slide/Slide';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleDot, faCircleLeft, faCircleRight } from '@fortawesome/free-regular-svg-icons';
+import {
+  faCircleDot,
+  faCircleLeft,
+  faCircleRight,
+} from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import { arrowRightIcon } from '../../../utils/icons';
@@ -21,7 +25,7 @@ const Hero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-  const updateIndex = newIndex => {
+  const updateIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex >= imgHeroLandingPage.length) {
@@ -29,7 +33,7 @@ const Hero = () => {
     }
     setActiveIndex(newIndex);
   };
-  const updateSlideIndex = newIndex => {
+  const updateSlideIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex >= imgHeroRdLandingPage.length) {
@@ -43,10 +47,13 @@ const Hero = () => {
         <div className={cx('hero-top-left')}>
           <div className={cx('descript')}>
             <h1>
-              Work Management tập hợp tất cả nhiệm vụ, thành viên nhóm và công cụ của bạn lại với
-              nhau
+              Work Management tập hợp tất cả nhiệm vụ, thành viên nhóm và công
+              cụ của bạn lại với nhau
             </h1>
-            <p>Duy trì mọi thứ ở cùng một nơi—dù cho nhóm của bạn không ở cùng nhau.</p>
+            <p>
+              Duy trì mọi thứ ở cùng một nơi—dù cho nhóm của bạn không ở cùng
+              nhau.
+            </p>
           </div>
           <div className={cx('singup')}>
             <Link to={!hasCurrentUser ? '/signup' : '/u/home'}>
@@ -80,7 +87,7 @@ const Hero = () => {
             className={cx('imgDetail')}
             style={{ transform: `translate(-${activeIndex * 100}%)` }}
           >
-            {imgHeroLandingPage.map(item => {
+            {imgHeroLandingPage.map((item) => {
               return <Carousel item={item} width={'100%'} />;
             })}
           </div>
@@ -88,7 +95,12 @@ const Hero = () => {
             {imgHeroLandingPage.map((item, index) => {
               return (
                 <button onClick={() => updateIndex(index)}>
-                  <span className={cx('symbol', `${index === activeIndex ? 'active' : ''}`)}>
+                  <span
+                    className={cx(
+                      'symbol',
+                      `${index === activeIndex ? 'active' : ''}`
+                    )}
+                  >
                     <FontAwesomeIcon icon={faCircleDot} />
                   </span>
                 </button>
@@ -117,7 +129,7 @@ const Hero = () => {
             className={cx('itemCarousel')}
             style={{ transform: `translate(-${activeSlideIndex * 100}%)` }}
           >
-            {imgHeroRdLandingPage.map(item => {
+            {imgHeroRdLandingPage.map((item) => {
               return <Slide item={item} />;
             })}
           </div>
@@ -127,17 +139,20 @@ const Hero = () => {
         <div className={cx('hero-footer-title')}>
           <h2>Theo dõi công việc theo một cách hoàn toàn mới</h2>
           <h3>
-            Xem các dự án của nhóm từ mọi góc độ và mang lại góc nhìn mới mẻ cho nhiệm vụ đang thực
-            hiện.
+            Xem các dự án của nhóm từ mọi góc độ và mang lại góc nhìn mới mẻ cho
+            nhiệm vụ đang thực hiện.
           </h3>
         </div>
-        {imgHeroEndPage.map(item => {
+        {imgHeroEndPage.map((item) => {
           return (
             <div className={cx('hero-footer-img')}>
               <img src={item.img} alt={item.title} />
               <div className={cx('hero-footer-img-title')}>
                 <h3>
-                  <FontAwesomeIcon icon={item.icon} style={{ color: item.color }} />
+                  <FontAwesomeIcon
+                    icon={item.icon}
+                    style={{ color: item.color }}
+                  />
                   {item.title}
                 </h3>
                 <p>{item.detail}</p>

@@ -13,7 +13,7 @@ const Header = () => {
       <div className={cx('logo')}>
         <img width="auto" height="40" src="/assets/logo.png" alt="logo" />
       </div>
-      {titleNavHeaderPage.map(item => {
+      {titleNavHeaderPage.map((item) => {
         return (
           <nav className={cx('navbar navbar-expand-lg bg-body')}>
             <div className="container-fluid">
