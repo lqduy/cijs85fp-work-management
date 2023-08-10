@@ -2,10 +2,12 @@ import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './HeaderLanding.module.scss';
 import { titleNavHeaderPage } from '../../../utils/imgHeroLandingPage';
-import HomePage from '../../../pages/HomePage';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../contexts/AuthContext';
 let cx = classNames.bind(styles);
 const Header = () => {
+  const { currentUser } = useAuth();
+  const hasCurrentUser = !!currentUser;
   return (
     <div className={cx('header')}>
       <div className={cx('logo')}>
@@ -65,7 +67,9 @@ const Header = () => {
       })}
       <div className={cx('btnAccount')}>
         <Link to="/u/home">
-          <button>Đến bảng của bạn</button>
+          <button>
+            {!hasCurrentUser ? 'Đăng ký ngay' : 'Mở bảng của bạn'}
+          </button>
         </Link>
       </div>
     </div>
