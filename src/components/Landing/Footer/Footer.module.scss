@@ -1,92 +1,93 @@
 .footer {
-    background-color: rgb(23, 43, 77);
-    color: rgb(255, 255, 255);
-    height: 200px;
+  background-color: rgb(23, 43, 77);
+  color: rgb(255, 255, 255);
+  height: 200px;
 
-    .footer-top {
+  .footer-top {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    .descript {
+      width: 270px;
+      padding: 20px;
+      transition: 0.3s;
+      margin-top: 10px;
+      img {
+        vertical-align: middle;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1.25rem;
+      }
+      &.text:hover {
+        background-color: #3f66aa;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  .footer-bot {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .translate {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      select {
+        font-size: 1.8rem;
+        color: #ffffff;
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+    }
+
+    .laws {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      .law-item {
+        font-weight: 300;
+        font-size: 1.3rem;
+      }
+    }
+
+    .contact {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+
+      .contact-item {
+        width: 25px;
+        height: 25px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
-        gap: 30px;
-
-        .descript {
-            width: 270px;
-            padding: 20px;
-            transition: .3s;
-            margin-top: 10px;
-
-            h3 {
-                font-size: 1.5rem;
-            }
-
-            p {
-                font-size: 1.25rem;
-            }
-            &.text:hover {
-                background-color: #3f66aa;
-                border-radius: 6px;
-            }
-
-        }
-    }
-
-    .footer-bot {
-        display: flex;
-        justify-content: space-around;
         align-items: center;
 
-        .translate {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-
-            select {
-                font-size: 1.8rem;
-                color: #FFFFFF;
-                border: none;
-                outline: none;
-                background-color: transparent;
-            }
+        svg {
+          width: 15px;
+          height: 15px;
+          transition: 0.3s;
         }
 
-        .laws {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-
-            .law-item {
-                font-weight: 300;
-                font-size: 1.3rem;
-            }
-
+        svg:hover {
+          transform: scale(0.8);
         }
-
-        .contact {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-
-            .contact-item {
-                width: 25px;
-                height: 25px;
-                border: 2px solid #FFFFFF;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                svg {
-                    width: 15px;
-                    height: 15px;
-                    transition: .3s;
-                }
-
-                svg:hover {
-                    transform: scale(0.8);
-                }
-            }
-        }
+      }
     }
+  }
 }

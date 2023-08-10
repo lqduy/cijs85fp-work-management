@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <div className={cx('header')}>
       <div className={cx('logo')}>
-        <img width="100" height="40" src="/assets/logo.png" alt="logo" />
+        <img width="auto" height="40" src="/assets/logo.png" alt="logo" />
       </div>
       {titleNavHeaderPage.map(item => {
         return (

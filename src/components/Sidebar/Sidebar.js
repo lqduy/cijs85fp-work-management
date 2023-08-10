@@ -52,7 +52,7 @@ const Sidebar = ({ onToggleSidebar, sidebarOpen, sidebarClassName }) => {
       )}
       <div className={sidebarContainerStyles}>
         <div className={cx('sidebar-top')}>
-          <Link to={'/'}>
+          <Link to={'/u/home'}>
             <FontAwesomeIcon icon={faSquarePollVertical} />
             Board
           </Link>
@@ -72,10 +72,12 @@ const Sidebar = ({ onToggleSidebar, sidebarOpen, sidebarClassName }) => {
           </div>
           <ul className={cx('sidebar-workspaces__list')}>
             <li className={cx('dropdown-item')}>
-              <span className={cx('dropdown-text')}>
-                <FontAwesomeIcon icon={faSuitcase} />
-                Getting started
-              </span>
+              <Link to={'/'}>
+                <span className={cx('dropdown-text')}>
+                  <FontAwesomeIcon icon={faSuitcase} />
+                  Getting started
+                </span>
+              </Link>
             </li>
             <li className={cx('dropdown-item')}>
               <span className={cx('dropdown-text')}>

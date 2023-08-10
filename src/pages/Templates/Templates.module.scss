@@ -1,7 +1,10 @@
+@import '../../styles/variables';
+
 .wrapper {
   padding: 50px;
   width: max-content;
-  height:max-content;
+  // height:max-content;
+  height: calc(100vh - $header-height);
   margin: 0 auto;
 
   .theme-top {
@@ -32,9 +35,9 @@
           padding-left: 10px;
         }
 
-        svg {}
+        svg {
+        }
       }
-
     }
 
     .theme-list-categories {
@@ -52,8 +55,7 @@
         justify-content: center;
         align-items: center;
         gap: 10px;
-        transition: .3s;
-
+        transition: 0.3s;
       }
 
       li:hover {

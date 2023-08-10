@@ -100,11 +100,12 @@ const Header = ({ onClickCreateBtn }) => {
   };
 
   const userName = useMemo(() => currentUser.bc.email.split('@')[0], [currentUser]);
+  const logoElement = <img src="/assets/logo-1.png" alt="Work M Logo" height="31px" width="auto" />;
 
   return (
     <header className={cx('header')}>
       <nav className={cx('menu')}>
-        <Button leftIcon={tableIcon} to={'/'}>
+        <Button leftIcon={logoElement} to={'/u/home'}>
           Work M
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
