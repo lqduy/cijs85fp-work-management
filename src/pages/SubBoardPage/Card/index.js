@@ -22,6 +22,7 @@ import { CARD_SETTING_SUBBOX, coverColorsListData } from '../../../utils/constan
 import ChangeCoverSubBox from './SettingSubBox/ChangeCoverSubBox';
 import ThemeContext from '../../../contexts/ThemeContext';
 import { useParams } from 'react-router-dom';
+import EditDatesSubBox from './SettingSubBox/EditDatesSubBox';
 
 let cx = classNames.bind(styles);
 
@@ -256,9 +257,18 @@ const Card = ({
         <Button leftIcon={copyIcon} className={cx('setting-item')}>
           Duplicate
         </Button>
-        <Button leftIcon={clockIcon} className={cx('setting-item')}>
-          Edit dates
-        </Button>
+        <div className={cx('setting-part')}>
+          <Button
+            leftIcon={clockIcon}
+            className={cx('setting-item')}
+            onClick={() => setOpenSettingSubBox(CARD_SETTING_SUBBOX.EDIT_DATES)}
+          >
+            Edit dates
+          </Button>
+          {openSettingSubBox === CARD_SETTING_SUBBOX.EDIT_DATES && (
+            <EditDatesSubBox onClickX={() => setOpenSettingSubBox(null)} />
+          )}
+        </div>
         <Button
           leftIcon={trashIcon}
           className={cx('setting-item', 'remove-column-btn')}

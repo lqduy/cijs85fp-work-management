@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 200px;
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 900;
+    background-color: #ffffff;
+    box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+
+
+    .btnAccount {
+        position: fixed;
+        right: 50px;
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        button {
+            border-radius: 10px;
+            width: 170px;
+            height: 50px;
+            background-color: #172b4d;
+            border: none;
+            outline: none;
+            transition: .3s;
+        }
+        button:hover{
+            transform: scale(1.1);
+            background-color: #345794;
+        }
+    }
+}

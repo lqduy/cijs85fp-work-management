@@ -16,7 +16,7 @@ const Footer = () => {
     <div className={cx("footer")}>
       <div className={cx("footer-top")}>
         <div className={cx("descript")}>
-          <img width="200" height="80" src="/assets/logo.png" alt="logo" />
+          <img width="200" height="auto" src="/assets/logo.png" alt="logo" />
         </div>
         {imgHeroFooterPage.map((item) => {
           return (

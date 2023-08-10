@@ -104,8 +104,8 @@ const Header = ({ onClickCreateBtn }) => {
   return (
     <header className={cx('header')}>
       <nav className={cx('menu')}>
-        <Button leftIcon={tableIcon} to={'/'}>
-          Work M
+        <Button to={'/u/home'} className={cx('logo-btn')}>
+          <img src="/assets/logo.png" alt="Work M Logo" height="24px" width="auto" />
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
         <Button rigthIcon={downCaretIcon}>Templates</Button>
@@ -144,7 +144,7 @@ const Header = ({ onClickCreateBtn }) => {
         <Button className={cx('settingBtn')} circled>
           {bellIcon}
         </Button>
-        <Button className={cx('settingBtn')} circled>
+        <Button className={cx('settingBtn')} to={'/'} circled>
           {infoIcon}
         </Button>
         <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
