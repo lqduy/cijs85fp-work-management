@@ -80,6 +80,33 @@ export const imgHeroRdLandingPage = [
   },
 ];
 
+export const titleNavHeaderPage = [
+  {
+    title: 'Tính Năng',
+    detail1: 'Dạng xem',
+    detail2: 'Mẫu',
+    detail3: 'Tự động hóa',
+  },
+  {
+    title: 'Giải Pháp',
+    detail1: 'Nhóm Marketing',
+    detail2: 'Nhóm khởi nghiệp',
+    detail3: 'Quản lí sản phẩm',
+  },
+  {
+    title: 'Gói',
+    detail1: 'Miễn phí',
+    detail2: 'Standar',
+    detail3: 'Pro',
+  },
+  {
+    title: 'Tài Liệu',
+    detail1: 'Hướng dẫn của Work M',
+    detail2: 'Hướng dẫn làm việc từ xa',
+    detail3: 'Tài nguyên trợ giúp',
+  },
+];
+
 export const imgHeroEndPage = [
   {
     icon: faBusinessTime,

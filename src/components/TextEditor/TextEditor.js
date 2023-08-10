@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import classNames from 'classnames/bind';
-import 'react-quill/dist/quill.snow.css';
 import styles from './TextEditor.module.scss';
 import Button from '../Button';
 import { cardsListStorage } from '../../utils/local-storage';
 import { penIcon, xIcon } from '../../utils/icons';
+import 'react-quill/dist/quill.snow.css';
 
 let cx = classNames.bind(styles);
 
