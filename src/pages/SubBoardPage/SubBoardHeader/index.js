@@ -76,7 +76,7 @@ const SubBoardHeader = ({ boardData }) => {
     columnsListStorage.save(newColumnsList);
     cardsListStorage.save(newCardsList);
 
-    navigator('/');
+    navigator('/u/home');
   };
 
   return (
