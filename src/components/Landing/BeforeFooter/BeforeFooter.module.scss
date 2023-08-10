@@ -1,0 +1,41 @@
+.before-footer {
+    background: url('https://images.ctfassets.net/rz1oowkt5gyp/6Q4l8SJeMZGSu1m6W9vAjL/1021a10f6940ce44c50d0ffaefec223e/BigSwingFooterHeroGraphic__Left.svg') left center / contain no-repeat scroll padding-box border-box,
+        url('https://images.ctfassets.net/rz1oowkt5gyp/7KsuX6srvRqJVzeAIdIzIb/da1a3319c278d251ecbd078fcffdcd23/BigSwingFooterHeroGraphic__Right.svg') right center / contain no-repeat scroll padding-box border-box,
+        linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+    background-blend-mode: normal, normal, normal;
+    color: rgb(255, 255, 255);
+    height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+
+            border-radius: 10px;
+            background-color: #0065ff;
+            width: 300px;
+            height: 60px;
+            border: none;
+            outline: none;
+            transition: .3s;
+        }
+        button:hover {
+            background-color: #eb4fb3;
+            transform: scale(1.1);
+        }
+
+    }
+}

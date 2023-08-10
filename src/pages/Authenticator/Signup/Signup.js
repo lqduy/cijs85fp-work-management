@@ -4,7 +4,9 @@ import signupStyles from '../Login/Login.module.scss';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRef, useState } from 'react';
 import SidebarLayout from '../../../layouts/SidebarLayout/SidebarLayout';
-import { eyeIcon, closedEyeIcon } from '../../../utils/icons';
+import { eyeIcon, closedEyeIcon, arrowRightIcon } from '../../../utils/icons';
+import loginStyles from '../Login/Login.module.scss';
+import Button from '../../../components/Button';
 
 const Signup = () => {
   const emailRef = useRef();
@@ -30,7 +32,7 @@ const Signup = () => {
       setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate('/');
+      navigate(`/u/home`);
     } catch (error) {
       setError(error.message);
     }
@@ -43,8 +45,7 @@ const Signup = () => {
       setError('');
       setLoading(true);
       await signInWithGoogle();
-      localStorage.clear();
-      navigate('/');
+      navigate(`/u/home`);
     } catch (error) {
       setError(error.message);
     }
@@ -63,12 +64,15 @@ const Signup = () => {
         </SidebarLayout>
       ) : (
         <div className={signupStyles.wrapper}>
+          <Button to={'/'} rigthIcon={arrowRightIcon} className={loginStyles.linkToLadingPage}>
+            Learn more about us
+          </Button>
           <div className={signupStyles.logo}>
-            <img src="/assets/logo.png" width="200" height="80" alt="logo" />
+            <img src="/assets/logo.png" width="auto" height="80" alt="logo" />
           </div>
           <div className={signupStyles.container}>
             <div className={signupStyles.logoTxt}>
-              <h2>Sign Up</h2>
+              <h2>SIGN UP</h2>
             </div>
             <form className={signupStyles.myform} onSubmit={handleSubmit}>
               <div className="mb-3 form-section">
@@ -81,6 +85,7 @@ const Signup = () => {
                     aria-describedby="emailHelp"
                     placeholder="Enter your email here"
                     ref={emailRef}
+                    style={{ width: '100%' }}
                     required
                   />
                 </div>
@@ -127,13 +132,15 @@ const Signup = () => {
                 <div className={signupStyles.error}>{error}</div>
                 <div className={signupStyles.infoText + ' info-text'}>
                   <Link to="/login" element={<Login />}>
-                    Already have an account? Log in here
+                    Already have an account? <span className={loginStyles.nav}>Log in here</span>
                   </Link>
                 </div>
                 <button disabled={loading} type="submit" className={signupStyles.btn}>
                   Sign up
                 </button>
-                <div className={signupStyles.infoText}>Or sign up with:</div>
+                <div className={signupStyles.orText}>
+                  <span>OR</span>
+                </div>
                 <div className={signupStyles.socialMedia}>
                   <button
                     disabled={loading}
@@ -141,10 +148,12 @@ const Signup = () => {
                     className={signupStyles.btn}
                     onClick={googleSignUpHandler}
                   >
-                    Google
+                    <img src="/assets/google-logo.webp" alt="" width="32px" height="auto" />
+                    <span>Continue with Google</span>
                   </button>
                   <button disabled={loading} type="button" className={signupStyles.btn}>
-                    Facebook
+                    <img src="/assets/facebook-logo.webp" alt="" width="32px" height="auto" />
+                    <span>Continue with Facebook</span>
                   </button>
                 </div>
               </div>

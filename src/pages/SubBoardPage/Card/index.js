@@ -22,6 +22,7 @@ import { CARD_SETTING_SUBBOX, coverColorsListData } from '../../../utils/constan
 import ChangeCoverSubBox from './SettingSubBox/ChangeCoverSubBox';
 import ThemeContext from '../../../contexts/ThemeContext';
 import { useParams } from 'react-router-dom';
+import EditDatesSubBox from './SettingSubBox/EditDatesSubBox';
 
 let cx = classNames.bind(styles);
 
@@ -31,7 +32,8 @@ const Card = ({
   cardsLength,
   handleRemoveCard,
   extendLabels,
-  handleClickLabel
+  handleClickLabel,
+  handleDuplicateCard
 }) => {
   const { cardId, cardTitle, cardLabels = [], isFullSizeCover, cardColorCover } = cardData;
   const { boardId } = useParams();
@@ -174,6 +176,11 @@ const Card = ({
     }
   };
 
+  const onDuplicateCard = () => {
+    handleDuplicateCard(cardData.cardId);
+    setOpenSettingBox(false);
+  };
+
   const handleUpdateLabels = labelsListArr => {
     setCardLabelArr(labelsListArr);
     const newCardData = { ...cardData, cardLabels: labelsListArr };
@@ -253,12 +260,21 @@ const Card = ({
         <Button leftIcon={arrowRightIcon} className={cx('setting-item')}>
           Move
         </Button>
-        <Button leftIcon={copyIcon} className={cx('setting-item')}>
+        <Button leftIcon={copyIcon} className={cx('setting-item')} onClick={onDuplicateCard}>
           Duplicate
         </Button>
-        <Button leftIcon={clockIcon} className={cx('setting-item')}>
-          Edit dates
-        </Button>
+        <div className={cx('setting-part')}>
+          <Button
+            leftIcon={clockIcon}
+            className={cx('setting-item')}
+            onClick={() => setOpenSettingSubBox(CARD_SETTING_SUBBOX.EDIT_DATES)}
+          >
+            Edit dates
+          </Button>
+          {openSettingSubBox === CARD_SETTING_SUBBOX.EDIT_DATES && (
+            <EditDatesSubBox onClickX={() => setOpenSettingSubBox(null)} />
+          )}
+        </div>
         <Button
           leftIcon={trashIcon}
           className={cx('setting-item', 'remove-column-btn')}

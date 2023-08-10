@@ -10,7 +10,7 @@ import {
   infoIcon,
   darkNLightIcon,
   userIcon,
-  logOutIcon
+  logOutIcon,
 } from '../../utils/icons';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '../Button';
@@ -61,7 +61,7 @@ const Header = ({ onClickCreateBtn }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focusInput]);
 
-  const handleSearch = inputKey => {
+  const handleSearch = (inputKey) => {
     if (inputKey.length === 0) return;
     const result = getSearchResult(inputKey);
     setSearchResult(result);
@@ -71,17 +71,19 @@ const Header = ({ onClickCreateBtn }) => {
     handleSearch(debouncedSearchKeyValue);
   }, [debouncedSearchKeyValue]);
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.key === 'ArrowUp') {
       e.preventDefault();
-      setSelectedResultIndex(prevIndex => {
-        const newIndex = prevIndex > 0 ? prevIndex - 1 : searchResult.length - 1;
+      setSelectedResultIndex((prevIndex) => {
+        const newIndex =
+          prevIndex > 0 ? prevIndex - 1 : searchResult.length - 1;
         return newIndex;
       });
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedResultIndex(prevIndex => {
-        const newIndex = prevIndex < searchResult.length - 1 ? prevIndex + 1 : 0;
+      setSelectedResultIndex((prevIndex) => {
+        const newIndex =
+          prevIndex < searchResult.length - 1 ? prevIndex + 1 : 0;
         return newIndex;
       });
     } else if (e.key === 'Enter' && selectedResultIndex !== -1) {
@@ -92,23 +94,33 @@ const Header = ({ onClickCreateBtn }) => {
   };
 
   const handleSetThemeMode = () => {
-    setDarkMode(prevMode => {
+    setDarkMode((prevMode) => {
       const newMode = !prevMode;
       themeModeStorage.save(newMode);
       return newMode;
     });
   };
 
-  const userName = useMemo(() => currentUser.bc.email.split('@')[0], [currentUser]);
+  const userName = useMemo(
+    () => currentUser.bc.email.split('@')[0],
+    [currentUser]
+  );
 
   return (
     <header className={cx('header')}>
       <nav className={cx('menu')}>
-        <Button leftIcon={tableIcon} to={'/'}>
-          Work M
+        <Button to={'/u/home'} className={cx('logo-btn')}>
+          <img
+            src="/assets/logo.png"
+            alt="Work M Logo"
+            height="24px"
+            width="auto"
+          />
         </Button>
         <Button rigthIcon={downCaretIcon}>Workspaces</Button>
-        <Button rigthIcon={downCaretIcon}>Templates</Button>
+        <Button rigthIcon={downCaretIcon} to={'/templates'}>
+          Templates
+        </Button>
         <div className={cx('setting-item__wrap')}>
           <Button className={cx('createBtn')} onClick={onClickCreateBtn}>
             Create
@@ -119,7 +131,7 @@ const Header = ({ onClickCreateBtn }) => {
         <div className={cx('inputBar__wrap')}>
           <form
             className={cx('inputBar', { focusInput: focusInput })}
-            onSubmit={e => e.preventDefault()}
+            onSubmit={(e) => e.preventDefault()}
           >
             <Button>{searchIcon}</Button>
             <input
@@ -128,7 +140,7 @@ const Header = ({ onClickCreateBtn }) => {
               placeholder="Search"
               value={searchInputValue}
               onFocus={() => setFocusInput(true)}
-              onChange={e => setSearchInputValue(e.target.value)}
+              onChange={(e) => setSearchInputValue(e.target.value)}
               onBlur={() => setFocusInput(false)}
               onKeyDown={handleKeyDown}
             />
@@ -144,10 +156,14 @@ const Header = ({ onClickCreateBtn }) => {
         <Button className={cx('settingBtn')} circled>
           {bellIcon}
         </Button>
-        <Button className={cx('settingBtn')} circled>
+        <Button className={cx('settingBtn')} to={'/'} circled>
           {infoIcon}
         </Button>
-        <Button className={cx('settingBtn')} circled onClick={handleSetThemeMode}>
+        <Button
+          className={cx('settingBtn')}
+          circled
+          onClick={handleSetThemeMode}
+        >
           {darkNLightIcon}
         </Button>
         <div className={cx('setting-item__wrap', 'userBtn__wrap')}>

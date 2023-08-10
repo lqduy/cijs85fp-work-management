@@ -9,36 +9,35 @@ Trang web đã có thể xử lý những tính năng sau:
 
 ### Authentication
 
-- User có thể sign up account mới: sign up bằng cách tạo mới password và email, hoặc sign up bằng google
+- User có thể sign up account mới: sign up bằng cách tạo mới password và email, hoặc sign up bằng google, và log in sau khi đã sign up 
 - Có regex kiểm tra password khi sign up
-- User có thể log in nếu đã sign up
-- Từng user (email riêng) sẽ có data riêng
-- Platform sử dụng: Firebase
+- Từng user (xác định bằng từng email riêng) sẽ có data riêng
+
 
 ### Tạo board, tạo card
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Tạo không gian làm việc (Board) cho một công việc, một hoạt động, hoặc một dự án. Trong mỗi Board, có thể tạo các cột (Column), mỗi cột chứa một nhóm các đầu mục (Card).
+- Xoá và cập nhật các board/column/card
+- Tìm kiếm board theo tên board hoặc theo card công việc trong board
+- Trong board có thể chọn theme, có thể đánh dấu board yêu thích (favorite) và có mục sắp xếp board theo thứ tự truy cập (recently viewed)
+- Có thể drag và thay đổi vị trí các column với nhau, hoặc đổi vị trí các card với nhau (thư viện dndKit)
 
-### Drag-and-drop feature
+### Card feature
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Trong card có những tính năng như:
+- Đổi màu cho label
+- Đổi màu cho card (half hoặc full)
+- Viết và cập nhật description cho card bằng ReactQuill
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Template Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Có những template với board mẫu liên quan đến các chủ đề khác nhau để user tiện sử dụng mà không cần phải làm từ đầu
 
-### Template Feature
+### Coming soon
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Các user có thể interact với nhau, có thể tạo nhóm để làm việc chung và có thể comment vào board của nhau
+Có tính năng update profile (thông tin cá nhân, ảnh đại diện)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ### Deployment
 

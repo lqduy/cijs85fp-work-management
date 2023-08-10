@@ -99,6 +99,7 @@ body.dark-mode {
     // padding-left: 16px;
 
     .site-content {
+      height: fit-content;
       flex-grow: 1;
       outline: none;
       overflow-y: auto;
