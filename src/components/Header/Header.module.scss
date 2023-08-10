@@ -20,6 +20,12 @@
   > *:not(.createBtn):hover {
     background-color: var(--backgroundColor-darker);
   }
+
+  .logo-btn {
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
 
 .setting {
