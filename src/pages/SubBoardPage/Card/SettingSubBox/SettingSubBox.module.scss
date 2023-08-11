@@ -232,9 +232,15 @@
       margin-bottom: 8px;
       color: white;
       background-color: var(--createBoardBtn-bgColor);
+      &:hover {
+        opacity: 0.8;
+      }
     }
     .remove-btn {
       background-color: var(--backgroundColor-lighter);
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }

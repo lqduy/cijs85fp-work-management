@@ -69,6 +69,15 @@ const EditDatesSubBox = ({
     setCardDates(newCardDates);
   };
 
+  const onClickRemoveDates = () => {
+    const initialValue = {
+      taskStartDate: null,
+      taskDueDate: null,
+    };
+    handleUpdateDates(initialValue);
+    setCardDates(initialValue);
+  };
+
   return (
     <MenuBox
       className={cx('menu-box', 'editDates-box')}
@@ -83,7 +92,7 @@ const EditDatesSubBox = ({
       <div className={cx('form-wrap')}>
         <h4>Start date</h4>
         <div className={cx('date-display')}>
-          <input type="checkbox" id="start-check" />
+          <input type="checkbox" checked id="start-check" />
           <label htmlFor="start-check">
             <input
               type="text"
@@ -96,7 +105,7 @@ const EditDatesSubBox = ({
         </div>
         <h4>Due date</h4>
         <div className={cx('date-display')}>
-          <input type="checkbox" id="end-check" />
+          <input type="checkbox" checked id="end-check" />
           <label htmlFor="end-check">
             <input
               type="text"
@@ -113,7 +122,9 @@ const EditDatesSubBox = ({
         >
           Save
         </Button>
-        <Button className={cx('remove-btn')}>Remove</Button>
+        <Button className={cx('remove-btn')} onClick={onClickRemoveDates}>
+          Remove
+        </Button>
       </div>
     </MenuBox>
   );

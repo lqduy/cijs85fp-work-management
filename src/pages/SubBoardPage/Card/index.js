@@ -382,7 +382,11 @@ const Card = ({
       <div className={cx('task-dates-display')}>
         {cardDates.map((date, index) => {
           const element = (
-            <Button key={index} className={cx('task-date')} leftIcon={clockIcon}>
+            <Button
+              key={index}
+              className={cx('task-date')}
+              leftIcon={clockIcon}
+            >
               {date}
             </Button>
           );
