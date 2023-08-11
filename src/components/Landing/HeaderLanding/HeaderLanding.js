@@ -4,8 +4,6 @@ import styles from './HeaderLanding.module.scss';
 import { titleNavHeaderPage } from '../../../utils/imgHeroLandingPage';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 let cx = classNames.bind(styles);
 const Header = () => {
   const { currentUser } = useAuth();

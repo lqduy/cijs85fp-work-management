@@ -91,20 +91,19 @@
         position: absolute;
         flex-direction: column;
         gap: 0;
-        top: 70px;
+        top: 60px;
         left: -100%;
         text-align: start;
         width: 100%;
         transition: 0.7s ease-in-out;
-        background-color: aliceblue;
-        padding: 10px;
+        background-color: #ffffff;
+        padding: 8px;
 
         &.active {
             left: 0;
         }
-
         li {
-            margin: 16px 0;
+            margin: 10px 0;
         }
 
         a {
