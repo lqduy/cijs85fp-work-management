@@ -224,7 +224,10 @@ $cardRadius: 6px;
 }
 
 .task-dates-display {
+  display: flex;
+  gap: 2px;
   padding: 4px;
+
   .task-date {
     padding: 3px 4px;
     border-radius: 3px;
