@@ -1,21 +1,11 @@
 @import '../../styles/variables';
 
-.wrapper__sidebarOpen {
-  margin-left: 280px;
-  width: calc(100% - 280px);
-}
-
 .wrapper {
-  display: flex;
-  justify-content: center;
-
-  padding-top: 50px;
+  padding: 50px;
+  width: max-content;
+  // height:max-content;
   height: calc(100vh - $header-height);
-
-  .core {
-    max-width: 960px;
-    min-width: 960px;
-  }
+  margin: 0 auto;
 
   .theme-top {
     width: 100%;
@@ -44,28 +34,28 @@
           outline: none;
           padding-left: 10px;
         }
+
+        svg {
+        }
       }
     }
 
     .theme-list-categories {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
-      gap: 80px;
-      padding-top: 80px;
-      padding-left: 0;
-
-      > * {
-        width: calc(25% - 80px * 3 / 4);
-        transition: 0.3s;
-      }
+      gap: 40px;
+      padding-top: 30px;
+      width: 100%;
 
       li {
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 10px;
+        transition: 0.3s;
       }
 
       li:hover {
@@ -74,16 +64,19 @@
 
       li img {
         gap: 10px;
-        width: 100%;
-        height: auto;
+        width: 104px;
+        height: 104px;
         border-radius: 6px;
       }
 
       li span {
-        font-size: 16px;
+        font-size: 12px;
         line-height: 16px;
         color: #44546f;
       }
     }
   }
 }
+
+// line-height: 24px;
+// font-size: 16px;
