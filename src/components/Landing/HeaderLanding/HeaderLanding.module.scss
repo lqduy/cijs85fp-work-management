@@ -3,23 +3,33 @@
     align-items: center;
     justify-content: start;
     padding-left: 200px;
-    height: 70px;
+    height: auto;
     width: 100%;
     position: fixed;
     z-index: 900;
     background-color: #ffffff;
     box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
 
-
-    .btnAccount {
-        position: fixed;
-        right: 50px;
-        color: #FFFFFF;
+    .navbar {
+        background-color: #FFFFFF;
+        padding: 10px 20px;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: end;
+        gap: 40px;
+        min-height: 100%;
 
+        .navMenu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 60px;
+        }
+    }
+
+    a {
         button {
+            color: #FFFFFF;
             border-radius: 10px;
             width: 170px;
             height: 50px;
@@ -28,9 +38,83 @@
             outline: none;
             transition: .3s;
         }
-        button:hover{
+
+        button:hover {
             transform: scale(1.1);
             background-color: #345794;
         }
     }
+
+
+}
+
+
+
+
+@media screen and (max-width: 991px) {
+    .header {
+        width: 100%;
+        padding-left: 0px;
+    }
+
+    /* hamburger */
+    .hamburger {
+        display: block;
+        cursor: pointer;
+
+        .bar {
+            background-color: #120f0b;
+            width: 20px;
+            height: 3px;
+            display: block;
+            margin: 5px;
+            -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
+        }
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* navMenu */
+
+    .navMenu {
+        position: absolute;
+        flex-direction: column;
+        gap: 0;
+        top: 70px;
+        left: -100%;
+        text-align: start;
+        width: 100%;
+        transition: 0.7s ease-in-out;
+        background-color: aliceblue;
+        padding: 10px;
+
+        &.active {
+            left: 0;
+        }
+
+        li {
+            margin: 16px 0;
+        }
+
+        a {
+            width: 100%;
+
+            button {
+                width: 500px;
+                height: 50px;
+            }
+        }
+    }
+
 }
