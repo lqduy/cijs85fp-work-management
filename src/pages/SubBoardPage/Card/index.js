@@ -13,12 +13,15 @@ import {
   photoIcon,
   tagIcon,
   trashIcon,
-  userIcon
+  userIcon,
 } from '../../../utils/icons';
 import styles from './Card.module.scss';
 import { cardsListStorage } from '../../../utils/local-storage';
 import EditLabelSubBox from './SettingSubBox/EditLabelSubBox';
-import { CARD_SETTING_SUBBOX, coverColorsListData } from '../../../utils/constants';
+import {
+  CARD_SETTING_SUBBOX,
+  coverColorsListData,
+} from '../../../utils/constants';
 import ChangeCoverSubBox from './SettingSubBox/ChangeCoverSubBox';
 import ThemeContext from '../../../contexts/ThemeContext';
 import { useParams } from 'react-router-dom';
@@ -32,9 +35,18 @@ const Card = ({
   cardsLength,
   handleRemoveCard,
   extendLabels,
-  handleClickLabel
+  handleClickLabel,
+  handleDuplicateCard,
 }) => {
-  const { cardId, cardTitle, cardLabels = [], isFullSizeCover, cardColorCover } = cardData;
+  const {
+    cardId,
+    cardTitle,
+    cardLabels = [],
+    isFullSizeCover,
+    cardColorCover,
+    taskStartDate,
+    taskDueDate,
+  } = cardData;
   const { boardId } = useParams();
   const { darkMode } = useContext(ThemeContext);
 
@@ -45,8 +57,9 @@ const Card = ({
     isFullSize: isFullSizeCover,
     coverColor: darkMode
       ? cardColorCover && cardColorCover.dark
-      : cardColorCover && cardColorCover.light
+      : cardColorCover && cardColorCover.light,
   });
+  const [cardDates, setCardDates] = useState([taskStartDate, taskDueDate]);
   const [openSettingBox, setOpenSettingBox] = useState(false);
   const [openSettingSubBox, setOpenSettingSubBox] = useState(null);
 
@@ -56,18 +69,25 @@ const Card = ({
   const saveBtnRef = useRef(null);
   const prevCardTitle = useRef(null);
 
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id: cardId,
-    data: { ...cardDataState, cardIndex: cardIndex, cardsLength: cardsLength }
+    data: { ...cardDataState, cardIndex: cardIndex, cardsLength: cardsLength },
   });
   const dndKitCardStyles = {
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.4 : undefined
+    opacity: isDragging ? 0.4 : undefined,
   };
 
   const updateCardDataState = () => {
-    const coverColorObj = coverColorsListData.find(colorObj =>
+    const coverColorObj = coverColorsListData.find((colorObj) =>
       darkMode
         ? colorObj.dark === cardCoverObj.coverColor
         : colorObj.light === cardCoverObj.coverColor
@@ -77,7 +97,7 @@ const Card = ({
       cardTitle: cardTitleValue,
       cardLabels: cardLabelsArr,
       cardColorCover: coverColorObj,
-      isFullSizeCover: cardCoverObj.isFullSize
+      isFullSizeCover: cardCoverObj.isFullSize,
     };
     setCardDataState(newCardData);
   };
@@ -88,7 +108,7 @@ const Card = ({
   }, [cardTitleValue, cardLabelsArr, cardCoverObj]);
 
   const handleChangeCoverByThemeMode = () => {
-    const coverColorObj = coverColorsListData.find(colorObj =>
+    const coverColorObj = coverColorsListData.find((colorObj) =>
       darkMode
         ? cardCoverObj && colorObj.light === cardCoverObj.coverColor
         : cardCoverObj && colorObj.dark === cardCoverObj.coverColor
@@ -96,7 +116,7 @@ const Card = ({
     if (coverColorObj && (coverColorObj.dark || coverColorObj.light)) {
       const newCardCoverObj = {
         ...cardCoverObj,
-        coverColor: darkMode ? coverColorObj.dark : coverColorObj.light
+        coverColor: darkMode ? coverColorObj.dark : coverColorObj.light,
       };
       setCardCoverObj(newCardCoverObj);
     }
@@ -107,7 +127,7 @@ const Card = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [darkMode]);
 
-  const onClickOutsideSettingBox = e => {
+  const onClickOutsideSettingBox = (e) => {
     let isClickOutside =
       settingBoxRef.current &&
       titleInputRef.current &&
@@ -116,7 +136,10 @@ const Card = ({
       !titleInputRef.current.contains(e.target) &&
       !saveBtnRef.current.contains(e.target);
     if (cardLabelsArr.length > 0) {
-      isClickOutside = isClickOutside && labelsRef.current && !labelsRef.current.contains(e.target);
+      isClickOutside =
+        isClickOutside &&
+        labelsRef.current &&
+        !labelsRef.current.contains(e.target);
     }
     if (isClickOutside) {
       setOpenSettingBox(false);
@@ -161,7 +184,7 @@ const Card = ({
 
     const newCardData = { ...cardData, cardTitle: newCardTitle };
     const cardsListData = cardsListStorage.load();
-    const newCardsListData = cardsListData.map(card =>
+    const newCardsListData = cardsListData.map((card) =>
       card.cardId === cardId ? newCardData : card
     );
     cardsListStorage.save(newCardsListData);
@@ -169,24 +192,29 @@ const Card = ({
     setOpenSettingBox(false);
   };
 
-  const onEnterToSave = e => {
+  const onEnterToSave = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       handleUpdateCardTitle(e);
     }
   };
 
-  const handleUpdateLabels = labelsListArr => {
+  const onDuplicateCard = () => {
+    handleDuplicateCard(cardData.cardId);
+    setOpenSettingBox(false);
+  };
+
+  const handleUpdateLabels = (labelsListArr) => {
     setCardLabelArr(labelsListArr);
     const newCardData = { ...cardData, cardLabels: labelsListArr };
     const cardsListData = cardsListStorage.load();
-    const newCardListData = cardsListData.map(card =>
+    const newCardListData = cardsListData.map((card) =>
       card.cardId === cardId ? newCardData : card
     );
     cardsListStorage.save(newCardListData);
   };
 
   const handleUpdateCover = (isFullSizeCover, coverColor) => {
-    let newColorObj = coverColorsListData.find(colorObj =>
+    let newColorObj = coverColorsListData.find((colorObj) =>
       darkMode ? colorObj.dark === coverColor : colorObj.light === coverColor
     );
     if (!newColorObj) {
@@ -194,25 +222,41 @@ const Card = ({
     }
     setCardCoverObj({
       isFullSize: isFullSizeCover,
-      coverColor: (darkMode ? newColorObj.dark : newColorObj.light) ?? null
+      coverColor: (darkMode ? newColorObj.dark : newColorObj.light) ?? null,
     });
     const newCardData = {
       ...cardData,
       isFullSizeCover: isFullSizeCover,
-      cardColorCover: newColorObj
+      cardColorCover: newColorObj,
     };
     const cardsListData = cardsListStorage.load();
-    const newCardListData = cardsListData.map(card =>
+    const newCardListData = cardsListData.map((card) =>
       card.cardId === cardId ? newCardData : card
     );
     cardsListStorage.save(newCardListData);
+  };
+
+  const handleUpdateDates = (datesObj) => {
+    const newCardData = { ...cardData, ...datesObj };
+    setCardDates(Object.values(datesObj));
+
+    const cardsListData = cardsListStorage.load();
+    const newCardsListData = cardsListData.map((card) =>
+      card.cardId === cardId ? newCardData : card
+    );
+    cardsListStorage.save(newCardsListData);
+    setOpenSettingSubBox(null);
   };
 
   const settingBox = useMemo(
     () => (
       <div className={cx('setting-box')} ref={settingBoxRef}>
         <div className={cx('setting-part')}>
-          <Button leftIcon={openIcon} className={cx('setting-item')} to={`/b/${boardId}/${cardId}`}>
+          <Button
+            leftIcon={openIcon}
+            className={cx('setting-item')}
+            to={`/b/${boardId}/${cardId}`}
+          >
             Open card
           </Button>
         </div>
@@ -220,7 +264,9 @@ const Card = ({
           <Button
             leftIcon={tagIcon}
             className={cx('setting-item')}
-            onClick={() => setOpenSettingSubBox(CARD_SETTING_SUBBOX.EDIT_LABELS)}
+            onClick={() =>
+              setOpenSettingSubBox(CARD_SETTING_SUBBOX.EDIT_LABELS)
+            }
           >
             Edit labels
           </Button>
@@ -239,7 +285,9 @@ const Card = ({
           <Button
             leftIcon={photoIcon}
             className={cx('setting-item')}
-            onClick={() => setOpenSettingSubBox(CARD_SETTING_SUBBOX.CHANGE_COVER)}
+            onClick={() =>
+              setOpenSettingSubBox(CARD_SETTING_SUBBOX.CHANGE_COVER)
+            }
           >
             Change cover
           </Button>
@@ -254,7 +302,11 @@ const Card = ({
         <Button leftIcon={arrowRightIcon} className={cx('setting-item')}>
           Move
         </Button>
-        <Button leftIcon={copyIcon} className={cx('setting-item')}>
+        <Button
+          leftIcon={copyIcon}
+          className={cx('setting-item')}
+          onClick={onDuplicateCard}
+        >
           Duplicate
         </Button>
         <div className={cx('setting-part')}>
@@ -266,7 +318,12 @@ const Card = ({
             Edit dates
           </Button>
           {openSettingSubBox === CARD_SETTING_SUBBOX.EDIT_DATES && (
-            <EditDatesSubBox onClickX={() => setOpenSettingSubBox(null)} />
+            <EditDatesSubBox
+              taskStartDate={taskStartDate}
+              taskDueDate={taskDueDate}
+              onClickX={() => setOpenSettingSubBox(null)}
+              handleUpdateDates={handleUpdateDates}
+            />
           )}
         </div>
         <Button
@@ -286,14 +343,14 @@ const Card = ({
     () => (
       <div className={cx('card-labels-list')} ref={labelsRef}>
         {cardLabelsArr.length > 0 &&
-          cardLabelsArr.map(label => (
+          cardLabelsArr.map((label) => (
             <span
               key={label}
               className={cx('label')}
               style={{
                 backgroundColor: label,
                 height: extendLabels ? '16px' : undefined,
-                opacity: darkMode ? '.5' : '1'
+                opacity: darkMode ? '.5' : '1',
               }}
               onClick={handleClickLabel}
             ></span>
@@ -309,13 +366,35 @@ const Card = ({
       <div
         className={cx('card-cover', {
           'card-cover__small':
-            cardCoverObj.isFullSize && !openSettingBox && cardLabelsArr.length > 0
+            cardCoverObj.isFullSize &&
+            !openSettingBox &&
+            cardLabelsArr.length > 0,
         })}
         style={{ backgroundColor: cardCoverObj.coverColor }}
       ></div>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [cardCoverObj, openSettingBox, cardLabelsArr, darkMode]
+  );
+
+  const datesElements = useMemo(
+    () => (
+      <div className={cx('task-dates-display')}>
+        {cardDates.map((date, index) => {
+          const element = (
+            <Button
+              key={index}
+              className={cx('task-date')}
+              leftIcon={clockIcon}
+            >
+              {date}
+            </Button>
+          );
+          return date ? element : undefined;
+        })}
+      </div>
+    ),
+    [cardDates]
   );
 
   return (
@@ -330,7 +409,11 @@ const Card = ({
       {openSettingBox && <div className={cx('black-overlay')}></div>}
       {openSettingBox && settingBox}
       {openSettingBox && (
-        <button ref={saveBtnRef} className={cx('save-btn')} onClick={handleUpdateCardTitle}>
+        <button
+          ref={saveBtnRef}
+          className={cx('save-btn')}
+          onClick={handleUpdateCardTitle}
+        >
           Save
         </button>
       )}
@@ -342,13 +425,14 @@ const Card = ({
             ref={titleInputRef}
             className={cx('card-title')}
             style={{
-              paddingTop: cardLabelsArr.length > 0 ? '0px' : undefined
+              paddingTop: cardLabelsArr.length > 0 ? '0px' : undefined,
             }}
             value={cardTitleValue}
-            onChange={e => setCardTitleValue(e.target.value)}
+            onChange={(e) => setCardTitleValue(e.target.value)}
             onKeyDown={onEnterToSave}
             rows={4}
           ></textarea>
+          {cardDates.every((date) => date) && datesElements}
         </div>
       )}
       {!openSettingBox && (
@@ -358,18 +442,22 @@ const Card = ({
             backgroundColor:
               cardCoverObj.isFullSize && cardCoverObj.coverColor
                 ? cardCoverObj.coverColor
-                : undefined
+                : undefined,
           }}
         >
           {cardCoverObj.coverColor && coverElements}
           {cardLabelsArr.length > 0 && labelsListElements}
           <p
             style={{
-              color: cardCoverObj.coverColor && cardCoverObj.isFullSize ? '#fafafa' : undefined
+              color:
+                cardCoverObj.coverColor && cardCoverObj.isFullSize
+                  ? '#fafafa'
+                  : undefined,
             }}
           >
             {cardTitleValue}
           </p>
+          {cardDates.every((date) => date) && datesElements}
           <Button className={cx('edit-card-btn')} onClick={onCLickEditCard}>
             {editIcon}
           </Button>

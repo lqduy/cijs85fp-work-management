@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useMemo } from 'react';
 import classNames from 'classnames/bind';
+import { v4 as uuidv4 } from 'uuid';
 import {
   useSortable,
   SortableContext,
@@ -153,6 +154,21 @@ const Column = ({
     setEditingColumnTitle(false);
   };
 
+  const handleDuplicateCard = id => {
+    const cardsListData = cardsListStorage.load();
+    let newCardData = cardsListData.find(card => card.cardId === id);
+    newCardData = { ...newCardData, cardId: `ca-${uuidv4()}` };
+
+    const newCardsList = [...cardsData];
+    const indexInColumn = newCardsList.findIndex(card => card.cardId === id);
+    newCardsList.splice(indexInColumn, 0, newCardData);
+    setCardsData(newCardsList);
+
+    const indexInStorage = cardsListData.findIndex(card => card.cardId === id);
+    cardsListData.splice(indexInStorage, 0, newCardData);
+    cardsListStorage.save(cardsListData);
+  };
+
   const onEnterToSave = e => {
     if (e.key === 'Enter') {
       handleUpdateColumnTitle(e);
@@ -216,6 +232,7 @@ const Column = ({
                 handleRemoveCard={() => handleRemoveCard(card.cardId)}
                 extendLabels={extendLabels}
                 handleClickLabel={handleClickLabel}
+                handleDuplicateCard={handleDuplicateCard}
               />
             ))}
           </div>

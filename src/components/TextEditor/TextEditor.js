@@ -16,16 +16,18 @@ const TextEditor = ({ cardId, cardDescription }) => {
   const hasInitialValues = cardId && cardDescription;
   const initialValues = cardDescription;
 
-  const handleUpdateCardDescription = () => {
-    if (descValue !== '') {
-      const cardsListData = cardsListStorage.load();
-      const newCardsListData = cardsListData.map((card) =>
-        card.cardId === cardId ? { ...card, description: descValue } : card
-      );
-      cardsListStorage.save(newCardsListData);
-    } else if (descPrevValueRef.current) {
-      setDescValue(descPrevValueRef.current);
+  useEffect(() => {
+    if (!cardDescription || cardDescription === '') {
+      setOpenEditor(true);
     }
+  }, []);
+
+  const handleUpdateCardDescription = () => {
+    const cardsListData = cardsListStorage.load();
+    const newCardsListData = cardsListData.map((card) =>
+      card.cardId === cardId ? { ...card, description: descValue } : card
+    );
+    cardsListStorage.save(newCardsListData);
     setOpenEditor(false);
   };
 
@@ -80,7 +82,11 @@ const TextEditor = ({ cardId, cardDescription }) => {
       )}
       {!openEditor && (
         <div className={cx('display-descr')}>
-          <div dangerouslySetInnerHTML={{ __html: descValue }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: descValue !== '' ? descValue : 'Add description',
+            }}
+          />
           <Button className={cx('editIcon')} onClick={OnClickToEdit}>
             {penIcon}
           </Button>
