@@ -8,6 +8,7 @@ import ThemeContext from "./contexts/ThemeContext";
 import { themeModeStorage } from "./utils/local-storage";
 import PrivateRoute from "./routers/PrivateRoute";
 import { privateRouters, publicRouters } from "./routers";
+import Header from "./components/Header";
 
 
 function App() {
@@ -41,7 +42,6 @@ function App() {
         }}
       >
         <div className="site-container">
-         
           <Routes>
             {publicRouters.map((route, index) => {
               const Page = route.component;
