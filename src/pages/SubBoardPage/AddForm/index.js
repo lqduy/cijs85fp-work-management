@@ -8,7 +8,7 @@ import { plusIcon, xIcon } from '../../../utils/icons';
 
 let cx = classNames.bind(styles);
 
-const AddForm = props => {
+const AddForm = (props) => {
   const {
     columnId,
     boardId,
@@ -16,14 +16,14 @@ const AddForm = props => {
     setCloseAddCardForm,
     isAddColumnForm,
     setCloseAddColumnForm,
-    handleAddNewColumn
+    handleAddNewColumn,
   } = props || {};
 
   const [title, setTitle] = useState('');
   const formRef = useRef(null);
   const inputRef = useRef(null);
 
-  const onClickOutside = e => {
+  const onClickOutside = (e) => {
     const handleCloseForm = () => {
       if (isAddColumnForm) {
         setCloseAddColumnForm();
@@ -44,14 +44,14 @@ const AddForm = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmitToAdd = e => {
+  const onSubmitToAdd = (e) => {
     e.preventDefault();
     if (title !== '') {
       if (isAddColumnForm) {
         const newColumn = {
           parentId: boardId,
           columnId: `co-${uuidv4()}`,
-          columnTitle: title
+          columnTitle: title,
         };
         handleAddNewColumn(newColumn);
       } else {
@@ -62,7 +62,9 @@ const AddForm = props => {
           cardLabels: [],
           cardColorCover: { light: null, dark: null },
           isFullSizeCover: false,
-          description: ''
+          description: '',
+          taskStartDate: null,
+          taskDueDate: null,
         };
         handleAddNewCard(newCard);
       }
@@ -71,13 +73,13 @@ const AddForm = props => {
     }
   };
 
-  const onEnterToSubmit = e => {
+  const onEnterToSubmit = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       onSubmitToAdd(e);
     }
   };
 
-  const handleCloseForm = e => {
+  const handleCloseForm = (e) => {
     e.preventDefault();
     if (isAddColumnForm) {
       setCloseAddColumnForm();
@@ -87,21 +89,36 @@ const AddForm = props => {
   const InputTagElement = isAddColumnForm ? 'input' : 'textarea';
 
   return (
-    <form className={cx('add-item-form')} onSubmit={onSubmitToAdd} ref={formRef}>
+    <form
+      className={cx('add-item-form')}
+      onSubmit={onSubmitToAdd}
+      ref={formRef}
+    >
       <InputTagElement
         ref={inputRef}
-        placeholder={isAddColumnForm ? 'Enter column title...' : 'Enter a title for this card...'}
+        placeholder={
+          isAddColumnForm
+            ? 'Enter column title...'
+            : 'Enter a title for this card...'
+        }
         className={cx('textarea', { 'add-column-input': isAddColumnForm })}
         value={title}
-        onChange={e => setTitle(e.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
         onKeyDown={onEnterToSubmit}
         autoFocus
       />
       <div className={cx('form-btns')}>
-        <Button type="submit" leftIcon={plusIcon} className={cx('add-item-form-submit-btn')}>
+        <Button
+          type="submit"
+          leftIcon={plusIcon}
+          className={cx('add-item-form-submit-btn')}
+        >
           {isAddColumnForm ? 'Add column' : 'Add card'}
         </Button>
-        <Button className={cx('add-item-form-cancel-btn')} onClick={handleCloseForm}>
+        <Button
+          className={cx('add-item-form-cancel-btn')}
+          onClick={handleCloseForm}
+        >
           {xIcon}
         </Button>
       </div>
@@ -110,7 +127,7 @@ const AddForm = props => {
 };
 
 AddForm.defaultProps = {
-  isAddColumnForm: false
+  isAddColumnForm: false,
 };
 
 export default AddForm;
