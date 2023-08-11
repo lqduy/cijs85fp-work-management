@@ -4,6 +4,7 @@ import styles from "./LandingPage.module.scss";
 import Hero from "../../components/Landing/Hero/Hero";
 import Footer from "../../components/Landing/Footer/Footer";
 import BeforeFooter from "../../components/Landing/BeforeFooter/BeforeFooter";
+import HeaderLandingpage from "../../components/Landing/HeaderLanding/HeaderLanding"
 import { useAuth } from "../../contexts/AuthContext";
 import HomePage from "../HomePage";
 let cx = classNames.bind(styles);
@@ -15,6 +16,9 @@ const LandingPage = () => {
     <>
       {!hasCurrentUser ? (
         <div className={cx("main")}>
+          <div className={cx("header")}>
+            <HeaderLandingpage />
+          </div>
           <div className={cx("hero")}>
             <Hero />
           </div>
