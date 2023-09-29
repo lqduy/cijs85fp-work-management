@@ -7,9 +7,11 @@ import Home from '../pages/Home/Home';
 import Templates from '../pages/Templates/Templates';
 import SubCardPage from '../pages/SubCardPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import NavigationPage from '../pages/NavigationPage';
 
 export const publicRouters = [
-  { path: '/', component: LandingPage },
+  { path: '/', component: NavigationPage },
+  { path: '/about', component: LandingPage },
   { path: '/login', component: Login },
   { path: '/signup', component: Signup },
   { path: '/not-found', component: NotFoundPage }

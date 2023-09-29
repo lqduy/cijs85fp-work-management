@@ -27,8 +27,10 @@
   }
 }
 .logo {
+  z-index: 100;
   overflow: hidden;
   margin: 0px auto;
+  max-height: 80px;
 }
 .logoTxt {
   margin-bottom: 20px;

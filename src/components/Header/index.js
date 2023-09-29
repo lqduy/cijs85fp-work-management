@@ -156,7 +156,7 @@ const Header = ({ onClickCreateBtn }) => {
         <Button className={cx('settingBtn')} circled>
           {bellIcon}
         </Button>
-        <Button className={cx('settingBtn')} to={'/'} circled>
+        <Button className={cx('settingBtn')} to={'/about'} circled>
           {infoIcon}
         </Button>
         <Button

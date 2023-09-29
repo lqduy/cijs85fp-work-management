@@ -11,6 +11,7 @@
     box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
 
     .navbar {
+        width: 100%;
         background-color: #FFFFFF;
         padding: 10px 20px;
         display: flex;
@@ -24,6 +25,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 60px;
+            color: black;
         }
     }
 

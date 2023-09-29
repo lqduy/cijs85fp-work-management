@@ -58,11 +58,11 @@ const Login = () => {
         </SidebarLayout>
       ) : (
         <div className={loginStyles.wrapper}>
-          <Button to={'/'} rigthIcon={arrowRightIcon} className={loginStyles.linkToLadingPage}>
+          <Button to={'/about'} rigthIcon={arrowRightIcon} className={loginStyles.linkToLadingPage}>
             Learn more about us
           </Button>
           <div className={loginStyles.logo}>
-            <img width="auto" height="80" src="/assets/logo.png" alt="logo" />
+            <img width="auto" height="100%" src="/assets/logo.png" alt="logo" />
           </div>
           <div className={loginStyles.container}>
             <div className={loginStyles.logoTxt}>
